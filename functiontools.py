@@ -278,7 +278,7 @@ def tongji_msg():
         	    data_stars.setdefault(s, 0)
         	    data_stars[s] += 1
             for a in ar:
-                data_area.setdefault(ar, 0)
+                data_area.setdefault(a, 0)
                 data_area[a] += 1 
             for se in senti:
                 data_sentiment.setdefault(se, 0)
