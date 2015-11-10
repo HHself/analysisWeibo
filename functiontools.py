@@ -187,7 +187,7 @@ def tongji_userfre():
 def cutwords_stars(sentence): 
 	stars = [s.decode("utf-8") for s in file("stars.txt")]
 	stopwords = [s.replace("\n", "").decode("utf-8") for s in file("stopwords.txt")]
-	cutcontent = " ".join([w for w in list(jieba.cut(sentence, cut_all = False)) if w not in stopwords and w in stars])
+	cutcontent = [w for w in list(jieba.cut(sentence, cut_all = False)) if w not in stopwords and w in stars]
 	return cutcontent
 
 def cutwords_keywords(sentence):
@@ -228,15 +228,17 @@ def tongji_msg():
         	# keyw = d["cut_keywords"][ind]
         	# senti = d["cut_sentiment"][ind]
             ar = d["cut_area"][ind]
-            for s in sta.split():
-        	data_stars.setdefault(s, 0)
-        	data_stars[s] += 1
-        	# data_keywords.setdefault(keyw, 0)
-        	# data_sentiment.setdefault(senti, 0)
-            data_area.setdefault(ar, 0)
+            for s in sta:
+        	    data_stars.setdefault(s, 0)
+        	    data_stars[s] += 1
+            for a in ar:
+                data_area.setdefault(ar, 0)
+                data_area[a] += 1 
+            # data_keywords.setdefault(keyw, 0)
+            # data_sentiment.setdefault(senti, 0)
             # data_keywords[keyw] += 1
             # data_sentiment[senti] += 1
-            data_area[ar] += 1 
+                
         #except:
         #	print line
 
