@@ -253,23 +253,23 @@ def tongji_msg():
         print num, line
         num +=1
         if num%100==0: print num
-        if num>2: break
+        if num>1: break
         #try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime"], axis = 1)
-        d["cut_stars"] = d['msginfo'].apply(cutwords_stars)
-        # d["cut_keywords"] = d['msginfo'].apply(cutwords_keywords)
-        # d["cut_sentiment"] = d['msginfo'].apply(cutwords_sentiment)
-        d["cut_area"] = d['msginfo'].apply(cutwords_area)
-        d["cut_phone"] = d['msginfo'].apply(cutwords_phone)
-        d["cut_internet"] = d['msginfo'].apply(cutwords_internet)
-        d["cut_social"] = d['msginfo'].apply(cutwords_social)
-        d["cut_sentiword"] = d['msginfo'].apply(cutwords_sentiword)
+        d["cut_stars"] = d['msginfo'].map(cutwords_stars)
+        # d["cut_keywords"] = d['msginfo'].map(cutwords_keywords)
+        # d["cut_sentiment"] = d['msginfo'].map(cutwords_sentiment)
+        d["cut_area"] = d['msginfo'].map(cutwords_area)
+        d["cut_phone"] = d['msginfo'].map(cutwords_phone)
+        d["cut_internet"] = d['msginfo'].map(cutwords_internet)
+        d["cut_social"] = d['msginfo'].map(cutwords_social)
+        d["cut_sentiword"] = d['msginfo'].map(cutwords_sentiword)
         for ind in d.index:
             sta = d["cut_stars"][ind]
             ar = d["cut_area"][ind]
-            # senti = d["cut_sentiment"][ind]
-            # keyw = d["cut_keywords"][ind]
+            senti = d["cut_sentiment"][ind]
+            keyw = d["cut_keywords"][ind]
             ph = d["cut_phone"][ind]
             inte = d["cut_internet"][ind]
             so = d["cut_social"][ind]
