@@ -212,7 +212,7 @@ def cutwords_sentiment(sentence):
 
 def cutwords_area(sentence): 
     district = [u"北京", u"天津", u"重庆", u"上海", u"河北", u"山西", u"辽宁", u"吉林", u"黑龙江", u"江苏", u"浙江", u"安徽", u"福建", u"江西", u"山东", u"河南", u"湖北", u"湖南", u"广东", u"海南", u"四川", u"贵州", u"云南", u"陕西", u"甘肃", u"青海", u"台湾"]
-    words = pseg.cut(sentence)
+    words = pseg.cut(sentence) #words
     district_word = [w.word for w in words if str(w.flag) == 'ns']
     return district_word
 
