@@ -190,7 +190,7 @@ def tongji_userfre():
 # 	cutcontent = [w for w in list(jieba.cut(sentence, cut_all = False)) if w not in stopwords and w in stars]
 # 	return cutcontent
 def cutwords_stars(sentence): 
-  stars = [s.decode("utf-8") for s in file("stars.txt")]
+  stars = [s for s in file("stars.txt")]
   cutcontent = [w for w in stars if w in sentence]
   return cutcontent
 
