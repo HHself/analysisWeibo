@@ -257,14 +257,31 @@ def tongji_msg():
         #try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime"], axis = 1)
+        t1 = time.time()
         d["cut_stars"] = d['msginfo'].map(cutwords_stars)
+        print "stars cost:", time.time()-t1
+        t2 = time.time()
         d["cut_keywords"] = d['msginfo'].map(cutwords_keywords)
+        print "keywords cost:", time.time()-t2
+        t3 = time.time()
         d["cut_sentiment"] = d['msginfo'].map(cutwords_sentiment)
+        print "sentiment cost:", time.time()-t3
+        t4 = time.time()
         d["cut_area"] = d['msginfo'].map(cutwords_area)
+        print "area cost:", time.time()-t4
+        t5 = time.time()
         d["cut_phone"] = d['msginfo'].map(cutwords_phone)
+        print "phone cost:", time.time()-t5
+        t6 = time.time()
         d["cut_internet"] = d['msginfo'].map(cutwords_internet)
+        print "internet cost:", time.time()-t6
+        t7 = time.time()
         d["cut_social"] = d['msginfo'].map(cutwords_social)
+        print "social cost:", time.time()-t7
+        t8 = time.time()
         d["cut_sentiword"] = d['msginfo'].map(cutwords_sentiword)
+        print "sentiword cost:", time.time()-t8
+
         for ind in d.index:
             sta = d["cut_stars"][ind]
             ar = d["cut_area"][ind]
