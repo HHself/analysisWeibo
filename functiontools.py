@@ -4,8 +4,8 @@ import time
 import pandas as pd
 import numpy as np
 import time
-import jieba
-import jieba.posseg as pseg
+# import jieba
+# import jieba.posseg as pseg
 from snownlp import SnowNLP
 
 filepath = "/home/weibo/"
@@ -211,29 +211,29 @@ def cutwords_sentiment(sentence):
     return st
 
 def cutwords_area(sentence): 
-    district = [u"北京", u"天津", u"重庆", u"上海", u"河北", u"山西", u"辽宁", u"吉林", u"黑龙江", u"江苏", u"浙江", u"安徽", u"福建", u"江西", u"山东", u"河南", u"湖北", u"湖南", u"广东", u"海南", u"四川", u"贵州", u"云南", u"陕西", u"甘肃", u"青海", u"台湾"]
+    district = ["北京", "天津", "重庆", "上海", "河北", "山西", "辽宁", "吉林", "黑龙江", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东", "海南", "四川", "贵州", "云南", "陕西", "甘肃", "青海", "台湾"]
     #words = pseg.cut(sentence) #words
     #district_word = [w.word for w in words if str(w.flag) == 'ns']
     district_word = [w for w in district if w in sentence]
     return district_word
 
 def cutwords_phone(sentence): 
-   phones = [u"三星", u"小米", u"苹果", u"华为", u"诺基亚", u"联想", u"索尼", u"魅族", u"酷派", u"金立"]
+   phones = ["三星", "小米", "苹果", "华为", "诺基亚", "联想", "索尼", "魅族", "酷派", "金立"]
    cutcontent = [w for w in stars if w in sentence]
    return cutcontent
 
 def cutwords_internet(sentence): 
-   internet = [u"百度", u"阿里", u"腾讯", u"京东", u"网易", u"搜狐", u"新浪", u"携程", u"优酷"]
+   internet = ["百度", "阿里", "腾讯", "京东", "网易", "搜狐", "新浪", "携程", "优酷"]
    cutcontent = [w for w in stars if w in sentence]
    return cutcontent
 
 def cutwords_social(sentence): 
-   social = [u"微博", u"知乎", u"贴吧", u"微信", u"QQ", u"糗事百科", u"人人", u"豆瓣", u"世纪佳缘"]
+   social = ["微博", "知乎", "贴吧", "微信", "QQ", "糗事百科", "人人", "豆瓣", "世纪佳缘"]
    cutcontent = [w for w in stars if w in sentence]
    return cutcontent
 
 def cutwords_sentiword(sentence): 
-   sentiword = [u"爱", u"恨", u"开心", u"伤心", u"哈哈", u"唉", u"么么哒", u"萌萌哒"]
+   sentiword = ["爱", "恨", "开心", "伤心", "哈哈", "唉", "么么哒", "萌萌哒"]
    cutcontent = [w for w in stars if w in sentence]
    return cutcontent
 
