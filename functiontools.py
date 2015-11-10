@@ -266,8 +266,8 @@ def tongji_msg():
         d["cut_sentiword"] = d['msginfo'].apply(cutwords_sentiword)
         for ind in d.index:
             sta = d["cut_stars"][ind]
-        	ar = d["cut_area"][ind]
-        	senti = d["cut_sentiment"][ind]
+            ar = d["cut_area"][ind]
+            senti = d["cut_sentiment"][ind]
             keyw = d["cut_keywords"][ind]
             ph = d["cut_phone"][ind]
             inte = d["cut_internet"][ind]
