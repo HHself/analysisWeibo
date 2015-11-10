@@ -6,7 +6,7 @@ import numpy as np
 import time
 import jieba
 import jieba.posseg as pseg
-#from snownlp import SnowNLP
+from snownlp import SnowNLP
 
 filepath = "/home/weibo/"
 output = "./output/"
@@ -189,10 +189,10 @@ def tongji_userfre():
 # 	stopwords = [s.replace("\n", "").decode("utf-8") for s in file("stopwords.txt")]
 # 	cutcontent = [w for w in list(jieba.cut(sentence, cut_all = False)) if w not in stopwords and w in stars]
 # 	return cutcontent
-def cutwords_stars(sentence): 
-  stars = [s for s in file("stars.txt")]
-  cutcontent = [w for w in stars if w in sentence]
-  return cutcontent
+def cutwords_stars(sentence):
+    stars = [s for s in file("stars.txt")]
+    cutcontent = [w for w in stars if w in sentence]
+    return cutcontent
 
 def cutwords_keywords(sentence):
 	s = SnowNLP(sentence.decode("utf-8"))
@@ -249,7 +249,7 @@ def tongji_msg():
     data_social = {}
     data_sentiword = {}
     for line in file(filepath2 + "content.txt"):
-        #print line
+        print num, line
         num +=1
         if num%100==0: print num
         if num>3: break
