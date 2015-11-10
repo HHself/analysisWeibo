@@ -199,8 +199,8 @@ def cutwords_keywords(sentence):
 	return s.cut_keywords(3)
 
 def cutwords_sentiment(sentence): 
-	s = SnowNLP(sentence.decode("utf-8"))
-	senti = s.sentiments
+    s = SnowNLP(sentence.decode("utf-8"))
+    senti = s.sentiments
     st = 0
     if senti > 0.6:
         st = 1
