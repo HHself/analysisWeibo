@@ -258,8 +258,8 @@ def tongji_msg():
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime"], axis = 1)
         d["cut_stars"] = d['msginfo'].map(cutwords_stars)
-        # d["cut_keywords"] = d['msginfo'].map(cutwords_keywords)
-        # d["cut_sentiment"] = d['msginfo'].map(cutwords_sentiment)
+        d["cut_keywords"] = d['msginfo'].map(cutwords_keywords)
+        d["cut_sentiment"] = d['msginfo'].map(cutwords_sentiment)
         d["cut_area"] = d['msginfo'].map(cutwords_area)
         d["cut_phone"] = d['msginfo'].map(cutwords_phone)
         d["cut_internet"] = d['msginfo'].map(cutwords_internet)
@@ -281,12 +281,12 @@ def tongji_msg():
             for a in ar:
                 data_area.setdefault(a, 0)
                 data_area[a] += 1 
-            # for se in senti:
-            #     data_sentiment.setdefault(se, 0)
-            #     data_sentiment[se] += 1 
-            # for k in keyw:                
-            #     data_keywords.setdefault(k, 0)
-            #     data_keywords[keyw] += 1
+            for se in senti:
+                data_sentiment.setdefault(se, 0)
+                data_sentiment[se] += 1 
+            for k in keyw:                
+                data_keywords.setdefault(k, 0)
+                data_keywords[keyw] += 1
             for p in ph:
                 data_phone.setdefault(p, 0)
                 data_phone[p] += 1
@@ -305,8 +305,8 @@ def tongji_msg():
 
     data_stars  = sorted(data_stars.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     data_area = sorted(data_area.iteritems(), key = lambda x:x[1], reverse = True)[:50]
-    # data_sentiment  = sorted(data_sentiment.iteritems(), key = lambda x:x[1], reverse = True)[:50]
-    # data_keywords = sorted(data_keywords.iteritems(), key = lambda x:x[1], reverse = True)[:50]
+    data_sentiment  = sorted(data_sentiment.iteritems(), key = lambda x:x[1], reverse = True)[:50]
+    data_keywords = sorted(data_keywords.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     data_phone  = sorted(data_phone.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     data_internet = sorted(data_internet.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     data_social  = sorted(data_social.iteritems(), key = lambda x:x[1], reverse = True)[:50]
@@ -314,8 +314,8 @@ def tongji_msg():
     
     writefile({i[0]:i[1] for i in data_stars}, output2 + "data_stars.txt")
     writefile({i[0]:i[1] for i in data_area}, output2 + "data_area.txt")
-    # writefile({i[0]:i[1] for i in data_sentiment}, output2 + "data_sentiment.txt")
-    # writefile({i[0]:i[1] for i in data_keywords}, output2 + "data_keywords.txt")
+    writefile({i[0]:i[1] for i in data_sentiment}, output2 + "data_sentiment.txt")
+    writefile({i[0]:i[1] for i in data_keywords}, output2 + "data_keywords.txt")
     writefile({i[0]:i[1] for i in data_phone}, output2 + "data_phone.txt")
     writefile({i[0]:i[1] for i in data_internet}, output2 + "data_internet.txt")
     writefile({i[0]:i[1] for i in data_social}, output2 + "data_social.txt")
