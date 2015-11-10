@@ -219,22 +219,22 @@ def cutwords_area(sentence):
 
 def cutwords_phone(sentence): 
    phones = ["三星", "小米", "苹果", "华为", "诺基亚", "联想", "索尼", "魅族", "酷派", "金立"]
-   cutcontent = [w for w in stars if w in sentence]
+   cutcontent = [w for w in phones if w in sentence]
    return cutcontent
 
 def cutwords_internet(sentence): 
    internet = ["百度", "阿里", "腾讯", "京东", "网易", "搜狐", "新浪", "携程", "优酷"]
-   cutcontent = [w for w in stars if w in sentence]
+   cutcontent = [w for w in internet if w in sentence]
    return cutcontent
 
 def cutwords_social(sentence): 
    social = ["微博", "知乎", "贴吧", "微信", "QQ", "糗事百科", "人人", "豆瓣", "世纪佳缘"]
-   cutcontent = [w for w in stars if w in sentence]
+   cutcontent = [w for w in social if w in sentence]
    return cutcontent
 
 def cutwords_sentiword(sentence): 
    sentiword = ["爱", "恨", "开心", "伤心", "哈哈", "唉", "么么哒", "萌萌哒"]
-   cutcontent = [w for w in stars if w in sentence]
+   cutcontent = [w for w in sentiword if w in sentence]
    return cutcontent
 
 
