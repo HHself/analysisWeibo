@@ -338,7 +338,7 @@ def filtertopuser():
         # try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d[~d["screenname"].isin(topuser)]
-        d = d[d.apply(lambda row: not row['msginfo'].startswith('#'), axis = 1)]
+        d = d[d.apply(lambda row: not row['msginfo'].startswith(r'//@'), axis = 1)]
         d = d[d.apply(lambda row: not row['msginfo'].startswith('【'), axis = 1)]
         newFrame = pd.concat([newFrame, d])
         if len(newFrame) > maxline:
