@@ -354,8 +354,8 @@ if __name__ =="__main__":
     #tongji_time()
     #tongji_source()
     # tongji_userfre()
-    # tongji_msg()
-    filtertopuser()
+    tongji_msg()
+    # filtertopuser()
 
 
 #抱歉，此微博已被作者删除 "分享图片"
