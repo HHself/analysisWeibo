@@ -181,7 +181,7 @@ def tongji_userfre():
                     data_user[nu] += int(d_user["countt"][nu])
         except:
         	print line
-    temp_userfre = sorted(data_user.iteritems(), key = lambda x:x[1], reverse = True)[:10000]
+    temp_userfre = sorted(data_user.iteritems(), key = lambda x:x[1], reverse = True)
     writefile({i[0]:i[1] for i in temp_userfre}, output2 + "data_userfre.txt")
 
 # def cutwords_stars(sentence): 
@@ -253,7 +253,7 @@ def tongji_msg():
         print num, line
         num +=1
         # if num%100==0: print num
-        # if num>1: break
+        if num>1: break
         #try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime"], axis = 1)
@@ -338,15 +338,16 @@ def tongji_msg():
     # writefile({i[0]:i[1] for i in data_social}, output2 + "data_social.txt")
     # writefile({i[0]:i[1] for i in data_sentiword}, output2 + "data_sentiword.txt")
 
-
+def filtertopuser():
+    topuser = [line.split("\t")[0] for line in file("result/data_userfre.txt")]
 
 
 if __name__ =="__main__":
     #find2012msg()
     #tongji_time()
     #tongji_source()
-    # tongji_userfre()
-    tongji_msg()
+    tongji_userfre()
+    # tongji_msg()
 
 
 #抱歉，此微博已被作者删除 "分享图片"
