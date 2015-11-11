@@ -12,7 +12,7 @@ filepath = "/home/weibo/"
 output = "./output/"
 filepath2 = "./output2/"
 output2 = "./result/"
-
+filepath3 = "./output3/"
 def readfile(path):
     data=[]
     for line in file(path):
@@ -339,15 +339,40 @@ def tongji_msg():
     # writefile({i[0]:i[1] for i in data_sentiword}, output2 + "data_sentiword.txt")
 
 def filtertopuser():
-    topuser = [line.split("\t")[0] for line in file("result/data_userfre.txt")]
+    precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
+    topuser = [line.split("\t")[0] for line in file("./result/data_userfre_del.txt")]
+    maxline = 150000
+    num = 0
+    numm = 0
+    
+    newFrame = pd.DataFrame(columns = precol)
+    for line in file(filepath2 + "content.txt"):
+        num += 1
+        if num%500 == 0: print num
+        
+        try:
+            d = pd.read_csv(filepath + line.replace("\n",""))
+            d = d[~d["screenname"].isin(topuser)]
+            d = d[d.apply(lambda row: not row['msginfo'].startswith('#'), axis = 1)]
+            d = d[d.apply(lambda row: not row['msginfo'].startswith('【'), axis = 1)]
+            newFrame = pd.concat([newFrame, d])
+
+            if len(newFrame) > maxline:
+                newFrame.iloc[:maxline, :].to_csv("./output3/2012weibodata_num_" + str(numm) +".csv", encoding="utf-8", index = False)
+                numm +=1
+                newFrame = newFrame.iloc[maxline:, :]
+            if numm >3: break
+        except:
+            print "illegal file: ",line
 
 
 if __name__ =="__main__":
     #find2012msg()
     #tongji_time()
     #tongji_source()
-    tongji_userfre()
+    # tongji_userfre()
     # tongji_msg()
+    filtertopuser()
 
 
 #抱歉，此微博已被作者删除 "分享图片"
