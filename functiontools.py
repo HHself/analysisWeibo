@@ -336,7 +336,7 @@ def filtertopuser():
         if num%500 == 0: print num
         
         # try:
-        d = pd.read_csv(filepath + line.replace("\n",""))
+        d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d[~d["screenname"].isin(topuser)]
         d = d[d.apply(lambda row: not row['msginfo'].startswith('#'), axis = 1)]
         d = d[d.apply(lambda row: not row['msginfo'].startswith('【'), axis = 1)]
