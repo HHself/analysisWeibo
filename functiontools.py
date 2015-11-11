@@ -254,71 +254,71 @@ def tongji_msg():
         num +=1
         # if num%100==0: print num
         # if num>1: break
-        try:
-            d = pd.read_csv(filepath2 + line.replace("\n",""))
-            d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime"], axis = 1)
-            #t1 = time.time()
-            # d["cut_stars"] = d['msginfo'].map(cutwords_stars)
-            # print "stars cost:", time.time()-t1
-            # t2 = time.time()
-            d["cut_keywords"] = d['msginfo'].map(cutwords_keywords)
-            # print "keywords cost:", time.time()-t2
-            # t3 = time.time()
-            d["cut_sentiment"] = d['msginfo'].map(cutwords_sentiment)
-            # print "sentiment cost:", time.time()-t3
-            # t4 = time.time()
-            # d["cut_area"] = d['msginfo'].map(cutwords_area)
-            # print "area cost:", time.time()-t4
-            # t5 = time.time()
-            # d["cut_phone"] = d['msginfo'].map(cutwords_phone)
-            # print "phone cost:", time.time()-t5
-            # t6 = time.time()
-            # d["cut_internet"] = d['msginfo'].map(cutwords_internet)
-            # print "internet cost:", time.time()-t6
-            # t7 = time.time()
-            # d["cut_social"] = d['msginfo'].map(cutwords_social)
-            # print "social cost:", time.time()-t7
-            # t8 = time.time()
-            # d["cut_sentiword"] = d['msginfo'].map(cutwords_sentiword)
-            # print "sentiword cost:", time.time()-t8
-    
-            for ind in d.index:
-                # sta = d["cut_stars"][ind]
-                # ar = d["cut_area"][ind]
-                senti = d["cut_sentiment"][ind]
-                keyw = d["cut_keywords"][ind]
-                # ph = d["cut_phone"][ind]
-                # inte = d["cut_internet"][ind]
-                # so = d["cut_social"][ind]
-                # sentiw = d["cut_sentiword"][ind]
-    
-                # for s in sta:
-            	   #  data_stars.setdefault(s, 0)
-            	   #  data_stars[s] += 1
-                # for a in ar:
-                #     data_area.setdefault(a, 0)
-                #     data_area[a] += 1 
-                for se in senti:
-                    data_sentiment.setdefault(se, 0)
-                    data_sentiment[se] += 1 
-                for k in keyw:                
-                    data_keywords.setdefault(k, 0)
-                    data_keywords[k] += 1
-                # for p in ph:
-                #     data_phone.setdefault(p, 0)
-                #     data_phone[p] += 1
-                # for i in inte:
-                #     data_internet.setdefault(i, 0)
-                #     data_internet[i] += 1
-                # for s in so:
-                #     data_social.setdefault(s, 0)
-                #     data_social[s] += 1
-                # for sen in sentiw:
-                #     data_sentiword.setdefault(sen, 0)
-                #     data_sentiword[sen] += 1 
+        #try:
+        d = pd.read_csv(filepath2 + line.replace("\n",""))
+        d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime"], axis = 1)
+        #t1 = time.time()
+        # d["cut_stars"] = d['msginfo'].map(cutwords_stars)
+        # print "stars cost:", time.time()-t1
+        # t2 = time.time()
+        d["cut_keywords"] = d['msginfo'].map(cutwords_keywords)
+        # print "keywords cost:", time.time()-t2
+        # t3 = time.time()
+        d["cut_sentiment"] = d['msginfo'].map(cutwords_sentiment)
+        # print "sentiment cost:", time.time()-t3
+        # t4 = time.time()
+        # d["cut_area"] = d['msginfo'].map(cutwords_area)
+        # print "area cost:", time.time()-t4
+        # t5 = time.time()
+        # d["cut_phone"] = d['msginfo'].map(cutwords_phone)
+        # print "phone cost:", time.time()-t5
+        # t6 = time.time()
+        # d["cut_internet"] = d['msginfo'].map(cutwords_internet)
+        # print "internet cost:", time.time()-t6
+        # t7 = time.time()
+        # d["cut_social"] = d['msginfo'].map(cutwords_social)
+        # print "social cost:", time.time()-t7
+        # t8 = time.time()
+        # d["cut_sentiword"] = d['msginfo'].map(cutwords_sentiword)
+        # print "sentiword cost:", time.time()-t8
+
+        for ind in d.index:
+            # sta = d["cut_stars"][ind]
+            # ar = d["cut_area"][ind]
+            senti = d["cut_sentiment"][ind]
+            keyw = d["cut_keywords"][ind]
+            # ph = d["cut_phone"][ind]
+            # inte = d["cut_internet"][ind]
+            # so = d["cut_social"][ind]
+            # sentiw = d["cut_sentiword"][ind]
+
+            # for s in sta:
+        	   #  data_stars.setdefault(s, 0)
+        	   #  data_stars[s] += 1
+            # for a in ar:
+            #     data_area.setdefault(a, 0)
+            #     data_area[a] += 1 
+            for se in senti:
+                data_sentiment.setdefault(se, 0)
+                data_sentiment[se] += 1 
+            for k in keyw:                
+                data_keywords.setdefault(k, 0)
+                data_keywords[k] += 1
+            # for p in ph:
+            #     data_phone.setdefault(p, 0)
+            #     data_phone[p] += 1
+            # for i in inte:
+            #     data_internet.setdefault(i, 0)
+            #     data_internet[i] += 1
+            # for s in so:
+            #     data_social.setdefault(s, 0)
+            #     data_social[s] += 1
+            # for sen in sentiw:
+            #     data_sentiword.setdefault(sen, 0)
+            #     data_sentiword[sen] += 1 
      
-        except:
-        	print line
+        # except:
+        # 	print line
 
     # data_stars  = sorted(data_stars.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # data_area = sorted(data_area.iteritems(), key = lambda x:x[1], reverse = True)[:50]
