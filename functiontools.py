@@ -344,7 +344,7 @@ def filtertopuser():
             newFrame.iloc[:maxline, :].to_csv("./output3/2012weibodata_num_" + str(numm) +".csv", encoding="utf-8", index = False)
             numm +=1
             newFrame = newFrame.iloc[maxline:, :]
-        if numm >3: break
+        # if numm >3: break
         # except:
         #     print "illegal file: ",line
 
@@ -354,8 +354,8 @@ if __name__ =="__main__":
     #tongji_time()
     #tongji_source()
     # tongji_userfre()
-    tongji_msg()
-    # filtertopuser()
+    # tongji_msg()
+    filtertopuser()
 
 
 #抱歉，此微博已被作者删除 "分享图片"
