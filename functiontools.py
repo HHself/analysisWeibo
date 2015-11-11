@@ -337,8 +337,9 @@ def filtertopuser():
         # try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d[~d["screenname"].isin(topuser)]
-        d = d[d.apply(lambda row: r'//@' not in row['msginfo'], axis = 1)]
-        d = d[d.apply(lambda row: not row['msginfo'].startswith('【'), axis = 1)]
+        filter_mathod = lambda row: r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【') and not row['msginfo'].startswith('#')
+        d = d[d.apply(filter_mathod, axis = 1)]
+        # d = d[d.apply(lambda row: not row['msginfo'].startswith('【'), axis = 1)]
         newFrame = pd.concat([newFrame, d])
         if len(newFrame) > maxline:
             newFrame.iloc[:maxline, :].to_csv("./output3/2012weibodata_num_" + str(numm) +".csv", encoding="utf-8", index = False)
@@ -354,8 +355,8 @@ if __name__ =="__main__":
     #tongji_time()
     #tongji_source()
     # tongji_userfre()
-    tongji_msg()
-    # filtertopuser()
+    # tongji_msg()
+    filtertopuser()
 
 
 #抱歉，此微博已被作者删除 "分享图片"
