@@ -4,6 +4,7 @@ import time
 import pandas as pd
 import numpy as np
 import time
+import re
 # import jieba
 # import jieba.posseg as pseg
 from snownlp import SnowNLP
@@ -324,6 +325,10 @@ def tongji_msg():
     # writefile({i[0]:i[1] for i in data_internet}, output2 + "data_internet.txt")
     # writefile({i[0]:i[1] for i in data_social}, output2 + "data_social.txt")
     # writefile({i[0]:i[1] for i in data_sentiword}, output2 + "data_sentiword.txt")
+def fiteret(sentence):
+    print len(sentence)
+    targ = re.sub('#.*#|@.*,', '', sentence)
+    retrun targ
 
 def filtertopuser():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
@@ -339,8 +344,10 @@ def filtertopuser():
         # try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d[~d["screenname"].isin(topuser)]
-        filter_mathod = lambda row: r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【') and not row['msginfo'].startswith('#')
+        d['msginfo'] = d['msginfo'].map(fiteret)
+        filter_mathod = lambda row: r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【') and not row['msginfo'].startswith('#') and len(row['msginfo']) > 10
         d = d[d.apply(filter_mathod, axis = 1)]
+        
         # d = d[d.apply(lambda row: not row['msginfo'].startswith('【'), axis = 1)]
         newFrame = pd.concat([newFrame, d])
         if len(newFrame) > maxline:
@@ -357,8 +364,8 @@ if __name__ =="__main__":
     #tongji_time()
     #tongji_source()
     # tongji_userfre()
-    tongji_msg()
-    # filtertopuser()
+    # tongji_msg()
+    filtertopuser()
 
 
 #抱歉，此微博已被作者删除 "分享图片"
