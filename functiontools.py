@@ -23,7 +23,7 @@ def readfile(path):
 def writefile(data, path):
     filee=open(path,'w')
     if isinstance(data,dict):
-        for i in data:
+        for i in data.keys():
             filee.write(str(i) + "\t"+str(data[i]) + "\n")
     elif isinstance(data,list):
         if isinstance(data[0], list):
@@ -260,7 +260,7 @@ def tongji_msg():
         # print num, line
         num +=1
         if num%100==0: print num
-        if num>2: break
+        # if num>2: break
         #try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime"], axis = 1)
@@ -379,37 +379,3 @@ if __name__ =="__main__":
     # tongji_userfre()
     tongji_msg()
     # filtertopuser()
-
-
-#抱歉，此微博已被作者删除 "分享图片"
-
-
-
-
-
-
-
-
-'''
-        for t in d.index:
-            distime = int(d["发布时间"][t])
-            if distime < 1325347200 or dis > 1356839999: continue
-                newFrame["用户ID"][numm] =
-                newFrame["用户名"][numm] = 
-                newFrame["屏幕名"][numm] = 
-                newFrame["消息内容"][numm] =
-                newFrame["来源"][numm] = 
-                newFrame["转发数"][numm] =
-                newFrame["评论数"][numm] =
-                newFrame["发布时间"] =
-                newFrame["@用户"] =
-        d.rename(columns = {"用户ID":"userID"}, inplace = True)
-            d.rename(columns = {"用户名":"username"}, inplace = True)
-            d.rename(columns = {"屏幕名":"screenname"}, inplace = True)
-            d.rename(columns = {"消息内容":"msginfo"}, inplace = True)
-            d.rename(columns = {"来源":"source"}, inplace = True)
-            d.rename(columns = {"转发数":"forwardNum"}, inplace = True)
-            d.rename(columns = {"评论数":"commentNum"}, inplace = True)
-            d.rename(columns = {"发布时间":"releasetime"}, inplace = True)
-            d.rename(columns = {"@用户":"etuser"}, inplace = True) 
-'''
