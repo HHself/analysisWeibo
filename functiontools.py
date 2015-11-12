@@ -366,7 +366,7 @@ def filtertopuser():
             newFrame.iloc[:maxline, :].to_csv("./output3/2012weibodata_num_" + str(numm) +".csv", encoding="utf-8", index = False)
             numm +=1
             newFrame = newFrame.iloc[maxline:, :]
-        if numm >3: break
+        # if numm >3: break
         # except:
         #     print "illegal file: ",line
 
