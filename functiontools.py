@@ -253,7 +253,7 @@ def tongji_msg():
         print num, line
         num +=1
         # if num%100==0: print num
-        # if num>1: break
+        if num>3: break
         #try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime"], axis = 1)
