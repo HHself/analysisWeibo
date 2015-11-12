@@ -192,6 +192,7 @@ def tongji_userfre():
 def cutwords_stars(sentence):
     stars = [s for s in file("stars.txt")]
     cutcontent = [w for w in stars if w in sentence]
+    print stars[:2], sentence
     return cutcontent
 
 def cutwords_keywords(sentence):
@@ -215,7 +216,7 @@ def cutwords_area(sentence):
     #words = pseg.cut(sentence) #words
     #district_word = [w.word for w in words if str(w.flag) == 'ns']
     district_word = [w for w in district if w in sentence]
-    print district[:2], sentence
+    
     return district_word
 
 def cutwords_phone(sentence): 
@@ -259,6 +260,7 @@ def tongji_msg():
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime"], axis = 1)
         d["cut_stars"] = d['msginfo'].map(cutwords_stars)
+        # print [d['msginfo'][ind], d['msginfo'][ind]]
         # d["cut_keywords"] = d['msginfo'].map(cutwords_keywords)
         # d["cut_sentiment"] = d['msginfo'].map(cutwords_sentiment)
         # d["cut_area"] = d['msginfo'].map(cutwords_area)
