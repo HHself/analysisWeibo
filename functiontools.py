@@ -339,8 +339,7 @@ def tongji_msg():
     writefile({i[0]:i[1] for i in data_stock}, output2 + "data_stock.txt")
 
 def fiteret(sentence):
-    # print sentence, len(sentence)
-    targ = re.sub('#.*#|@.*,|@.* ', '', sentence)
+    targ = re.sub(r'#.*#|@.*,|@.* |http://.*', '', sentence)
     return targ
 
 def filtertopuser():
