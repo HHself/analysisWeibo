@@ -328,7 +328,7 @@ def tongji_msg():
 def fiteret(sentence):
     print sentence, len(sentence)
     targ = re.sub(r'#.*#|@.*,', '', sentence)
-    retrun targ
+    return targ
 
 def filtertopuser():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
