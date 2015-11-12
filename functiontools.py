@@ -345,7 +345,7 @@ def filtertopuser():
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d[~d["screenname"].isin(topuser)]
         d['msginfo'] = d['msginfo'].map(fiteret)
-        filter_mathod = lambda row: r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【') and not row['msginfo'].startswith('#') and len(row['msginfo']) > 30
+        filter_mathod = lambda row: r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【') and not row['msginfo'].startswith('#') and len(row['msginfo']) > 30 and "此微博已被删除。如需帮助" not in row['msginfo'] and "分享图片" not in row['msginfo']
         d = d[d.apply(filter_mathod, axis = 1)]
         
         # d = d[d.apply(lambda row: not row['msginfo'].startswith('【'), axis = 1)]
