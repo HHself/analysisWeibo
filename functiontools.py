@@ -192,7 +192,6 @@ def tongji_userfre():
 def cutwords_stars(sentence):
     stars = [s.replace("\n", "") for s in file("stars.txt")]
     cutcontent = [w for w in stars if w in sentence]
-    # print stars[:2], [sentence, sentence]
     return cutcontent
 
 def cutwords_keywords(sentence):
@@ -255,7 +254,7 @@ def tongji_msg():
         print num, line
         num +=1
         # if num%100==0: print num
-        if num>3: break
+        # if num>2: break
         #try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime"], axis = 1)
