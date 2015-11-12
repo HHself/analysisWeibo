@@ -239,6 +239,10 @@ def cutwords_sentiword(sentence):
    cutcontent = [w for w in sentiword if w in sentence]
    return cutcontent
 
+def cutwords_stock(sentence):
+    stock = ["股市", "股票", "炒股", "涨", "跌", "涨停", "跌停", "被套了"]
+    cutcontent = [w for w in stock if w in sentence]
+    return cutcontent
 
 def tongji_msg():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
@@ -251,11 +255,12 @@ def tongji_msg():
     data_internet = {}
     data_social = {}
     data_sentiword = {}
+    data_stock = {}
     for line in file(filepath2 + "content.txt"):
         # print num, line
         num +=1
         if num%100==0: print num
-        # if num>2: break
+        if num>2: break
         #try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime"], axis = 1)
@@ -268,6 +273,7 @@ def tongji_msg():
         # d["cut_internet"] = d['msginfo'].map(cutwords_internet)
         # d["cut_social"] = d['msginfo'].map(cutwords_social)
         # d["cut_sentiword"] = d['msginfo'].map(cutwords_sentiword)
+        d["cut_stock"] = d['msginfo'].map(cutwords_stock)
 
         for ind in d.index:
             sta = d["cut_stars"][ind]
@@ -279,6 +285,7 @@ def tongji_msg():
             # inte = d["cut_internet"][ind]
             # so = d["cut_social"][ind]
             # sentiw = d["cut_sentiword"][ind]
+            sto = d["cut_stock"][ind]
 
             for s in sta:
         	    data_stars.setdefault(s, 0)
@@ -304,6 +311,9 @@ def tongji_msg():
             # for sen in sentiw:
             #     data_sentiword.setdefault(sen, 0)
             #     data_sentiword[sen] += 1 
+            for s in sto:
+                data_stock.setdefault(s, 0)
+                data_stock[s] += 1
      
         # except:
         # 	print line
@@ -316,6 +326,7 @@ def tongji_msg():
     # data_internet = sorted(data_internet.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # data_social  = sorted(data_social.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # data_sentiword = sorted(data_sentiword.iteritems(), key = lambda x:x[1], reverse = True)[:50]
+    data_stock = sorted(data_stock.iteritems(), key = lambda x:x[1], reverse = True)
     
     writefile({i[0]:i[1] for i in data_stars}, output2 + "data_stars.txt")
     # writefile({i[0]:i[1] for i in data_area}, output2 + "data_area.txt")
@@ -325,6 +336,8 @@ def tongji_msg():
     # writefile({i[0]:i[1] for i in data_internet}, output2 + "data_internet.txt")
     # writefile({i[0]:i[1] for i in data_social}, output2 + "data_social.txt")
     # writefile({i[0]:i[1] for i in data_sentiword}, output2 + "data_sentiword.txt")
+    writefile({i[0]:i[1] for i in data_stock}, output2 + "data_stock.txt")
+
 def fiteret(sentence):
     # print sentence, len(sentence)
     targ = re.sub(r'#.*#|@.*,', '', sentence)
@@ -364,8 +377,8 @@ if __name__ =="__main__":
     #tongji_time()
     #tongji_source()
     # tongji_userfre()
-    # tongji_msg()
-    filtertopuser()
+    tongji_msg()
+    # filtertopuser()
 
 
 #抱歉，此微博已被作者删除 "分享图片"
