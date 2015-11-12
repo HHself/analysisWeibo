@@ -251,9 +251,9 @@ def tongji_msg():
     data_social = {}
     data_sentiword = {}
     for line in file(filepath2 + "content.txt"):
-        print num, line
+        # print num, line
         num +=1
-        # if num%100==0: print num
+        if num%100==0: print num
         # if num>2: break
         #try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
