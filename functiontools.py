@@ -215,6 +215,7 @@ def cutwords_area(sentence):
     #words = pseg.cut(sentence) #words
     #district_word = [w.word for w in words if str(w.flag) == 'ns']
     district_word = [w for w in district if w in sentence]
+    print district[:2], sentence
     return district_word
 
 def cutwords_phone(sentence): 
