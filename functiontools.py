@@ -326,7 +326,7 @@ def tongji_msg():
     # writefile({i[0]:i[1] for i in data_social}, output2 + "data_social.txt")
     # writefile({i[0]:i[1] for i in data_sentiword}, output2 + "data_sentiword.txt")
 def fiteret(sentence):
-    print sentence, len(sentence)
+    # print sentence, len(sentence)
     targ = re.sub(r'#.*#|@.*,', '', sentence)
     return targ
 
@@ -345,7 +345,7 @@ def filtertopuser():
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d[~d["screenname"].isin(topuser)]
         d['msginfo'] = d['msginfo'].map(fiteret)
-        filter_mathod = lambda row: r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【') and not row['msginfo'].startswith('#') and len(row['msginfo']) > 10
+        filter_mathod = lambda row: r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【') and not row['msginfo'].startswith('#') and len(row['msginfo']) > 30
         d = d[d.apply(filter_mathod, axis = 1)]
         
         # d = d[d.apply(lambda row: not row['msginfo'].startswith('【'), axis = 1)]
