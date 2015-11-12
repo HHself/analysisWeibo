@@ -326,8 +326,8 @@ def tongji_msg():
     # writefile({i[0]:i[1] for i in data_social}, output2 + "data_social.txt")
     # writefile({i[0]:i[1] for i in data_sentiword}, output2 + "data_sentiword.txt")
 def fiteret(sentence):
-    print len(sentence)
-    targ = re.sub('#.*#|@.*,', '', sentence)
+    print sentence, len(sentence)
+    targ = re.sub(r'#.*#|@.*,', '', sentence)
     retrun targ
 
 def filtertopuser():
