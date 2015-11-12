@@ -191,8 +191,8 @@ def tongji_userfre():
 # 	return cutcontent
 def cutwords_stars(sentence):
     stars = [s for s in file("stars.txt")]
-    cutcontent = [w for w in stars if w in sentence]
-    print stars[:2], [sentence, sentence]
+    cutcontent = [w for w in stars if w.replace("\n", "") in sentence]
+    # print stars[:2], [sentence, sentence]
     return cutcontent
 
 def cutwords_keywords(sentence):
