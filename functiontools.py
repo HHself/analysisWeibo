@@ -340,7 +340,7 @@ def tongji_msg():
 
 def fiteret(sentence):
     # print sentence, len(sentence)
-    targ = re.sub(r'#.*#|@.*,', '', sentence)
+    targ = re.sub('#.*#|@.*,|@.* ', '', sentence)
     return targ
 
 def filtertopuser():
@@ -358,7 +358,7 @@ def filtertopuser():
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d[~d["screenname"].isin(topuser)]
         d['msginfo'] = d['msginfo'].map(fiteret)
-        filter_mathod = lambda row: r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【') and not row['msginfo'].startswith('#') and len(row['msginfo']) > 30 and "此微博已被删除。如需帮助" not in row['msginfo'] and "分享图片" not in row['msginfo']
+        filter_mathod = lambda row: r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【') and not row['msginfo'].startswith('#') and len(row['msginfo']) > 30 and "此微博已被删除" not in row['msginfo'] and "分享图片" not in row['msginfo']
         d = d[d.apply(filter_mathod, axis = 1)]
         
         # d = d[d.apply(lambda row: not row['msginfo'].startswith('【'), axis = 1)]
@@ -367,7 +367,7 @@ def filtertopuser():
             newFrame.iloc[:maxline, :].to_csv("./output3/2012weibodata_num_" + str(numm) +".csv", encoding="utf-8", index = False)
             numm +=1
             newFrame = newFrame.iloc[maxline:, :]
-        # if numm >3: break
+        if numm >3: break
         # except:
         #     print "illegal file: ",line
 
@@ -377,5 +377,5 @@ if __name__ =="__main__":
     #tongji_time()
     #tongji_source()
     # tongji_userfre()
-    tongji_msg()
-    # filtertopuser()
+    # tongji_msg()
+    filtertopuser()
