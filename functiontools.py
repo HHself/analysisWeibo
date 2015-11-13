@@ -359,6 +359,7 @@ def filtertopuser():
         d['msginfo'] = d['msginfo'].map(fiteret)
         filter_mathod = lambda row: r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【') and not row['msginfo'].startswith('#') and len(row['msginfo']) > 30 and "此微博已被删除" not in row['msginfo'] and "分享图片" not in row['msginfo']
         d = d[d.apply(filter_mathod, axis = 1)]
+        d = d.drop_duplicates(["msginfo"])
         
         # d = d[d.apply(lambda row: not row['msginfo'].startswith('【'), axis = 1)]
         newFrame = pd.concat([newFrame, d])
