@@ -24,7 +24,7 @@ def writefile(data, path):
     filee=open(path,'w')
     if isinstance(data,dict):
         for i in data.keys():
-            filee.write(str(i) + "\t"+str(data[i]) + "\n")
+            filee.write(str(i.encode('utf-8')) + "\t"+str(data[i]) + "\n")
     elif isinstance(data,list):
         if isinstance(data[0], list):
             for line in data:
@@ -260,7 +260,7 @@ def tongji_msg():
         print num, line
         num +=1
         if num%100==0: print num
-        if num>1: break
+        if num>2: break
         #try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "etuser"], axis = 1)
