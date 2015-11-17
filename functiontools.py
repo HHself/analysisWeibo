@@ -260,42 +260,45 @@ def tongji_msg():
         # print num, line
         num +=1
         if num%100==0: print num
-        # if num>2: break
+        if num>2: break
         #try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
-        d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime"], axis = 1)
-        d["cut_stars"] = d['msginfo'].map(cutwords_stars)
+        d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "releasetime", "etuser"], axis = 1)
+
+        # d["cut_stars"] = d['msginfo'].map(cutwords_stars)
         # print [d['msginfo'][ind], d['msginfo'][ind]]
+        
+        d["cut_sentiment"] = d['msginfo'].map(cutwords_sentiment)
+        d = d.groupby("cut_sentiment").count()
+
         # d["cut_keywords"] = d['msginfo'].map(cutwords_keywords)
-        # d["cut_sentiment"] = d['msginfo'].map(cutwords_sentiment)
         # d["cut_area"] = d['msginfo'].map(cutwords_area)
         # d["cut_phone"] = d['msginfo'].map(cutwords_phone)
         # d["cut_internet"] = d['msginfo'].map(cutwords_internet)
         # d["cut_social"] = d['msginfo'].map(cutwords_social)
         # d["cut_sentiword"] = d['msginfo'].map(cutwords_sentiword)
-        d["cut_stock"] = d['msginfo'].map(cutwords_stock)
+        # d["cut_stock"] = d['msginfo'].map(cutwords_stock)
 
         for ind in d.index:
-            sta = d["cut_stars"][ind]
+            # sta = d["cut_stars"][ind]
             # ar = d["cut_area"][ind]
-            # senti = d["cut_sentiment"][ind]
-            # data_sentiment[senti] += 1 
+            data_sentiment[ind] += int(d["msginfo"][ind])
             # keyw = d["cut_keywords"][ind]
             # ph = d["cut_phone"][ind]
             # inte = d["cut_internet"][ind]
             # so = d["cut_social"][ind]
             # sentiw = d["cut_sentiword"][ind]
-            sto = d["cut_stock"][ind]
+            # sto = d["cut_stock"][ind]
 
-            for s in sta:
-        	    data_stars.setdefault(s, 0)
-        	    data_stars[s] += 1
+            # for s in sta:
+        	    # data_stars.setdefault(s, 0)
+        	    # data_stars[s] += 1
             # for a in ar:
             #     data_area.setdefault(a, 0)
             #     data_area[a] += 1 
             # for se in senti:
-            #     data_sentiment.setdefault(se, 0)
-            #     data_sentiment[se] += 1 
+                # data_sentiment.setdefault(se, 0)
+                # data_sentiment[se] += 1 
             # for k in keyw:                
             #     data_keywords.setdefault(k, 0)
             #     data_keywords[k] += 1
@@ -311,32 +314,32 @@ def tongji_msg():
             # for sen in sentiw:
             #     data_sentiword.setdefault(sen, 0)
             #     data_sentiword[sen] += 1 
-            for s in sto:
-                data_stock.setdefault(s, 0)
-                data_stock[s] += 1
+            # for s in sto:
+            #     data_stock.setdefault(s, 0)
+            #     data_stock[s] += 1
      
         # except:
         # 	print line
 
-    data_stars  = sorted(data_stars.iteritems(), key = lambda x:x[1], reverse = True)[:50]
+    # data_stars  = sorted(data_stars.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # data_area = sorted(data_area.iteritems(), key = lambda x:x[1], reverse = True)[:50]
-    # data_sentiment  = sorted(data_sentiment.iteritems(), key = lambda x:x[1], reverse = True)
+    data_sentiment  = sorted(data_sentiment.iteritems(), key = lambda x:x[1], reverse = True)
     # data_keywords = sorted(data_keywords.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # data_phone  = sorted(data_phone.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # data_internet = sorted(data_internet.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # data_social  = sorted(data_social.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # data_sentiword = sorted(data_sentiword.iteritems(), key = lambda x:x[1], reverse = True)[:50]
-    data_stock = sorted(data_stock.iteritems(), key = lambda x:x[1], reverse = True)
+    # data_stock = sorted(data_stock.iteritems(), key = lambda x:x[1], reverse = True)
     
-    writefile({i[0]:i[1] for i in data_stars}, output2 + "data_stars.txt")
+    # writefile({i[0]:i[1] for i in data_stars}, output2 + "data_stars.txt")
     # writefile({i[0]:i[1] for i in data_area}, output2 + "data_area.txt")
-    # writefile({i[0]:i[1] for i in data_sentiment}, output2 + "data_sentiment.txt")
+    writefile({i[0]:i[1] for i in data_sentiment}, output2 + "data_sentiment.txt")
     # writefile({i[0]:i[1] for i in data_keywords}, output2 + "data_keywords.txt")
     # writefile({i[0]:i[1] for i in data_phone}, output2 + "data_phone.txt")
     # writefile({i[0]:i[1] for i in data_internet}, output2 + "data_internet.txt")
     # writefile({i[0]:i[1] for i in data_social}, output2 + "data_social.txt")
     # writefile({i[0]:i[1] for i in data_sentiword}, output2 + "data_sentiword.txt")
-    writefile({i[0]:i[1] for i in data_stock}, output2 + "data_stock.txt")
+    # writefile({i[0]:i[1] for i in data_stock}, output2 + "data_stock.txt")
 
 def fiteret(sentence):
     targ = re.sub(r'#.*#|@.*,|@.* |http://.*', '', sentence)
@@ -358,7 +361,7 @@ def filtertopuser():
         d = d[~d["screenname"].isin(topuser)]
         d['msginfo'] = d['msginfo'].map(fiteret)
         filter_mathod = lambda row: r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【') and not row['msginfo'].startswith('#') and len(row['msginfo']) > 30 and "此微博已被删除" not in row['msginfo'] and "分享图片" not in row['msginfo']
-        d = d[d.apply(filter_mathod, axis = 1)]
+        d = d[d.apply(filter_mathod, axis = 1)
         d = d.drop_duplicates(["msginfo"])
         
         # d = d[d.apply(lambda row: not row['msginfo'].startswith('【'), axis = 1)]
@@ -377,5 +380,5 @@ if __name__ =="__main__":
     #tongji_time()
     #tongji_source()
     # tongji_userfre()
-    # tongji_msg()
-    filtertopuser()
+    tongji_msg()
+    # filtertopuser()
