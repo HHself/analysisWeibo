@@ -198,7 +198,9 @@ def cutwords_stars(sentence):
 def cutwords_keywords(sentence):
 	s = SnowNLP(sentence.decode("utf-8"))
     keyw = s.keywords(1)
-	return keyw[0]
+    if len(keyw) == 0 or keyw in stopwords: keyw ='None'
+    else: keyw = keyw[0]
+	return keyw
 
 def cutwords_sentiment(sentence): 
     s = SnowNLP(sentence.decode("utf-8"))
@@ -288,7 +290,7 @@ def tongji_msg():
             # ar = d["cut_area"][ind]
             # data_sentiment[ind] += int(d["msginfo"][ind])
             # keyw = d["cut_keywords"][ind]
-            if ind in stopwords:continue
+            
             data_keywords.setdefault(ind, 0)
             data_keywords[ind] += int(d["msginfo"][ind])
             # ph = d["cut_phone"][ind]
