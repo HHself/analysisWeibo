@@ -14,6 +14,8 @@ output = "./output/"
 filepath2 = "./output2/"
 output2 = "./result/"
 filepath3 = "./output3/"
+stopwords = [s.replace("\n", "").decode("utf-8") for s in file("stopwords.txt")]
+
 def readfile(path):
     data=[]
     for line in file(path):
@@ -196,11 +198,11 @@ def cutwords_stars(sentence):
     return cutcontent
 
 def cutwords_keywords(sentence):
-	s = SnowNLP(sentence.decode("utf-8"))
+    s = SnowNLP(sentence.decode("utf-8"))
     keyw = s.keywords(1)
     if len(keyw) == 0 or keyw in stopwords: keyw ='None'
     else: keyw = keyw[0]
-	return keyw
+    return keyw
 
 def cutwords_sentiment(sentence): 
     s = SnowNLP(sentence.decode("utf-8"))
