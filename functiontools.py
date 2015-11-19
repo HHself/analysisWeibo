@@ -201,7 +201,7 @@ def cutwords_stars(sentence):
 def cutwords_keywords(sentence):
     s = SnowNLP(sentence.decode("utf-8"))
     keyw = s.keywords(1)
-    if len(keyw) == 0 or keyw[0] in stopwords or len(key[0]) ==1: keyw ='None'
+    if len(keyw) == 0 or keyw[0] in stopwords or len(key[0]) ==1 or len(ken[0]) >8: keyw ='None'
     else: keyw = keyw[0]
     return keyw
 
