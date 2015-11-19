@@ -197,7 +197,8 @@ def cutwords_stars(sentence):
 
 def cutwords_keywords(sentence):
 	s = SnowNLP(sentence.decode("utf-8"))
-	return s.keywords(1)
+    keyw = s.keywords(1)
+	return keyw[0]
 
 def cutwords_sentiment(sentence): 
     s = SnowNLP(sentence.decode("utf-8"))
