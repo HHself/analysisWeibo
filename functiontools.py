@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import time
 import re
+import random
 # import jieba
 # import jieba.posseg as pseg
 from snownlp import SnowNLP
@@ -200,7 +201,7 @@ def cutwords_stars(sentence):
 def cutwords_keywords(sentence):
     s = SnowNLP(sentence.decode("utf-8"))
     keyw = s.keywords(1)
-    if len(keyw) == 0 or keyw in stopwords: keyw ='None'
+    if len(keyw) == 0 or keyw[0] in stopwords or len(key[0]) ==1: keyw ='None'
     else: keyw = keyw[0]
     return keyw
 
@@ -262,7 +263,11 @@ def tongji_msg():
     data_social = {}
     data_sentiword = {}
     data_stock = {}
-    for line in file(filepath2 + "content.txt"):
+
+    filelist = file(filepath2 + "content.txt")
+    randlist = random.sample(filelist, 30)
+    
+    for line in randlist:
         print num, line 
         num +=1
         if num%100==0: print num
@@ -292,7 +297,7 @@ def tongji_msg():
             # ar = d["cut_area"][ind]
             # data_sentiment[ind] += int(d["msginfo"][ind])
             # keyw = d["cut_keywords"][ind]
-            
+            if ind == "None": continue
             data_keywords.setdefault(ind, 0)
             data_keywords[ind] += int(d["msginfo"][ind])
             # ph = d["cut_phone"][ind]
@@ -347,7 +352,7 @@ def tongji_msg():
     # writefile({i[0]:i[1] for i in data_stars}, output2 + "data_stars.txt")
     # writefile({i[0]:i[1] for i in data_area}, output2 + "data_area.txt")
     # writefile({i[0]:i[1] for i in data_sentiment}, output2 + "data_sentiment.txt")
-    writefile({i[0]:i[1] for i in data_keywords}, output2 + "data_keywords_789.txt")
+    writefile({i[0]:i[1] for i in data_keywords}, output2 + "data_keywords_789_1.txt")
     # writefile({i[0]:i[1] for i in data_phone}, output2 + "data_phone.txt")
     # writefile({i[0]:i[1] for i in data_internet}, output2 + "data_internet.txt")
     # writefile({i[0]:i[1] for i in data_social}, output2 + "data_social.txt")
