@@ -397,23 +397,23 @@ def gethalfyear():
     numm = 0
     
     newFrame = pd.DataFrame(columns = precol)
-    for line in file(filepath2 + "content.txt"):
+    for line in file(filepath3 + "content.txt"):
         num += 1
         if num%100 == 0: print num
-        # try:
-        d = pd.read_csv(filepath2 + line.replace("\n",""))
-    
-        filter_mathod = lambda row: "2012-07" in row['releasetime'] or "2012-08" in row['releasetime'] or "2012-09" in row['releasetime'] or "2012-10" in row['releasetime'] or "2012-11" in row['releasetime'] or "2012-12" in row['releasetime']
-        d = d[d.apply(filter_mathod, axis = 1)]
+        try:
+            d = pd.read_csv(filepath3 + line.replace("\n",""))
         
-        newFrame = pd.concat([newFrame, d])
-        if len(newFrame) > maxline:
-            newFrame.iloc[:maxline, :].to_csv("./output4/2012weibodata_num_" + str(numm) +".csv", encoding="utf-8", index = False)
-            numm +=1
-            newFrame = newFrame.iloc[maxline:, :]
-        if numm >2: break
-        # except:
-        #     print "illegal file: ",line
+            filter_mathod = lambda row: "2012-07" in row['releasetime'] or "2012-08" in row['releasetime'] or "2012-09" in row['releasetime'] or "2012-10" in row['releasetime'] or "2012-11" in row['releasetime'] or "2012-12" in row['releasetime']
+            d = d[d.apply(filter_mathod, axis = 1)]
+            
+            newFrame = pd.concat([newFrame, d])
+            if len(newFrame) > maxline:
+                newFrame.iloc[:maxline, :].to_csv("./output4/2012weibodata_num_" + str(numm) +".csv", encoding="utf-8", index = False)
+                numm +=1
+                newFrame = newFrame.iloc[maxline:, :]
+            # if numm >2: break
+        except:
+            print "illegal file: ",line
 
 
 if __name__ =="__main__":
