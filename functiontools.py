@@ -15,6 +15,7 @@ output = "./output/"
 filepath2 = "./output2/"
 output2 = "./result/"
 filepath3 = "./output3/"
+filepath4 = "./output4/"
 stopwords = [s.replace("\n", "").decode("utf-8") for s in file("stopwords.txt")]
 
 def readfile(path):
@@ -264,16 +265,16 @@ def tongji_msg():
     data_sentiword = {}
     data_stock = {}
 
-    filelist = file(filepath2 + "content.txt")
-    randlist = random.sample(filelist, 30)
-    
+    # filelist = list(file(filepath3 + "content.txt"))
+    # randlist = random.sample(filelist, 30)
+    randlist = list(file(filepath4 + "content.txt"))
     for line in randlist:
         print num, line 
-        num +=1
-        if num%100==0: print num
+        # num +=1
+        # if num%100==0: print num
         if num>2: break
         #try:
-        d = pd.read_csv(filepath2 + line.replace("\n",""))
+        d = pd.read_csv(filepath4 + line.replace("\n",""))
         d = d.drop(["userID", "username", "screenname", "source", "forwardNum", "commentNum", "etuser"], axis = 1)
 
         # d["cut_stars"] = d['msginfo'].map(cutwords_stars)
@@ -342,7 +343,7 @@ def tongji_msg():
     # data_stars  = sorted(data_stars.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # data_area = sorted(data_area.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # data_sentiment  = sorted(data_sentiment.iteritems(), key = lambda x:x[1], reverse = True)
-    data_keywords = sorted(data_keywords.iteritems(), key = lambda x:x[1], reverse = True)[:50]
+    data_keywords = sorted(data_keywords.iteritems(), key = lambda x:x[1], reverse = True)[:10000]
     # data_phone  = sorted(data_phone.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # data_internet = sorted(data_internet.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # data_social  = sorted(data_social.iteritems(), key = lambda x:x[1], reverse = True)[:50]
@@ -352,7 +353,7 @@ def tongji_msg():
     # writefile({i[0]:i[1] for i in data_stars}, output2 + "data_stars.txt")
     # writefile({i[0]:i[1] for i in data_area}, output2 + "data_area.txt")
     # writefile({i[0]:i[1] for i in data_sentiment}, output2 + "data_sentiment.txt")
-    writefile({i[0]:i[1] for i in data_keywords}, output2 + "data_keywords_789_1.txt")
+    writefile({i[0]:i[1] for i in data_keywords}, output2 + "data_keywords_789_2.txt")
     # writefile({i[0]:i[1] for i in data_phone}, output2 + "data_phone.txt")
     # writefile({i[0]:i[1] for i in data_internet}, output2 + "data_internet.txt")
     # writefile({i[0]:i[1] for i in data_social}, output2 + "data_social.txt")
