@@ -201,7 +201,7 @@ def cutwords_stars(sentence):
 def cutwords_keywords(sentence):
     s = SnowNLP(sentence.decode("utf-8"))
     keyw = s.keywords(1)
-    if len(keyw) == 0 or keyw[0] in stopwords or len(key[0]) ==1 or len(ken[0]) >8: keyw ='None'
+    if len(keyw) == 0 or keyw[0] in stopwords or len(keyw[0]) ==1 or len(keyw[0]) >8: keyw ='None'
     else: keyw = keyw[0]
     return keyw
 
@@ -371,13 +371,11 @@ def filtertopuser():
     numm = 0
     
     newFrame = pd.DataFrame(columns = precol)
-    for line in file(filepath2 + "content.txt"):
+    for line in file(filepath3 + "content.txt"):
         num += 1
         if num%100 == 0: print num
         # try:
-        d = pd.read_csv(filepath2 + line.replace("\n",""))
-        d = d[~d["screenname"].isin(topuser)]
-        d['msginfo'] = d['msginfo'].map(fiteret)
+        d = pd.read_csv(filepath3 + line.replace("\n",""))
         filter_mathod = lambda row: r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【') and not row['msginfo'].startswith('#') and len(row['msginfo']) > 30 and "此微博已被删除" not in row['msginfo'] and "分享图片" not in row['msginfo']
         d = d[d.apply(filter_mathod, axis = 1)]
         d = d.drop_duplicates(["msginfo"])
@@ -391,6 +389,31 @@ def filtertopuser():
         # if numm >3: break
         # except:
         #     print "illegal file: ",line
+def gethalfyear():
+    precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
+    # topuser = [line.split("\t")[0] for line in file("./result/data_userfre_del.txt")]
+    maxline = 150000
+    num = 0
+    numm = 0
+    
+    newFrame = pd.DataFrame(columns = precol)
+    for line in file(filepath2 + "content.txt"):
+        num += 1
+        if num%100 == 0: print num
+        # try:
+        d = pd.read_csv(filepath2 + line.replace("\n",""))
+    
+        filter_mathod = lambda row: "2012-07" in row['releasetime'] or "2012-08" in row['releasetime'] or "2012-09" in row['releasetime'] or "2012-10" in row['releasetime'] or "2012-11" in row['releasetime'] or "2012-12" in row['releasetime']
+        d = d[d.apply(filter_mathod, axis = 1)]
+        
+        newFrame = pd.concat([newFrame, d])
+        if len(newFrame) > maxline:
+            newFrame.iloc[:maxline, :].to_csv("./output4/2012weibodata_num_" + str(numm) +".csv", encoding="utf-8", index = False)
+            numm +=1
+            newFrame = newFrame.iloc[maxline:, :]
+        if numm >2: break
+        # except:
+        #     print "illegal file: ",line
 
 
 if __name__ =="__main__":
@@ -398,5 +421,6 @@ if __name__ =="__main__":
     #tongji_time()
     #tongji_source()
     # tongji_userfre()
-    tongji_msg()
+    # tongji_msg()
     # filtertopuser()
+    gethalfyear()
