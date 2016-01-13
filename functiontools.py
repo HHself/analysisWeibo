@@ -415,7 +415,33 @@ def gethalfyear():
             # if numm >2: break
         except:
             print "illegal file: ",line
-
+#------------------------------------second------------------------------
+def filteractivity(sent):
+    res = "No Activity"
+    m = re.search(r'#.*#',sent)
+    if m:
+        res = m.group(0)
+    return res
+def getactivity():
+    precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
+    data_source = {}  
+    num = 0
+    for line in file(filepath2 + "content.txt"):
+        print line
+        num +=1
+        if num%100==0: print num
+        try:
+            d = pd.read_csv(filepath2 + line.replace("\n",""))
+            d_source = pd.DataFrame(d['msginfo'])
+            d_source["activity"] =  d['msginfo'].map(filteractivity)
+            d_source = d_source.groupby('activity').count()
+            for nu in d_source.index:
+                    data_source.setdefault(nu, 0)
+                    data_source[nu] += int(d_source["msginfo"][nu])
+        except:
+            print line
+    temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:50]
+    writefile({i[0]:i[1] for i in temp_source}, output2 + "data_source.txt")
 
 if __name__ =="__main__":
     #find2012msg()
@@ -424,4 +450,5 @@ if __name__ =="__main__":
     # tongji_userfre()
     # tongji_msg()
     # filtertopuser()
-    gethalfyear()
+    # gethalfyear()
+    getactivity()
