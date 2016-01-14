@@ -434,11 +434,12 @@ def getactivity():
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
         d_source["activity"] = d_source['msginfo'].map(filteractivity)
+        d_source["activity_num"] = d["commentNum"]
         d_source= d_source.groupby('activity').count()
 
 
         for nu in d_source.index:
-            print nu,d_source[nu]
+            print nu,d_source['activity_num'][nu]
             data_source.setdefault(nu, 0)
             data_source[nu] += int(d_source["activity"][nu])
         # for index,row in d_source.iterrows():
