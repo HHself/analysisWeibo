@@ -450,8 +450,9 @@ def getactivity():
         # except:
         #     print line
         break
+    print data_source
     temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:50]
-    writefile({i[0]:i[1] for i in temp_source},  " activity.txt")
+    writefile({i[0]:i[1] for i in temp_source},  "activity.txt")
 
 if __name__ =="__main__":
     #find2012msg()
