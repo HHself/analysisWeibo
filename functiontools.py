@@ -435,13 +435,17 @@ def getactivity():
         d_source = pd.DataFrame(d['msginfo'])
         d_source["activity"] = d_source['msginfo'].map(filteractivity)
         d_source= d_source.groupby('activity').count()
-        print d_source.columns, d_source.head(10)
-        # print d_source.columns,d_source['activity']d_source['activity']
-        for index,row in d_source.iterrows():
-            print "come index"
-            print row['activity'],row['num']
-            data_source.setdefault(row['activity'], 0)
-            data_source[row['activity']] += int(row['num'])
+
+
+        for nu in d_source.index:
+            print nu,d_source["activity"][nu]
+            data_source.setdefault(nu, 0)
+            data_source[nu] += int(d_source["activity"][nu])
+        # for index,row in d_source.iterrows():
+        #     print "come index"
+        #     print row['activity'],row['num']
+        #     data_source.setdefault(row['activity'], 0)
+        #     data_source[row['activity']] += int(row['num'])
         # except:
         #     print line
         break
