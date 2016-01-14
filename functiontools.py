@@ -426,7 +426,7 @@ def getactivity():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
     data_source = {}  
     num = 0
-    for line in file(filepath2 + "content.txt"):
+    for line in file(filepath4 + "content.txt"):
         print line
         num +=1
         if num%100==0: print num
@@ -451,7 +451,6 @@ def getactivity():
         #     print line
         # break 
     temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:10000]
-    # print temp_source
     writefile(temp_source,  "activity.txt")
 
 if __name__ =="__main__":
