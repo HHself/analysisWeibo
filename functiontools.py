@@ -460,7 +460,7 @@ def searchfilter():
         for ind,row in d_source.iterrows():
             # if '头条新闻' in row['msginfo']:
             # if 'http' in row['msginfo']:
-            if '.com' in row['msginfo']:
+            if '.com' in row['msginfo'] and '@' in row['msginfo']:
 
                 print row['msginfo']
                 # exit(0)
