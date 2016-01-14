@@ -28,7 +28,7 @@ def writefile(data, path):
     filee=open(path,'w')
     if isinstance(data,dict):
         for i in data.keys():
-            filee.write(str(i.encode('utf-8')) + "\t"+str(data[i]) + "\n")
+            filee.write(str(i) + "\t"+str(data[i]) + "\n")
     elif isinstance(data,list):
         if isinstance(data[0], list):
             for line in data:
@@ -440,8 +440,9 @@ def getactivity():
                     data_source[nu] += int(d_source["msginfo"][nu])
         except:
             print line
+        break
     temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:50]
-    writefile({i[0]:i[1] for i in temp_source}, output2 + "data_source.txt")
+    writefile({i[0]:i[1] for i in temp_source},  " activity.txt")
 
 if __name__ =="__main__":
     #find2012msg()
