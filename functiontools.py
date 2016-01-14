@@ -453,9 +453,9 @@ def getactivity():
     temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:10000]
     writefile(temp_source,  "activity.txt")
 def searchfilter():
-    for line in file(filepath4 + "content.txt"):
+    for line in file(output + "content.txt"):
         print line  
-        d = pd.read_csv(filepath4 + line.replace("\n",""))
+        d = pd.read_csv(output + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
         for ind,row in d_source.iterrows():
             if '头条新闻' in row['msginfo']:
