@@ -437,10 +437,10 @@ def getactivity():
         d_source['num'] = d_source.groupby('activity').count()
  
 
-        print d_source.columns,d_source['activity'], '\n', d_source.dtypes
+        # print d_source.columns,d_source['activity']d_source['activity']
         for index,row in d_source.iterrows():
             print "come index"
-            print row['activity'],row['msginfo']
+            print row['activity'],row['num']
             data_source.setdefault(row['activity'], 0)
             data_source[row['activity']] += int(row['msginfo'])
         # except:
