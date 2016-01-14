@@ -432,7 +432,7 @@ def getactivity():
         if num%100==0: print num
         # try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
-        d_source = pd.DataFrame(d['msginfo']).map(filteractivity)
+        d_source = pd.DataFrame(d['msginfo']).apply(filteractivity)
         d_source["activity"] = d_source['msginfo'] 
         d_source = d_source.groupby('activity').count()
 
