@@ -461,7 +461,8 @@ def searchfilter():
             # if '头条新闻' in row['msginfo']:
             # if 'http' in row['msginfo']:
             # if '@qq.com' in row['msginfo']:
-            if '【' in row['msginfo']:
+            # if '【' in row['msginfo']:
+            if '转发' in row['msginfo']:
 
                 print row['msginfo']
                 # exit(0)
