@@ -427,7 +427,7 @@ def getactivity():
     data_source = {}  
     num = 0
     for line in file(filepath2 + "content.txt"):
-        print line
+        print line,line
         num +=1
         if num%100==0: print num
         # try:
