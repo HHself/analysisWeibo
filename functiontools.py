@@ -435,7 +435,7 @@ def getactivity():
             d_source = pd.DataFrame(d['msginfo'])
             d_source["activity"] =  d['msginfo'].map(filteractivity)
             d_source = d_source.groupby('activity').count()
-            # print d_source
+            print d_source.index
             for nu in d_source.index:
                 print d_source[nu]
                 data_source.setdefault(nu, 0)
