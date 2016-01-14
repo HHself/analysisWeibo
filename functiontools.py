@@ -16,7 +16,7 @@ filepath2 = "./output2/"
 output2 = "./result/"
 filepath3 = "./output3/"
 filepath4 = "./output4/"
-stopwords = [s.replace("\n", "").decode("utf-8") for s in file("stopwords.txt")]
+#stopwords = [s.replace("\n", "").decode("utf-8") for s in file("stopwords.txt")]
 
 def readfile(path):
     data=[]
