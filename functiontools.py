@@ -438,7 +438,7 @@ def getactivity():
 
 
         for nu in d_source.index:
-            print nu,d_source["activity"][nu]
+            print nu,d_source[nu]
             data_source.setdefault(nu, 0)
             data_source[nu] += int(d_source["activity"][nu])
         # for index,row in d_source.iterrows():
