@@ -430,19 +430,19 @@ def getactivity():
         print line
         num +=1
         if num%100==0: print num
-        try:
-            d = pd.read_csv(filepath2 + line.replace("\n",""))
-            d_source = pd.DataFrame(d['msginfo'])
-            d_source["activity"] =  d['msginfo'].map(filteractivity)
-            d_source = d_source.groupby('activity').count()
-            print d_source['activity'], '\n', d_source.dtypes
-            for index,row in d_source.iterrows():
-                print "come index"
-                print row['activity'],row['msginfo']
-                data_source.setdefault(row['activity'], 0)
-                data_source[row['activity']] += int(row['msginfo'])
-        except:
-            print line
+        # try:
+        d = pd.read_csv(filepath2 + line.replace("\n",""))
+        d_source = pd.DataFrame(d['msginfo'])
+        d_source["activity"] =  d['msginfo'].map(filteractivity)
+        d_source = d_source.groupby('activity').count()
+        print d_source,d_source['activity'], '\n', d_source.dtypes
+        for index,row in d_source.iterrows():
+            print "come index"
+            print row['activity'],row['msginfo']
+            data_source.setdefault(row['activity'], 0)
+            data_source[row['activity']] += int(row['msginfo'])
+        # except:
+        #     print line
         break
     temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     writefile({i[0]:i[1] for i in temp_source},  " activity.txt")
