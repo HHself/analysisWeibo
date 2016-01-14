@@ -427,14 +427,14 @@ def getactivity():
     data_source = {}  
     num = 0
     for line in file(filepath2 + "content.txt"):
-        print line,line
+        print line
         num +=1
         if num%100==0: print num
         # try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
         d_source["activity"] = d_source['msginfo'].map(filteractivity)
-        d_source = d_source.groupby('activity').count()
+        d_source['num'] = d_source.groupby('activity').count()
  
 
         print d_source.columns,d_source['activity'], '\n', d_source.dtypes
