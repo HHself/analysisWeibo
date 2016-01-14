@@ -432,12 +432,10 @@ def getactivity():
         if num%100==0: print num
         # try:
         d = pd.read_csv(filepath2 + line.replace("\n",""))
-        d_source = pd.DataFrame(d['msginfo']).apply(filteractivity)
-        d_source["activity"] = d_source['msginfo'] 
+        d_source = pd.DataFrame(d['msginfo'])
+        d_source["activity"] = d_source['msginfo'].map(filteractivity)
         d_source = d_source.groupby('activity').count()
-
-# d_time_24["countt"] = d["commentNum"]
-#             d_time_24 = d_time_24.groupby('releasetime').count()
+ 
 
         print d_source.columns,d_source['activity'], '\n', d_source.dtypes
         for index,row in d_source.iterrows():
