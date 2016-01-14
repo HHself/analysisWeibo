@@ -435,7 +435,7 @@ def getactivity():
             d_source = pd.DataFrame(d['msginfo'])
             d_source["activity"] =  d['msginfo'].map(filteractivity)
             d_source = d_source.groupby('activity').count()
-            print d_source.describe()
+            print d_source, '\n', d_source.describe()
             for index,row in d_source.iterrows():
                 print "come index"
                 print row['activity'],row['msginfo']
@@ -443,7 +443,7 @@ def getactivity():
                 data_source[row['activity']] += int(row['msginfo'])
         except:
             print line
-        # break
+        break
     temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     writefile({i[0]:i[1] for i in temp_source},  " activity.txt")
 
