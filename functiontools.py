@@ -435,10 +435,10 @@ def getactivity():
             d_source = pd.DataFrame(d['msginfo'])
             d_source["activity"] =  d['msginfo'].map(filteractivity)
             d_source = d_source.groupby('activity').count()
-            # print d_source.index
+            print d_source
             for index,row in d_source.iterrows():
                 print "come index"
-                print d_source[nu]
+                print row['activity'],row['msginfo']
                 data_source.setdefault(row['activity'], 0)
                 data_source[row['activity']] += int(row['msginfo'])
         except:
