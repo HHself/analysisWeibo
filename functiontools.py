@@ -33,7 +33,7 @@ def writefile(data, path):
         if isinstance(data[0], list):
             for line in data:
                 #filee.write(" ".join([s.encode("utf-8") for s in line])+"\n")
-                filee.write(" ".join([str(s) for s in line]) + "\n")
+                filee.write(" ".join(line) + "\n")
         else:
             for i in data:
                 filee.write(str(i) + "\n")
@@ -452,7 +452,7 @@ def getactivity():
         break 
     temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     print temp_source
-    writefile({i[0]:i[1] for i in temp_source},  "activity.txt")
+    writefile(temp_source,  "activity.txt")
 
 if __name__ =="__main__":
     #find2012msg()
