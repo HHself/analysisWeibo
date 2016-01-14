@@ -434,6 +434,7 @@ def getactivity():
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
         d_source["activity"] =  d['msginfo'].map(filteractivity)
+        print d_source['activity']
         d_source = d_source.groupby('activity').count()
         print d_source,d_source['activity'], '\n', d_source.dtypes
         for index,row in d_source.iterrows():
