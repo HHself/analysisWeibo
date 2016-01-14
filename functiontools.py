@@ -452,6 +452,18 @@ def getactivity():
         # break 
     temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:10000]
     writefile(temp_source,  "activity.txt")
+def searchfilter():
+    for line in file(filepath4 + "content.txt"):
+        print line
+        num +=1
+        if num%100==0: print num
+        # try:
+        d = pd.read_csv(filepath4 + line.replace("\n",""))
+        d_source = pd.DataFrame(d['msginfo'])
+        for ind,row in d_source.iterrows:
+            if '头条新闻' in row['msginfo']:
+                exit(0)
+
 
 if __name__ =="__main__":
     #find2012msg()
@@ -461,4 +473,5 @@ if __name__ =="__main__":
     # tongji_msg()
     # filtertopuser()
     # gethalfyear()
-    getactivity()
+    # getactivity()
+    searchfilter()
