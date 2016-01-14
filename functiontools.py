@@ -449,9 +449,9 @@ def getactivity():
         #     data_source[row['activity']] += int(row['num'])
         # except:
         #     print line
-        break 
-    temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:50]
-    print temp_source
+        # break 
+    temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:10000]
+    # print temp_source
     writefile(temp_source,  "activity.txt")
 
 if __name__ =="__main__":
