@@ -457,8 +457,9 @@ def searchfilter():
         print line  
         d = pd.read_csv(filepath4 + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
-        for ind,row in d_source.iterrows:
+        for ind,row in d_source.iterrows():
             if '头条新闻' in row['msginfo']:
+                print row['msginfo']
                 exit(0)
 
 
