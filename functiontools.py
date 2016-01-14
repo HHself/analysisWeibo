@@ -454,10 +454,7 @@ def getactivity():
     writefile(temp_source,  "activity.txt")
 def searchfilter():
     for line in file(filepath4 + "content.txt"):
-        print line
-        num +=1
-        if num%100==0: print num
-        # try:
+        print line  
         d = pd.read_csv(filepath4 + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
         for ind,row in d_source.iterrows:
