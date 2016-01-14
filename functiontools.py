@@ -436,8 +436,9 @@ def getactivity():
             d_source["activity"] =  d['msginfo'].map(filteractivity)
             d_source = d_source.groupby('activity').count()
             for nu in d_source.index:
-                    data_source.setdefault(nu, 0)
-                    data_source[nu] += int(d_source["msginfo"][nu])
+                print data_source[nu]
+                data_source.setdefault(nu, 0)
+                data_source[nu] += int(d_source["msginfo"][nu])
         except:
             print line
         # break
