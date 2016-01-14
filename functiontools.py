@@ -461,7 +461,7 @@ def searchfilter():
             # if '头条新闻' in row['msginfo']:
             if 'http' in row['msginfo']:
                 print row['msginfo']
-                exit(0)
+                # exit(0)
 
 
 if __name__ =="__main__":
