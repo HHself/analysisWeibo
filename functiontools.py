@@ -426,12 +426,12 @@ def getactivity():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
     data_source = {}  
     num = 0
-    for line in file(filepath4 + "content.txt"):
+    for line in file(filepath2 + "content.txt"):
         print line
         num +=1
         if num%100==0: print num
         # try:
-        d = pd.read_csv(filepath4 + line.replace("\n",""))
+        d = pd.read_csv(filepath2 + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
         d_source["activity"] = d_source['msginfo'].map(filteractivity)
         d_source["activity_num"] = d["commentNum"]
