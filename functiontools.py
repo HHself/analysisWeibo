@@ -463,7 +463,7 @@ def searchfilter():
             # if '@qq.com' in row['msginfo']:
             # if '【' in row['msginfo']:
             # if '转发' in row['msginfo']:
-            if row['msginfo'].startswith("#"):
+            if row['msginfo'].startswith("#2012伦敦奥运"):
 
                 print row['msginfo']
                 # exit(0)
