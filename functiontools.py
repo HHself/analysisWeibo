@@ -462,7 +462,8 @@ def searchfilter():
             # if 'http' in row['msginfo']:
             # if '@qq.com' in row['msginfo']:
             # if '【' in row['msginfo']:
-            if '转发' in row['msginfo']:
+            # if '转发' in row['msginfo']:
+            if row['msginfo'].startswith("#"):
 
                 print row['msginfo']
                 # exit(0)
