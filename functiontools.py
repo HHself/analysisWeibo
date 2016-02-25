@@ -460,7 +460,7 @@ def searchfilter():
                 # exit(0)
 def calcwordnum(sent):
     w1 = re.sub(ur"[^\u4e00-\u9fa5]|[.*]","",str(sent).decode("utf-8"))
-    wordlen = len(re.sub(r"[.*]","",w1))
+    wordlen = len(re.sub(ur"\[[\u4e00-\u9fa5]+]","",w1))
     if wordlen>140:print sent,wordlen
     return wordlen
 def getwordnumdistri():
