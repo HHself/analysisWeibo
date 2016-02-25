@@ -470,8 +470,9 @@ def getwordnumdistri():
             d = pd.read_csv(filepath2 + line.replace("\n",""))
             d_source = pd.DataFrame(d['msginfo'])
             d_source["word_num"] =  d['msginfo'].apply(lambda x:len(re.sub("\\pP‘’“”","",str(x).decode("utf-8"))))
+            print d['msginfo'][1],d_source["word_num"][1]
             d_source = d_source.groupby('word_num').count()
-            for nu in d_source.index:
+            for nu in d_source.index: 
                     data_source.setdefault(nu, 0)
                     data_source[nu] += int(d_source["msginfo"][nu])
         except:
