@@ -458,7 +458,10 @@ def searchfilter():
 
                 print row['msginfo']
                 # exit(0)
-
+def calcwordnum(sent):
+    wordlen = len(re.sub(ur"[^\u4e00-\u9fa5]","",str(sent).decode("utf-8")))
+    if wordlen>130:print sent
+    return wordlen
 def getwordnumdistri():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
     data_source = {}  
@@ -469,7 +472,8 @@ def getwordnumdistri():
         try:
             d = pd.read_csv(filepath4 + line.replace("\n",""))
             d_source = pd.DataFrame(d['msginfo'])
-            d_source["word_num"] =  d['msginfo'].apply(lambda x:len(re.sub(ur"[^\u4e00-\u9fa5]","",str(x).decode("utf-8"))))
+            # d_source["word_num"] =  d['msginfo'].apply(lambda x:len(re.sub(ur"[^\u4e00-\u9fa5]","",str(x).decode("utf-8"))))
+            d_source["word_num"] =  d['msginfo'].map(calcwordnum)
             # print d['msginfo'][1],d_source["word_num"][1]
             d_source = d_source.groupby('word_num').count()
             for nu in d_source.index: 
@@ -478,7 +482,7 @@ def getwordnumdistri():
         except:
             print line
     # temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:50]
-    writefile(data_source, "word_num.txt")
+    # writefile(data_source, "word_num.txt")
 
 if __name__ =="__main__":
     #find2012msg()
