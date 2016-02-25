@@ -473,7 +473,26 @@ def searchfilter():
 
                 print row['msginfo']
                 # exit(0)
-
+def getwordnumdistri():
+    precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
+    data_source = {}  
+    num = 0
+    for line in file(filepath3 + "content.txt"):
+        print line,line
+        num +=1
+        if num%100==0: print num
+        try:
+            d = pd.read_csv(filepath2 + line.replace("\n",""))
+            d_source = pd.DataFrame(d['msginfo'])
+            d_source["word_num"] =  d['msginfo'].apply(lambda x:len(str(x).decode("utf-8")))
+            d_source = d_source.groupby('word_num').count()
+            for nu in d_source.index:
+                    data_source.setdefault(nu, 0)
+                    data_source[nu] += int(d_source["msginfo"][nu])
+        except:
+            print line
+    temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:50]
+    writefile({i[0]:i[1] for i in temp_source}, "word_num.txt")
 
 if __name__ =="__main__":
     #find2012msg()
@@ -483,5 +502,6 @@ if __name__ =="__main__":
     # tongji_msg()
     # filtertopuser()
     # gethalfyear()
-    getactivity()
+    #getactivity()
     # searchfilter()
+    getwordnumdistri() 
