@@ -463,13 +463,13 @@ def getwordnumdistri():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
     data_source = {}  
     num = 0
-    for line in file(output + "content.txt"):
+    for line in file(filepath2 + "content.txt"):
         num +=1
         if num%100==0: print num
         try:
             d = pd.read_csv(filepath2 + line.replace("\n",""))
             d_source = pd.DataFrame(d['msginfo'])
-            d_source["word_num"] =  d['msginfo'].apply(lambda x:len(str(x).decode("utf-8")))
+            d_source["word_num"] =  d['msginfo'].apply(lambda x:len(re.sub("\\pP‘’“”","",str(x).decode("utf-8"))))
             d_source = d_source.groupby('word_num').count()
             for nu in d_source.index:
                     data_source.setdefault(nu, 0)
