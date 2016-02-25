@@ -443,37 +443,6 @@ def getactivity():
     temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     writefile({i[0]:i[1] for i in temp_source}, "activity.txt")
 
-        print line
-        num +=1
-        if num%100==0: print num
-        # try:
-        d = pd.read_csv(filepath2 + line.replace("\n",""))
-        d_source = pd.DataFrame(d['msginfo'])
-        d_source["releasetime"] = d['releasetime']
-
-        filter_mathod = lambda row: "2012-08" in row['releasetime']
-        d_source = d_source[d_source.apply(filter_mathod, axis = 1)]
-
-        
-        d_source["activity"] = d_source['msginfo'].map(filteractivity)
-        d_source["activity_num"] = d["commentNum"]
-        d_source= d_source.groupby('activity').count()
-
-
-        for nu in d_source.index:
-            # print nu,d_source['activity_num'][nu]
-            data_source.setdefault(nu, 0)
-            data_source[nu] += int(d_source["activity_num"][nu])
-        # for index,row in d_source.iterrows():
-        #     print "come index"
-        #     print row['activity'],row['num']
-        #     data_source.setdefault(row['activity'], 0)
-        #     data_source[row['activity']] += int(row['num'])
-        # except:
-        #     print line
-        # break 
-    temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:10000]
-    writefile(temp_source,  "activity.txt")
 def searchfilter():
     for line in file(output + "content.txt"):
         print line  
@@ -520,5 +489,5 @@ if __name__ =="__main__":
     # gethalfyear()  
     # getactivity()
     getwordnumdistri() 
-    getactivity()
+    # getactivity()
     # searchfilter()
