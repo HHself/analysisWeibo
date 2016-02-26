@@ -464,7 +464,7 @@ def calcwordnum(sent):
         w1 = re.sub(ur"[^\u4e00-\u9fa5]","",str(sent).decode("utf-8"))
         wordlen = len(w1)
         # wordlen = len(re.sub(ur"\[.*\]","",w1))
-        if wordlen>130:print sent,wordlen
+        if wordlen<130 and wordlen>50:print sent,wordlen
     return wordlen
 def getwordnumdistri():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
