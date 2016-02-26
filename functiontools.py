@@ -459,9 +459,12 @@ def searchfilter():
                 print row['msginfo']
                 # exit(0)
 def calcwordnum(sent):
-    w1 = re.sub(ur"[^\u4e00-\u9fa5]|[.*]","",str(sent).decode("utf-8"))
-    wordlen = len(re.sub(ur"\[.*\]","",w1))
-    if wordlen>140:print sent,wordlen
+    wordlen = 0
+    if '[' not in sent: 
+        w1 = re.sub(ur"[^\u4e00-\u9fa5]","",str(sent).decode("utf-8"))
+        wordlen = len(w1)
+        # wordlen = len(re.sub(ur"\[.*\]","",w1))
+        # if wordlen>140:print sent,wordlen
     return wordlen
 def getwordnumdistri():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
