@@ -13,7 +13,7 @@ def getcutcontent():
     num = 0
     for line in file("./output4/content.txt"):
         num +=1
-        if num%100==0: print num
+        if num%10==0: print num
         try:
             d = pd.read_csv("./output4/" + line.replace("\n",""))
             d_source = pd.DataFrame(d['msginfo'])
