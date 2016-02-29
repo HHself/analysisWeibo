@@ -2,9 +2,9 @@ import jieba
 import pandas as pd
 
 def cutallcontent(sent):    
-    stopwords = [line.replace("\n","").replace("\r","") for line in file("stopwords.txt")]
-    cut_content = [list(jieba.cut(line[1], cut_all = False)) for line in pid_context]
-    cut_content = [[word.encode("utf-8") for word in doc if len(word)>2 and word not in stopwords] for doc in cut_content]
+    stopwords = [line.replace("\n","").replace("\r","").decode("utf-8") for line in file("stopwords.txt")]
+    cut_content = list(jieba.cut(sent.decode("utf-8"), cut_all = False))
+    cut_content = [word.encode("utf-8") for word in cut_content if len(word)>1 and word not in stopwords]
     return cut_content
 
 def getcutcontent():
