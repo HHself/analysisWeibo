@@ -15,7 +15,7 @@ def getcutcontent():
         num +=1
         if num%100==0: print num
         try:
-            d = pd.read_csv(filepath4 + line.replace("\n",""))
+            d = pd.read_csv("./output4/" + line.replace("\n",""))
             d_source = pd.DataFrame(d['msginfo'])
             d_source["cut_content"] =  d['msginfo'].map(cutallcontent)
         except:
