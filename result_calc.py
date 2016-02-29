@@ -4,7 +4,6 @@ import math
 import jieba
 import jieba.posseg as pseg
 from sklearn import cluster,metrics
-import BTMmodel as bm
 import scipy.spatial.distance
 import numpy 
 import pandas as pd
