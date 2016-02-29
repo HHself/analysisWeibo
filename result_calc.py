@@ -8,7 +8,7 @@ import scipy.spatial.distance
 import numpy 
 import pandas as pd
 
-
+filepath2 = "./output2/"
 def readfile(path):
     data=[]
     for line in file(path):
