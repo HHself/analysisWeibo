@@ -7,6 +7,7 @@ from sklearn import cluster,metrics
 import scipy.spatial.distance
 import numpy 
 import pandas as pd
+import re
 
 filepath2 = "./output2/"
 def readfile(path):
