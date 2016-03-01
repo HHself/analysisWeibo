@@ -28,7 +28,7 @@ def writefile(data, path):
         else:
             for i in data:
                 # filee.write(str(i[0])+" "+str(i[1]) + "\n")
-                 filee.write(i)
+                 filee.write(i+ "\n")
     elif isinstance(data, str):
         filee.write(data)
     else:
