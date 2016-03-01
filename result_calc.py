@@ -86,7 +86,9 @@ def cutallcontent():
         elif line.startswith("#爱情公寓#"):
             content.append(9)
         else:
+            print line
             print "not in 10 activity"
+            continue
         cutt = cutcontent(re.sub(ur"#.*#|@.*,|@.* |http://.*","",line))
         if len(cutt) < 5:
             content.pop()
