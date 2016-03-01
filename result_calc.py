@@ -48,7 +48,7 @@ def getactivitydata():
             d_source = d_source[d_source.apply(filter_mathod, axis = 1)]
         except:
             print line
-        print list(d_source['msginfo'])
+        print list(d_source['msginfo'])[0]
         data_source += list(d_source['msginfo'])
     
     writefile(data_source, "activity_10_data.txt")
