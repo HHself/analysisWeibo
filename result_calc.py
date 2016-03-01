@@ -27,7 +27,8 @@ def writefile(data, path):
                 filee.write(" ".join(line) + "\n")
         else:
             for i in data:
-                filee.write(str(i[0])+" "+str(i[1]) + "\n")
+                # filee.write(str(i[0])+" "+str(i[1]) + "\n")
+                 filee.write(i)
     elif isinstance(data, str):
         filee.write(data)
     else:
@@ -44,11 +45,11 @@ def getactivitydata():
         try:
             d = pd.read_csv(filepath2 + line.replace("\n",""))
             d_source = pd.DataFrame(d['msginfo'])
-            filter_mathod = lambda row: row['msginfo'].startswith("#美女车模#") #or row['msginfo'].startswith("#游戏美女#") or row['msginfo'].startswith("#三国来了#")or row['msginfo'].startswith("#伦敦奥运#")or row['msginfo'].startswith("#中国好声音#")or row['msginfo'].startswith("#IT新闻#")or row['msginfo'].startswith("#汽车知道#")or row['msginfo'].startswith("#美食#")or row['msginfo'].startswith("#台风海葵#")or row['msginfo'].startswith("#爱情公寓#")
+            filter_mathod = lambda row: row['msginfo'].startswith("#美女车模#") or row['msginfo'].startswith("#游戏美女#") or row['msginfo'].startswith("#三国来了#")or row['msginfo'].startswith("#伦敦奥运#")or row['msginfo'].startswith("#中国好声音#")or row['msginfo'].startswith("#IT新闻#")or row['msginfo'].startswith("#汽车知道#")or row['msginfo'].startswith("#美食#")or row['msginfo'].startswith("#台风海葵#")or row['msginfo'].startswith("#爱情公寓#")
             d_source = d_source[d_source.apply(filter_mathod, axis = 1)]
         except:
             print line
-        print list(d_source['msginfo'])[0]
+        # print list(d_source['msginfo'])[0]
         data_source += list(d_source['msginfo'])
     
     writefile(data_source, "activity_10_data.txt")
