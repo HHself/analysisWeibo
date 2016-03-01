@@ -28,7 +28,7 @@ def writefile(data, path):
         else:
             for i in data:
                 # filee.write(str(i[0])+" "+str(i[1]) + "\n")
-                 filee.write(i+ "\n")
+                 filee.write(str(i)+ "\n")
     elif isinstance(data, str):
         filee.write(data)
     else:
@@ -54,28 +54,49 @@ def getactivitydata():
     
     writefile(data_source, "activity_10_data.txt")
 
-def cutallcontent(sent):    
+def cutcontent(sent):    
     stopwords = [line.replace("\n","").replace("\r","").decode("utf-8") for line in file("stopwords.txt")]
     cut_content = list(jieba.cut(sent.decode("utf-8"), cut_all = False))
     cut_content = [word.encode("utf-8") for word in cut_content if len(word)>1 and word not in stopwords]
     return cut_content
 
+def cutallcontent():    
+    content = []
+    flag = []
+    for line in file("activity_10_data.txt"):
+        if line.startswith("#美女车模#"):
+            content.append(0)
+        elif line.startswith("#游戏美女#"):
+            content.append(1)
+        elif line.startswith("#三国来了#"):
+            content.append(2)
+        elif line.startswith("#伦敦奥运#"):
+            content.append(3)
+        elif line.startswith("#中国好声音#"):
+            content.append(4)
+        elif line.startswith("#IT新闻#"):
+            content.append(5)
+        elif line.startswith("#汽车知道#"):
+            content.append(6)
+        elif line.startswith("#美食#"):
+            content.append(7)
+        elif line.startswith("#台风海葵#"):
+            content.append(8)
+        elif line.startswith("#爱情公寓#"):
+            content.append(9)
+        else:
+            print "not in 10 activity"
+        cutt = cutcontent(re.sub(ur"#.*#|@.*,|@.* |http://.*","",line))
+        if len(cutt) < 5:
+            content.pop()
+            continue
+        content.append(cutt)
+    if len(content) != len(flag):
+        print "content and flag are not equal!"
+        return
+    writefile(content, "cutcontent_10.txt")
+    writefile(flag, "flag_true.txt")
 
-def getcutcontent():
-    precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
-    data_source = {}  
-    num = 0
-    for line in file("./output4/content.txt"):
-        num +=1
-        if num%10==0: print num
-        try:
-            d = pd.read_csv("./output4/" + line.replace("\n",""))
-            d_source = pd.DataFrame(d['msginfo'])
-            d_source["cut_content"] =  d['msginfo'].map(cutallcontent)
-        except:
-            print line
-    d_source.drop(["msginfo"])
-    d.source.to_csv("./result/cut_content.csv", encoding="utf-8", index = False)
 
 def kmeanscluster(self, pd_z, k):
     k_means = cluster.KMeans(k)
@@ -89,8 +110,7 @@ def calcF1(labels_true,labels_alg):
     #     TP_FP += jc(len(l))
     return metrics.f1_score(labels_true, labels_alg, average='weighted')
 
-
 if __name__ == "__main__":
-    # getcutcontent()
-    getactivitydata()
+    # getactivitydata()
+    cutallcontent()
 
