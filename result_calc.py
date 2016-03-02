@@ -127,6 +127,6 @@ if __name__ == "__main__":
             flag_true_sub.append(flag_true[i])
             pd_z_sub.append(pd_z[i])
     predict_flag_sub= kmeanscluster(pd_z_sub,2)
-    print set(predict_flag_sub)
+    print set(flag_true_sub), set(predict_flag_sub)
     print calcF1(flag_true_sub, predict_flag_sub)
 
