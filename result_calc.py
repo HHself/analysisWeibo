@@ -137,7 +137,7 @@ if __name__ == "__main__":
         # print set(flag_true_sub), set(predict_flag_sub)
         # print candi, calcF1(flag_true_sub, predict_flag_sub)
         # print candi, calcF1([i^1 for i in flag_true_sub], predict_flag_sub)
-        f1_tr = F1_2[1]
+        f1_tr = F1_2[0]
         maxF1 = max(maxF1, f1_tr)
         minF1 = min(minF1, f1_tr)
         summ += f1_tr
