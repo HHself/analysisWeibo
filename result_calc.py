@@ -132,12 +132,12 @@ if __name__ == "__main__":
                 flag_true_sub.append(candi.index(flag_true[i]))
                 pd_z_sub.append(pd_z[i])
         predict_flag_sub= kmeanscluster(pd_z_sub,2)
-        F1_1 = calcF1([i^1 for i in flag_true_sub], predict_flag_sub)
+        # F1_1 = calcF1([i^1 for i in flag_true_sub], predict_flag_sub)
         F1_2 = calcF1(flag_true_sub, predict_flag_sub)
         # print set(flag_true_sub), set(predict_flag_sub)
         # print candi, calcF1(flag_true_sub, predict_flag_sub)
         # print candi, calcF1([i^1 for i in flag_true_sub], predict_flag_sub)
-        f1_tr = max(F1_1[2], F1_2[2])
+        f1_tr = F1_2[2]
         maxF1 = max(maxF1, f1_tr)
         minF1 = min(minF1, f1_tr)
         summ += f1_tr
