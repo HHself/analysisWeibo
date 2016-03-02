@@ -120,15 +120,16 @@ if __name__ == "__main__":
     # cutallcontent()
     pd_z=[[float(num) for num in line.split()] for line in file("pd_z.txt")]
     flag_true = [int(line.replace('\n','')) for line in file("flag_true.txt")]
-
-    pd_z_sub = []
-    flag_true_sub = []
-    candi = random.sample(range(0,10),2)
-    for i in range(len(flag_true)):
-        if flag_true[i] in candi:
-            flag_true_sub.append(candi.index(flag_true[i]))
-            pd_z_sub.append(pd_z[i])
-    predict_flag_sub= kmeanscluster(pd_z_sub,2)
-    print set(flag_true_sub), set(predict_flag_sub)
-    print candi, calcF1(flag_true_sub, predict_flag_sub)
+    
+    for num in range(50):
+        pd_z_sub = []
+        flag_true_sub = []
+        candi = random.sample(range(0,10),2)
+        for i in range(len(flag_true)):
+            if flag_true[i] in candi:
+                flag_true_sub.append(candi.index(flag_true[i]))
+                pd_z_sub.append(pd_z[i])
+        predict_flag_sub= kmeanscluster(pd_z_sub,2)
+        print set(flag_true_sub), set(predict_flag_sub)
+        print candi, calcF1(flag_true_sub, predict_flag_sub)
 
