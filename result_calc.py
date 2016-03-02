@@ -137,9 +137,10 @@ if __name__ == "__main__":
         # print set(flag_true_sub), set(predict_flag_sub)
         # print candi, calcF1(flag_true_sub, predict_flag_sub)
         # print candi, calcF1([i^1 for i in flag_true_sub], predict_flag_sub)
-        f1_tr = F1_2[0]
+        f1_tr = F1_2[2]
         maxF1 = max(maxF1, f1_tr)
         minF1 = min(minF1, f1_tr)
         summ += f1_tr
+        if f1_tr>0.4949:print F1_2
     print maxF1, minF1, summ/1000
 
