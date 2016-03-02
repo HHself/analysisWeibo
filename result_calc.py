@@ -120,8 +120,10 @@ if __name__ == "__main__":
     # cutallcontent()
     pd_z=[[float(num) for num in line.split()] for line in file("pd_z.txt")]
     flag_true = [int(line.replace('\n','')) for line in file("flag_true.txt")]
-    
-    for num in range(50):
+    maxF1 = 0
+    minF1 = 10
+    summ = 0
+    for num in range(1000):
         pd_z_sub = []
         flag_true_sub = []
         candi = random.sample(range(0,10),10)
@@ -130,7 +132,14 @@ if __name__ == "__main__":
                 flag_true_sub.append(candi.index(flag_true[i]))
                 pd_z_sub.append(pd_z[i])
         predict_flag_sub= kmeanscluster(pd_z_sub,2)
-        print set(flag_true_sub), set(predict_flag_sub)
-        print candi, calcF1(flag_true_sub, predict_flag_sub)
-        print candi, calcF1([i^1 for i in flag_true_sub], predict_flag_sub)
+        F1_1 = calcF1([i^1 for i in flag_true_sub], predict_flag_sub)
+        F1_2 = calcF1(flag_true_sub, predict_flag_sub)
+        # print set(flag_true_sub), set(predict_flag_sub)
+        # print candi, calcF1(flag_true_sub, predict_flag_sub)
+        # print candi, calcF1([i^1 for i in flag_true_sub], predict_flag_sub)
+        f1_tr = max(F1_1, F1_2)
+        maxF1 = max(maxF1, f1_tr)
+        minF1 = min(minF1, f1_tr)
+        summ += f1_tr
+        print maxF1, minF1, summ/1000
 
