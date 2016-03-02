@@ -124,7 +124,7 @@ if __name__ == "__main__":
     for num in range(50):
         pd_z_sub = []
         flag_true_sub = []
-        candi = random.sample(range(0,10),2)
+        candi = random.sample(range(0,10),10)
         for i in range(len(flag_true)):
             if flag_true[i] in candi:
                 flag_true_sub.append(candi.index(flag_true[i]))
