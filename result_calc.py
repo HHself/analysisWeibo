@@ -122,7 +122,7 @@ if __name__ == "__main__":
     flag_true = [int(line.replace('\n','')) for line in file("flag_true.txt")]
     maxF1 = 0
     minF1 = 10
-    summ = 0
+    summ = 0.0
     for num in range(1000):
         pd_z_sub = []
         flag_true_sub = []
