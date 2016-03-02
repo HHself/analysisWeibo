@@ -119,5 +119,13 @@ if __name__ == "__main__":
     # cutallcontent()
     pd_z=[[float(num) for num in line.split()] for line in file("pd_z.txt")]
     flag_true = [int(line.replace('\n','')) for line in file("flag_true.txt")]
-    print calcF1(flag_true, kmeanscluster(pd_z,10))
+
+    pd_z_sub = []
+    flag_true_sub = []
+    for i in range(len(flag_true)):
+        if flag_true[i] in [1,2]:
+            flag_true_sub.append(flag_true[i])
+            pd_z_sub.append(pd_z[i])
+    predict_flag_sub= kmeanscluster(pd_z_sub,2)
+    print calcF1(flag_true_sub, predict_flag_sub)
 
