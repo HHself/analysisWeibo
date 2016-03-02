@@ -8,6 +8,7 @@ import scipy.spatial.distance
 import numpy 
 import pandas as pd
 import re
+import random
 
 filepath2 = "./output2/"
 def readfile(path):
@@ -122,12 +123,12 @@ if __name__ == "__main__":
 
     pd_z_sub = []
     flag_true_sub = []
-    candi = [3,8]
+    candi = random.sample(range(0,10),2)
     for i in range(len(flag_true)):
         if flag_true[i] in candi:
             flag_true_sub.append(candi.index(flag_true[i]))
             pd_z_sub.append(pd_z[i])
     predict_flag_sub= kmeanscluster(pd_z_sub,2)
     print set(flag_true_sub), set(predict_flag_sub)
-    print calcF1(flag_true_sub, predict_flag_sub)
+    print candi, calcF1(flag_true_sub, predict_flag_sub)
 
