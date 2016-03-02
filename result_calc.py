@@ -102,7 +102,7 @@ def cutallcontent():
     writefile(flag, "flag_true.txt")
 
 
-def kmeanscluster(self, pd_z, k):
+def kmeanscluster(pd_z, k):
     k_means = cluster.KMeans(k)
     k_means.fit_transform(pd_z)
     return k_means.labels_
@@ -116,5 +116,8 @@ def calcF1(labels_true,labels_alg):
 
 if __name__ == "__main__":
     # getactivitydata()
-    cutallcontent()
+    # cutallcontent()
+    pd_z=[[float(num) for num in line.split()] for line in file("cutcontent_10.txt")]
+    flag_true = [int(line.replace('\n','')) for line in file("flag_true.txt")]
+    print calcF1(flag_true, kmeanscluster(pd_z,10))
 
