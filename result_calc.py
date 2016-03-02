@@ -112,7 +112,7 @@ def calcF1(labels_true,labels_alg):
     # TP_FP = 0
     # for l in labels_alg:
     #     TP_FP += jc(len(l))
-    return metrics.f1_score(labels_true, labels_alg, average='weighted')
+    return metrics.precision_score(labels_true, labels_alg, average='macro'), metrics.recall_score(labels_true, labels_alg, average='micro'), metrics.f1_score(labels_true, labels_alg, average='weighted')
 
 if __name__ == "__main__":
     # getactivitydata()
