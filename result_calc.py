@@ -123,7 +123,7 @@ if __name__ == "__main__":
     pd_z_sub = []
     flag_true_sub = []
     for i in range(len(flag_true)):
-        if flag_true[i] in [0,1]:
+        if flag_true[i] in [1,2]:
             flag_true_sub.append(flag_true[i])
             pd_z_sub.append(pd_z[i])
     predict_flag_sub= kmeanscluster(pd_z_sub,2)
