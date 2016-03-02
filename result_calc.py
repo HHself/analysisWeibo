@@ -132,4 +132,5 @@ if __name__ == "__main__":
         predict_flag_sub= kmeanscluster(pd_z_sub,2)
         print set(flag_true_sub), set(predict_flag_sub)
         print candi, calcF1(flag_true_sub, predict_flag_sub)
+        print candi, calcF1([i^1 for i in flag_true_sub], predict_flag_sub)
 
