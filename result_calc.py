@@ -66,34 +66,35 @@ def cutallcontent():
     flag = []
     for line in file("activity_10_data.txt"):
         if line.startswith("#美女车模#"):
-            content.append(0)
+            flag.append(0)
         elif line.startswith("#游戏美女#"):
-            content.append(1)
+            flag.append(1)
         elif line.startswith("#三国来了#"):
-            content.append(2)
+            flag.append(2)
         elif line.startswith("#伦敦奥运#"):
-            content.append(3)
+            flag.append(3)
         elif line.startswith("#中国好声音#"):
-            content.append(4)
+            flag.append(4)
         elif line.startswith("#IT新闻#"):
-            content.append(5)
+            flag.append(5)
         elif line.startswith("#汽车知道#"):
-            content.append(6)
+            flag.append(6)
         elif line.startswith("#美食#"):
-            content.append(7)
+            flag.append(7)
         elif line.startswith("#台风海葵#"):
-            content.append(8)
+            flag.append(8)
         elif line.startswith("#爱情公寓#"):
-            content.append(9)
+            flag.append(9)
         else:
             print line
             print "not in 10 activity"
             continue
         cutt = cutcontent(re.sub(ur"#.*#|@.*,|@.* |http://.*","",line))
         if len(cutt) < 5:
-            content.pop()
+            flag.pop()
             continue
         content.append(cutt)
+        # print content[-1],'\n',
     if len(content) != len(flag):
         print "content and flag are not equal!"
         return
