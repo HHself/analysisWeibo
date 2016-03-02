@@ -141,5 +141,5 @@ if __name__ == "__main__":
         maxF1 = max(maxF1, f1_tr)
         minF1 = min(minF1, f1_tr)
         summ += f1_tr
-        print maxF1, minF1, summ/1000
+    print maxF1, minF1, summ/1000
 
