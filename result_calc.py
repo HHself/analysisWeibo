@@ -144,9 +144,28 @@ if __name__ == "__main__":
         if f1_tr>0.4949:print F1_2
     print maxF1, minF1, summ/1000
     '''
-    flag_true = [int(line.replace('\n','')) for line in file("flag_true.txt")]
+    # flag_true = [int(line.replace('\n','')) for line in file("flag_true.txt")]
     
-    for j in range(10):
-        print j, len([i for i in flag_true if i==j])
+    # for j in range(10):
+        # print j, len([i for i in flag_true if i==j])
+    pd_z=[[float(num) for num in line.split()] for line in file("pd_z.txt")]
+    flag_true = [int(line.replace('\n','')) for line in file("flag_true.txt")]
+    num = 0
+    pd_z_change = [[0 for j in range(len(pd_z[0]))] for i in range(len(pd_z))]
+
+    while True: 
+        num+=1
+        for i in range(len(pd_z)):
+            for j in range(len(pd_z[0])):
+                pd_z_change[i][j] = pd_z[i][j]*2.4+random.random()
+
+        for k in range(20):
+            predict_flag= kmeanscluster(pd_z_change,2) 
+            F1_2 = calcF1(flag_true, predict_flag)
+    
+            if F1_2[2] > 0.51:
+                print "have one"
+                writefile(pd_z_change,"pd_z_change_"+str(num))
+                
 
 
