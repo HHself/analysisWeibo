@@ -155,6 +155,7 @@ if __name__ == "__main__":
 
     while True: 
         num+=1
+        if num%20==0: print num
         for i in range(len(pd_z)):
             for j in range(len(pd_z[0])):
                 pd_z_change[i][j] = pd_z[i][j]*2.4+random.random()
