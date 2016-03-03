@@ -118,7 +118,7 @@ def calcF1(labels_true,labels_alg):
 if __name__ == "__main__":
     # getactivitydata()
     # cutallcontent()
-    pd_z=[[float(num) for num in line.split()] for line in file("pd_z.txt")]
+    '''pd_z=[[float(num) for num in line.split()] for line in file("pd_z.txt")]
     flag_true = [int(line.replace('\n','')) for line in file("flag_true.txt")]
     maxF1 = 0
     minF1 = 10
@@ -143,4 +143,10 @@ if __name__ == "__main__":
         summ += f1_tr
         if f1_tr>0.4949:print F1_2
     print maxF1, minF1, summ/1000
+    '''
+    flag_true = [int(line.replace('\n','')) for line in file("flag_true.txt")]
+    
+    for j in range(10):
+        print j, len([i for i in flag_true if i==j])
+
 
