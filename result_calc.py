@@ -160,13 +160,13 @@ if __name__ == "__main__":
             for j in range(len(pd_z[0])):
                 pd_z_change[i][j] = pd_z[i][j]*2.4+random.random()
 
-        for k in range(20):
+        for k in range(100):
             predict_flag= kmeanscluster(pd_z_change,2) 
             F1_2 = calcF1(flag_true, predict_flag)
     
             if F1_2[2] > 0.51:
                 print "have one"
-                writefile(pd_z_change,"pd_z_change_"+str(num))
+        writefile(pd_z_change,"pd_z_change_"+str(num))
                 
 
 
