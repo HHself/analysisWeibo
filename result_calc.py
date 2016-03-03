@@ -26,7 +26,7 @@ def writefile(data, path):
         if isinstance(data[0], list):
             for line in data:
                 #filee.write(" ".join([s.encode("utf-8") for s in line])+"\n")
-                filee.write(" ".join([str(f) for f in line) + "\n")
+                filee.write(" ".join([str(f) for f in line]) + "\n")
         else:
             for i in data:
                 # filee.write(str(i[0])+" "+str(i[1]) + "\n")
