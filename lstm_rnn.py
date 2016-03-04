@@ -1,0 +1,74 @@
+import numpy as np
+import scipy as sp
+from math import exp
+
+sigmoid = lambda x : 1.0/(1+exp(-x))
+tanh = lambda x : numpy.tanh(x)
+cos = lambda x,y : numpy.cos(x,y)
+
+class LSTM_RNN():
+	 """Long short-term memory.
+
+    The input consists of 4 parts:
+    - input gate
+    - forget gate
+    - cell input
+    - output gate
+
+    """
+
+	def __init__(self, param, text, textvec):
+	    self.W1 = np.array(param[0]) # param: W1, W2, W3, W4, Wr1, Wr2, Wr3, Wr4, Wp1, Wp2, Wp3, b1, b2, b3, b4
+	    self.W2 = np.array(param[1])
+	    self.W3 = np.array(param[2])
+	    self.W4 = np.array(param[3])
+	    self.Wr1 = np.array(param[4])
+	    self.Wr2 = np.array(param[5])
+	    self.Wr3 = np.array(param[6])
+	    self.Wr4 = np.array(param[7])
+	    self.Wp1 = np.array(param[8])
+	    self.Wp2 = np.array(param[9])
+	    self.Wp3 = np.array(param[10]) # dim: n*32
+	    self.b1 = np.array(param[11])
+	    self.b2 = np.array(param[12])
+	    self.b3 = np.array(param[13])
+	    self.b4 = np.array(param[14]) # dim: n*1
+	    self.textvec = np.array(textvec)
+	    self.text = text # it's unicode without non-chinese
+	    self.textlen = len(text)
+    
+    def lstmrun(self, flag="last"):
+    	'''
+    	    flag means output all vectors or last vector
+    	'''
+    	if textlen != self.textvec.shape[0]:
+    		print "data error, length not equal!"
+    		return
+    	y_before = 0
+    	c_before = 0
+    	y_output = []
+    	for num in range(self.textlen):
+    		curvec = self.textvec[num]
+    		ygt = tanh(np.dot(self.W4, curvec) + np.dot(self.Wr4, y_before) + self.b4)
+    		it  = sigmoid(np.dot(self.W3, curvec) + np.dot(self.Wr3, y_before) + np.dot(self.Wp3, c_before) + self.b3)
+    		ft  = sigmoid(np.dot(self.W2, curvec) + np.dot(self.Wr2, y_before) + np.dot(self.Wp2, c_before) + self.b2) 
+    		ct  = ft * c_before + it * ygt
+    		ot  = sigmoid(np.dot(self.W1, curvec) + np.dot(self.Wr1, y_before) +np.dot(self.Wp1, ct) + self.b1)
+    		yt  = ot * tanh(ct)
+    		y_output.append(yt)
+    	if flag == "all":
+    		return y_output
+    	else:
+    		return y_output[-1]
+
+    def BPTTtrain(self, ): 
+
+    def getkeywordind(self):
+    	y_output = self.lstmrun()
+
+
+
+
+    
+    
+    
