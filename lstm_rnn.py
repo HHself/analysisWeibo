@@ -2,9 +2,12 @@ import numpy as np
 import scipy as sp
 import math 
 
-sigmoid = lambda x : 1.0/(1 + math.exp(-x))
-tanh = lambda x : numpy.tanh(x)
-cos = lambda x,y : numpy.cos(x, y)
+
+N = 128 
+C = 64 # the number of cell
+sigmoid = lambda x : 1.0/(1 + np.exp(-x))
+tanh = lambda x : np.tanh(x)
+cos = lambda x,y : np.cos(x, y)
 
 class LSTM_RNN():
 	 """Long short-term memory.
@@ -17,7 +20,10 @@ class LSTM_RNN():
 
     """
 
-	def __init__(self, param, text, textvec, k=3):
+	def __init__(self, param, textvec, text="", k=3):
+	    if len(textvec) > C:
+	    	print "text length >= max len"
+	    	return
 	    self.W1 = np.array(param[0]) # param: W1, W2, W3, W4, Wr1, Wr2, Wr3, Wr4, Wp1, Wp2, Wp3, b1, b2, b3, b4
 	    self.W2 = np.array(param[1])
 	    self.W3 = np.array(param[2])
@@ -35,10 +41,10 @@ class LSTM_RNN():
 	    self.b4 = np.array(param[14]) # dim: n*1
 	    self.textvec = np.array(textvec)
 	    self.text = text # it's unicode without non-chinese
-	    self.textlen = len(text)
+	    self.textlen = len(textvec)
 	    self.k = k # the number of keyword
     
-    def lstmrun(self, flag = "last"):
+    def lstmrun(self):
     	'''
     	    flag means output all vectors or last vector
     	'''
@@ -47,7 +53,9 @@ class LSTM_RNN():
     		return
     	y_before = 0
     	c_before = 0
-    	y_output = []
+    	output = [[[0]*N for j in range(C)] for i in range(6)]
+
+
     	for num in range(self.textlen):
     		curvec = self.textvec[num]
     		ygt = tanh(np.dot(self.W4, curvec) + np.dot(self.Wr4, y_before) + self.b4)
@@ -56,30 +64,29 @@ class LSTM_RNN():
     		ct  = ft * c_before + it * ygt
     		ot  = sigmoid(np.dot(self.W1, curvec) + np.dot(self.Wr1, y_before) +np.dot(self.Wp1, ct) + self.b1)
     		yt  = ot * tanh(ct)
-    		y_output.append(yt)
-    	if flag == "last":
-    		return y_output[-1]
-    	else:
-    		return y_output
+    		
 
-    def BPTTtrain(self, ): 
+    		y_before = yt
+    		c_before = ct
+    		output[0][num] = ygt
+    		output[1][num] = it
+    	    output[2][num] = ft
+    	    output[3][num] = ct
+    	    output[4][num] = ot
+    	    output[5][num] = yt
+    	output = np.array(output)
+    	return output
+
 
     def getkeywordind(self):
     	y_output = self.lstmrun(flag = "all")
-    	dis = []
-    	for num in range(textlen-1):
-    		dis.append(cossim(y_output[num], y_output[num+1]))
-    	dis.sort()#bug：当元素相同
-    	keyind = [dis.index(i) for i in dis]
+    	dis = [cossim(y_output[num], y_output[num+1]) for num in range(textlen-1)]
+    	dis_ind_val = dict([(ind, val) for ind, val in enumerate(dis, start = 1)])
+    	dis_ind = sorted(dis_ind_val)
+
     	f = 0
     	while f < textlen:
     		for j in range(f, textlen):
-
-
-
-
-
-
 
     def cossim(self, ls1, ls2):
         if ls1.shape != ls2.shape:
