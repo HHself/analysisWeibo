@@ -10,7 +10,7 @@ tanh = lambda x : np.tanh(x)
 cos = lambda x,y : np.cos(x, y)
 
 class LSTM_RNN():
-	 """Long short-term memory.
+	"""Long short-term memory.
 
     The input consists of 4 parts:
     - input gate
@@ -19,7 +19,7 @@ class LSTM_RNN():
     - output gate
 
     """
-	def __init__(self, param, textvec, text="", k=3):
+    def __init__(self, param, textvec, text="", k=3):
         if len(textvec) > C:
 	    	print "text length >= max len"
 	    	return
