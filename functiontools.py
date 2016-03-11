@@ -491,6 +491,13 @@ def getwordnumdistri():
 
 #------------------------------------third------------------------------
 
+def findactivity(sen):
+    s = re.search(r'#.*#',sen)
+    if s:
+        return True
+    else:
+        return False
+
 def gettraindata():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
     data_source = {}  
@@ -503,8 +510,8 @@ def gettraindata():
         # try:
         d = pd.read_csv(filepath4 + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
-        filter_mathod = lambda row: re.search(r'#.*#',row)
-        d_source = d_source[d_source.apply(filter_mathod, axis = 1)]
+        
+        d_source = d_source[d_source.apply(findactivity, axis = 1)]
         newFrame = pd.concat([newFrame, d_source])
 
         # except:
