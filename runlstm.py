@@ -28,8 +28,8 @@ def fmtoutput(y_ss, y_pp, y_nn):
 
 def calgradient(param, y_s, y_p, y_n, data):
     #data[0]:source, data[1]:positive, data[2]:negative
-    gra = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)]  for k in range(11)] +　[[random.random() for p in range(N)] for q in range(4)]]
-    lasts_p = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)]  for k in range(8)] +　[[random.random() for p in range(N)] for q in range(3)]]
+    gra = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)]  for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
+    lasts_p = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)]  for k in range(8)] + [[random.random() for p in range(N)] for q in range(3)]]
     lasts_q = copy.deepcopy(lasts_p)
 
     # y_s, y_p, y_n, maxlen = fmtoutput(y_s, y_p, y_n)
