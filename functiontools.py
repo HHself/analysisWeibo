@@ -509,7 +509,7 @@ def gettraindata():
         # try:
         num += 1
         print num
-        d = pd.read_csv(filepath4 + line.replace("\n",""))
+        d = pd.read_csv(filepath2 + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
         
         findactivity = lambda row : str(row).startswith("#")
