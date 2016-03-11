@@ -227,7 +227,7 @@ def gettraindata(i, weibo):
     worddict = genworddict("wordhashdict.txt")
     tdata = []
     s = weibo[i]
-    posi, neg = rdmnegative(alldoc, s)
+    posi, neg = rdmnegative(weibo, s)
     tdata.append(text2vec(worddict, s))
     tdata.append(text2vec(worddict, posi))
     for i in neg:
@@ -243,6 +243,7 @@ def genworddict(worddict):
         # dictword2vec.setdefault(word, 0)
         s = "dictword2vec['" + word + "']=" + da[1] 
         exec(s)
+    print dictword2vec
     return dictword2vec
 def getacti(s):
     # get #...#
