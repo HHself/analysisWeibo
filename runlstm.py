@@ -1,3 +1,5 @@
+#coding:utf-8
+
 import lstm_rnn as lr
 import random
 import numpy as np
