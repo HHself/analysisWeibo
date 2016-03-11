@@ -503,11 +503,9 @@ def gettraindata():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
     data_source = {}  
     num = 0
-    newFrame = pd.DataFrame(columns = ["msginfo"]])
+    newFrame = pd.DataFrame(columns = ["msginfo"])
 
     for line in file(filepath4 + "content.txt"):
-        num +=1
-        if num%100==0: print num
         # try:
         d = pd.read_csv(filepath4 + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
