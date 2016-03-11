@@ -85,6 +85,8 @@ class LSTM_RNN():
     	f = 0
     	while f < textlen:
     		for j in range(f, textlen):
+                pass #---*--*---*---*----*----*--*--choose continue ....
+
 
     def cossim(self, ls1, ls2):
         if ls1.shape != ls2.shape:
