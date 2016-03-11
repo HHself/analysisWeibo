@@ -189,7 +189,7 @@ def BPTTtrain():
     param_last = np.array([[0]*len(pa) for pa in param_init])
 
     while 1:
-        gradient = [np.array(p) for p [[[0 for j in range(M)] for i in range(N)] for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
+        gradient = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)] for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
         for r in range(len(weibo)):
             if getacti(weibo[r]) == "None" : continue
             data = gettraindata(r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
