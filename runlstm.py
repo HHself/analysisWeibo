@@ -240,8 +240,9 @@ def genworddict(worddict):
     for line in dictdata:
         da = line.split("\t")
         word = da[0].decode("utf-8")
-        dictword2vec.setdefault(word, 0)
-        exec(str(dictword2vec[word]) + "=" + da[1])
+        # dictword2vec.setdefault(word, 0)
+        s = "dictword2vec[" + str(word) + "]=" + da[1] 
+        exec(s)
     return dictword2vec
 def getacti(s):
     # get #...#
