@@ -28,9 +28,10 @@ def fmtoutput(y_ss, y_pp, y_nn):
 
 def calgradient(param, y_s, y_p, y_n, data):
     #data[0]:source, data[1]:positive, data[2]:negative
-    gra = np.array([[[0 for j in range(M)] for i in range(N)]  for k in range(11)] +　[[random.random() for p in range(N)] for q in range(4)])
-    lasts_p = np.array([[[0 for j in range(M)] for i in range(N)]  for k in range(8)] +　[[random.random() for p in range(N)] for q in range(3)])
-    lasts_q = lasts_p.copy()
+    gra = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)]  for k in range(11)] +　[[random.random() for p in range(N)] for q in range(4)]]
+    lasts_p = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)]  for k in range(8)] +　[[random.random() for p in range(N)] for q in range(3)]]
+    lasts_q = copy.deepcopy(lasts_p)
+    
     # y_s, y_p, y_n, maxlen = fmtoutput(y_s, y_p, y_n)
     for t in range(1, C):
         if len(set(y_s[-1])) + len(set(y_s[-1])) + len(set(y_s[-1])) == 3 and sum(y_s[-1]) + sum(y_s[-1])+ sum(y_s[-1]) == 0:
@@ -188,7 +189,7 @@ def BPTTtrain():
     param_last = np.array([[0]*len(pa) for pa in param_init])
 
     while 1:
-        gradient = np.array([[[0 for j in range(M)] for i in range(N)]  for k in range(11)] +　[[random.random() for p in range(N)] for q in range(4)])
+        gradient = [np.array(p) for p [[[0 for j in range(M)] for i in range(N)]  for k in range(11)] +　[[random.random() for p in range(N)] for q in range(4)]]
         for r in range(len(weibo)):
             if getacti(weibo[r]) == "None" : continue
             data = gettraindata(r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
@@ -197,13 +198,18 @@ def BPTTtrain():
             y_p = getlastoutput(param, data[1], len(data[1]), f = "all")
             cos_y_sp = cossim(y_s[-1][-1], y_p[-1][-1])
             esum = 0
+            cosy_spns = []
             for j in range(NW):
                 y_n = getlastoutput(param, data[2+j], len(data[2+j]), f = "all")
                 cos_y_sn = cossim(y_s[-1][-1], y_n[-1][-1])
-                esum += np.exp(-1 * gama * (cos_y_sp - cos_y_sn))
+                cosy_spn = cos_y_sp - cos_y_sn
+                esum += np.exp(-1 * gama * cosy_spn)
+                cosy_spns.append(cosy_spn)
             for j in range(NW):
-                alpharj = (-1 * gama * np.exp(-1 * gama *)) / (1 + esum)
-                gradient += alpharj * calgradient(param, y_s, y_p, y_n, [data[0], data[1], data[2+j]])
+                alpharj = (-1 * gama * np.exp(-1 * gama * cosy_spns[j])) / (1 + esum)
+                g = calgradient(param, y_s, y_p, y_n, [data[0], data[1], data[2+j]])
+                for k in range(11):
+                    gradient[k] += g[k]
             
         delta_k = miu * (parameters- param_last) - era * gradient
         parameters = parameters + delta_k
@@ -212,10 +218,7 @@ def BPTTtrain():
 
     pa = ["w1", "w2", "w3", "w4", "wr1", "wr2", "wr3", "wr4", "wp1", "wp2", "wp3", "b1", "b2", "b3", "b4"]
     for i in range(15):
-        if i < 11:
-            np.array([[k for k in j]for j in parameters[i]]).tofile("./param/" + pa[i] + ".txt")
-        else:
-            np.array([j for j in parameters[i]]).tofile("./param/" + pa[i] + ".txt")
+        parameters[i].tofile("./param/" + pa[i] + ".txt")
 
 
 def gettraindata(i, weibo):

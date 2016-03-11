@@ -512,6 +512,7 @@ def gettraindata():
         
         findactivity = lambda row : str(row).startswith("#")
         d_source = d_source[d_source.apply(findactivity, axis = 1)]
+        print d_source
         newFrame = pd.concat([newFrame, d_source])
 
         # except:
