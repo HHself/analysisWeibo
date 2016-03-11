@@ -508,7 +508,7 @@ def gettraindata():
     for line in file(filepath2 + "content.txt"):
         # try:
         num += 1
-        # if num > 5: break #print num
+        if num % 50 ==0: print num, line
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
         
@@ -516,7 +516,7 @@ def gettraindata():
         d_source = d_source[d_source.apply(findactivity, axis = 1)]
         # print d_source
         newFrame = pd.concat([newFrame, d_source])
-        print num, newFrame
+        # print num, newFrame
 
         # except:
             # print line
