@@ -1,7 +1,9 @@
 import lstm_rnn as lr
+import pybrain
 import random
 import numpy as np
 import copy
+import re
 
 N = 128
 M = 32 # the dim of wordvec
