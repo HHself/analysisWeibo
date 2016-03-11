@@ -43,10 +43,10 @@ class LSTM_RNN():
         self.textlen = len(textvec)
         self.k = k # the number of keyword
     
+    '''
+            flag means output all vectors or last vector
+    '''
     def lstmrun(self):
-    	'''
-    	    flag means output all vectors or last vector
-    	'''
     	if textlen != self.textvec.shape[0]:
     		print "data error, length not equal!"
     		return
@@ -62,12 +62,12 @@ class LSTM_RNN():
     		ft  = sigmoid(np.dot(self.W2, curvec) + np.dot(self.Wr2, y_before) + np.dot(self.Wp2, c_before) + self.b2) 
     		ct  = ft * c_before + it * ygt
     		ot  = sigmoid(np.dot(self.W1, curvec) + np.dot(self.Wr1, y_before) +np.dot(self.Wp1, ct) + self.b1)
-    		yt  = ot * tanh(ct)
+            yt  = ot * tanh(ct)
     		
-    		y_before = yt
-    		c_before = ct
-    		output[0][num] = ygt
-    		output[1][num] = it
+            y_before = yt
+            c_before = ct
+            output[0][num] = ygt
+            output[1][num] = it
             output[2][num] = ft
             output[3][num] = ct
             output[4][num] = ot
