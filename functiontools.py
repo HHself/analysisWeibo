@@ -500,16 +500,15 @@ def gettraindata():
     for line in file(filepath4 + "content.txt"):
         num +=1
         if num%100==0: print num
-        try:
-            d = pd.read_csv(filepath4 + line.replace("\n",""))
-            d_source = pd.DataFrame(d['msginfo'])
+        # try:
+        d = pd.read_csv(filepath4 + line.replace("\n",""))
+        d_source = pd.DataFrame(d['msginfo'])
+        filter_mathod = lambda row: re.search(r'#.*#',row)
+        d_source = d_source[d_source['msginfo'].apply(filter_mathod, axis = 1)]
+        newFrame = pd.concat([newFrame, d_source])
 
-            filter_mathod = lambda row: re.search(r'#.*#',row)
-            d_source = d_source[d_source['msginfo'].apply(filter_mathod, axis = 1)]
-            newFrame = pd.concat([newFrame, d_source])
-
-        except:
-            print line
+        # except:
+            # print line
     newFrame.to_csv("weibo_train.csv", encoding="utf-8", index = False)
 
 if __name__ =="__main__":
