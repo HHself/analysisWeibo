@@ -501,14 +501,14 @@ def getwordnumdistri():
 
 def gettraindata():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
-    data_source = {}  
+    data_source = {} 
     num = 0
     newFrame = pd.DataFrame(columns = ["msginfo"])
 
     for line in file(filepath2 + "content.txt"):
         # try:
         num += 1
-        print num
+        if num > 5: break #print num
         d = pd.read_csv(filepath2 + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
         
