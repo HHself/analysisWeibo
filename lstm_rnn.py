@@ -85,7 +85,7 @@ class LSTM_RNN():
     	f = 0
     	while f < textlen:
     		for j in range(f, textlen):
-                j + =1 #---*--*---*---*----*----*--*--choose continue ....
+                return  #---*--*---*---*----*----*--*--choose continue ....
 
 
     def cossim(self, ls1, ls2):
