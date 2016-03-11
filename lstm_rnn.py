@@ -24,22 +24,22 @@ class LSTM_RNN():
 	    if len(textvec) > C:
 	    	print "text length >= max len"
 	    	return
-	    self.W1 = np.array(param[0]) # param: W1, W2, W3, W4, Wr1, Wr2, Wr3, Wr4, Wp1, Wp2, Wp3, b1, b2, b3, b4
-	    self.W2 = np.array(param[1])
-	    self.W3 = np.array(param[2])
-	    self.W4 = np.array(param[3])
-	    self.Wr1 = np.array(param[4])
-	    self.Wr2 = np.array(param[5])
-	    self.Wr3 = np.array(param[6])
-	    self.Wr4 = np.array(param[7])
-	    self.Wp1 = np.array(param[8])
-	    self.Wp2 = np.array(param[9])
-	    self.Wp3 = np.array(param[10]) # dim: n*32
-	    self.b1 = np.array(param[11])
-	    self.b2 = np.array(param[12])
-	    self.b3 = np.array(param[13])
-	    self.b4 = np.array(param[14]) # dim: n*1
-	    self.textvec = np.array(textvec)
+	    self.W1 = param[0] # param: W1, W2, W3, W4, Wr1, Wr2, Wr3, Wr4, Wp1, Wp2, Wp3, b1, b2, b3, b4
+	    self.W2 = param[1]
+	    self.W3 = param[2]
+	    self.W4 = param[3]
+	    self.Wr1 = param[4]
+	    self.Wr2 = param[5]
+	    self.Wr3 = param[6]
+	    self.Wr4 = param[7]
+	    self.Wp1 = param[8]
+	    self.Wp2 = param[9]
+	    self.Wp3 = param[10] # dim: n*32
+	    self.b1 = param[11]
+	    self.b2 = param[12]
+	    self.b3 = param[13]
+	    self.b4 = param[14] # dim: n*1
+	    self.textvec = textvec
 	    self.text = text # it's unicode without non-chinese
 	    self.textlen = len(textvec)
 	    self.k = k # the number of keyword
@@ -65,7 +65,6 @@ class LSTM_RNN():
     		ot  = sigmoid(np.dot(self.W1, curvec) + np.dot(self.Wr1, y_before) +np.dot(self.Wp1, ct) + self.b1)
     		yt  = ot * tanh(ct)
     		
-
     		y_before = yt
     		c_before = ct
     		output[0][num] = ygt
@@ -74,7 +73,7 @@ class LSTM_RNN():
     	    output[3][num] = ct
     	    output[4][num] = ot
     	    output[5][num] = yt
-    	output = np.array(output)
+    	# output = np.array(output)
     	return output
 
 

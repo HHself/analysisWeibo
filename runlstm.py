@@ -271,7 +271,7 @@ def text2vec(worddict, te):
     for w in aw:
         if w not in allwords: continue
         tevec.append(worddict[w])
-    return tevec
+    return np.array(tevec)
 
 def cossim(ls1, ls2):
     if ls1.shape != ls2.shape:
