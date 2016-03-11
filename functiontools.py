@@ -492,7 +492,8 @@ def getwordnumdistri():
 #------------------------------------third------------------------------
 
 def findactivity(sen):
-    s = re.search(r'#.*#',sen)
+    print sen
+    s = re.search(ur'#.*#',sen)
     if s:
         return True
     else:
