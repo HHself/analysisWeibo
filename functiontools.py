@@ -505,7 +505,7 @@ def gettraindata():
             d_source = pd.DataFrame(d['msginfo'])
 
             filter_mathod = lambda row: re.search(r'#.*#',row)
-            d_source = d_source[d_source.apply(filter_mathod, axis = 1)]
+            d_source = d_source[d_source['msginfo'].apply(filter_mathod, axis = 1)]
             newFrame = pd.concat([newFrame, d_source])
 
         except:
