@@ -219,7 +219,7 @@ def BPTTtrain():
 
 
 def gettraindata(i, weibo):
-    worddict = genworddict("worddict.txt")
+    worddict = genworddict("wordhashdict.txt")
     tdata = []
     s = weibo[i]
     posi, neg = rdmnegative(alldoc, s)
@@ -234,7 +234,7 @@ def genworddict(worddict):
     dictdata = [line for line in file(worddict)]
     for line in dictdata:
         da = line.split("\t")
-        dictword2vec[da[0].decode("utf-8")] = da[1]
+        exec(str(dictword2vec[da[0].decode("utf-8")]) + "=" + da[1])
     return dictword2vec
 def getacti(s):
     # get #...#
@@ -275,3 +275,7 @@ def cossim(ls1, ls2):
         print "error ,list not equal"
         return
     return np.dot(ls1, ls2)/(np.linalg.norm(ls1) * np.linalg.norm(ls2))
+
+if __name__ == '__main__':
+    BPTTtrain()
+    
