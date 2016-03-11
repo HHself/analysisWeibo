@@ -241,7 +241,7 @@ def genworddict(worddict):
         da = line.split("\t")
         word = da[0].decode("utf-8")
         # dictword2vec.setdefault(word, 0)
-        s = "dictword2vec[" + word + "]=" + da[1] 
+        s = "dictword2vec['" + word + "'']=" + da[1] 
         exec(s)
     return dictword2vec
 def getacti(s):
