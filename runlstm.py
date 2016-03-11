@@ -239,7 +239,9 @@ def genworddict(worddict):
     dictdata = [line for line in file(worddict)]
     for line in dictdata:
         da = line.split("\t")
-        exec(str(dictword2vec[da[0].decode("utf-8")]) + "=" + da[1])
+        word = da[0].decode("utf-8")
+        dictword2vec.setdefault(word, 0)
+        exec(str(dictword2vec[word]) + "=" + da[1])
     return dictword2vec
 def getacti(s):
     # get #...#
