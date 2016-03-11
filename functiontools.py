@@ -505,14 +505,16 @@ def gettraindata():
     num = 0
     newFrame = pd.DataFrame(columns = ["msginfo"])
 
-    for line in file(filepath4 + "content.txt"):
+    for line in file(filepath2 + "content.txt"):
         # try:
+        num += 1
+        print num
         d = pd.read_csv(filepath4 + line.replace("\n",""))
         d_source = pd.DataFrame(d['msginfo'])
         
         findactivity = lambda row : str(row).startswith("#")
         d_source = d_source[d_source.apply(findactivity, axis = 1)]
-        print d_source
+        # print d_source
         newFrame = pd.concat([newFrame, d_source])
 
         # except:
