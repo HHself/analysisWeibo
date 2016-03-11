@@ -7,9 +7,7 @@ N = 128
 M = 32 # the dim of wordvec
 C = 64 # the number of cell
 NW = 10 #the number of negitive sample
-parameters = [np.array(q) for q in [[[random.random() for j in range(M)] for i \
-in range(N)] for k in range(11)] \
-+ [[random.random() for p in range(N)] for q in range(4)]]
+parameters = [np.array(q) for q in [[[random.random() for j in range(M)] for i in range(N)] for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
 miu = 0.99  #momentum parameter
 gama = 10 #scaling
 era = 1.0 #learning rate
