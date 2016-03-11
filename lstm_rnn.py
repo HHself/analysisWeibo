@@ -9,16 +9,16 @@ sigmoid = lambda x : 1.0/(1 + np.exp(-x))
 tanh = lambda x : np.tanh(x)
 cos = lambda x,y : np.cos(x, y)
 
-class LSTM_RNN():
-	"""Long short-term memory.
+
+"""Long short-term memory.
 
     The input consists of 4 parts:
     - input gate
     - forget gate
     - cell input
     - output gate
-
-    """
+"""
+class LSTM_RNN():
     def __init__(self, param, textvec, text="", k=3):
         if len(textvec) > C:
 	    	print "text length >= max len"
