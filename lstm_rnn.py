@@ -83,9 +83,11 @@ class LSTM_RNN():
     	dis_ind = sorted(dis_ind_val)
 
     	f = 0
-    	while f < textlen:
-    		for j in range(f, textlen):
-                return  #---*--*---*---*----*----*--*--choose continue ....
+    	# while f < textlen:
+    	# 	for j in range(f, textlen):
+
+            
+        return  #---*--*---*---*----*----*--*--choose continue ....
 
 
     def cossim(self, ls1, ls2):
