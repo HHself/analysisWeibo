@@ -68,10 +68,10 @@ class LSTM_RNN():
     		c_before = ct
     		output[0][num] = ygt
     		output[1][num] = it
-    	    output[2][num] = ft
-    	    output[3][num] = ct
-    	    output[4][num] = ot
-    	    output[5][num] = yt
+            output[2][num] = ft
+            output[3][num] = ct
+            output[4][num] = ot
+            output[5][num] = yt
     	# output = np.array(output)
     	return output
 
