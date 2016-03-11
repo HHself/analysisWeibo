@@ -186,8 +186,8 @@ def getlastoutput(param, textvec, t, f = "last"):
 
 def BPTTtrain():
     weibo = [line for line in file("weibo_train.txt")]
-    param_last = np.array([[0]*len(pa) for pa in param_init])
-
+    param_last = [np.array(q) for q in [[[random.random() for j in range(M)] for i in range(N)] for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
+   
     while 1:
         gradient = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)] for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
         for r in range(len(weibo)):
