@@ -265,7 +265,7 @@ def rdmnegative(alldoc, s):
         cur = cur.replace("c", "")
         if c == acti and positive == "":
             positive = cur
-        elif len(negative) < CW:
+        elif len(negative) < NW:
             negative.append(cur)
     return positive, negative
 
