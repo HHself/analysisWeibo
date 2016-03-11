@@ -415,6 +415,7 @@ def gethalfyear():
             # if numm >2: break
         except:
             print "illegal file: ",line
+
 #------------------------------------second------------------------------
 def filteractivity(sent):
     res = "No Activity"
@@ -488,6 +489,29 @@ def getwordnumdistri():
     # temp_source= sorted(data_source.iteritems(), key = lambda x:x[1], reverse = True)[:50]
     # writefile(data_source, "word_num.txt")
 
+#------------------------------------third------------------------------
+
+def gettraindata():
+    precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
+    data_source = {}  
+    num = 0
+    newFrame = pd.DataFrame(columns = precol)
+
+    for line in file(filepath4 + "content.txt"):
+        num +=1
+        if num%100==0: print num
+        try:
+            d = pd.read_csv(filepath4 + line.replace("\n",""))
+            d_source = pd.DataFrame(d['msginfo'])
+
+            filter_mathod = lambda row: re.search(r'#.*#',row)
+            d_source = d_source[d_source.apply(filter_mathod, axis = 1)]
+            newFrame = pd.concat([newFrame, d_source])
+
+        except:
+            print line
+    newFrame.to_csv("weibo_train.csv", encoding="utf-8", index = False)
+
 if __name__ =="__main__":
     #find2012msg()
     #tongji_time()
@@ -497,6 +521,7 @@ if __name__ =="__main__":
     # filtertopuser()
     # gethalfyear()  
     # getactivity()
-    getwordnumdistri() 
+    # getwordnumdistri() 
     # getactivity()
     # searchfilter()
+    gettraindata()
