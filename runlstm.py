@@ -231,7 +231,7 @@ def gettraindata(i, weibo):
     tdata.append(text2vec(worddict, s))
     tdata.append(text2vec(worddict, posi))
     for i in neg:
-        tdata.append(text2vec(worddict, t))
+        tdata.append(text2vec(worddict, i))
     return tdata
 
 def genworddict(worddict):
