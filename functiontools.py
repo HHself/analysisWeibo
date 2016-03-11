@@ -518,7 +518,7 @@ def gettraindata():
 
         # except:
             # print line
-    newFrame.to_csv("weibo_train.csv", encoding="utf-8", index = False)
+    newFrame["msginfo"].to_csv("weibo_train.csv", encoding="utf-8", index = False)
 
 if __name__ =="__main__":
     #find2012msg()
