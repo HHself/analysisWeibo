@@ -229,6 +229,7 @@ def gettraindata(i, weibo):
     tdata = []
     s = weibo[i]
     posi, neg = rdmnegative(weibo, s)
+    print s, posi, neg
     tdata.append(text2vec(worddict, s))
     tdata.append(text2vec(worddict, posi))
     for i in neg:
