@@ -42,7 +42,7 @@ class LSTM_RNN():
         self.textvec = textvec
         self.text = text # it's unicode without non-chinese
         self.textlen = len(textvec)
-        self.k = k # the number of keyword
+        self.k = k # the number of keywordd
     
     '''
             flag means output all vectors or last vector
