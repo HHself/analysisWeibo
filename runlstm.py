@@ -203,14 +203,14 @@ def BPTTtrain(parameters):
             y_s = getlastoutput(param, data[0])
             y_p = getlastoutput(param, data[1])
             cos_y_sp = cossim(y_s[-1][len(data[0])-1], y_p[-1][len(data[1])-1])
-            print y_s[-1][len(data[0])-1], '\n' ,y_p[-1][len(data[1])-1], '\n' ,cos_y_sp,'\n' ,type(cos_y_sp)
+            print "#####", y_s[-1][len(data[0])-1], '\n' ,y_p[-1][len(data[1])-1], '\n' ,cos_y_sp,'\n' ,type(cos_y_sp)
 
             esum = 0
             cosy_spns = []
             for j in range(NW):
                 y_n = getlastoutput(param, data[2+j])
                 cos_y_sn = cossim(y_s[-1][len(data[2+j])-1], y_n[-1][len(data[2+j])-1])
-                print y_n[-1][len(data[2+j])-1], '\n' ,cos_y_sn, '\n' ,type(cos_y_sn)
+                print "%%%%%%%%%%%", y_n[-1][len(data[2+j])-1], '\n' ,cos_y_sn, '\n' ,type(cos_y_sn)
                 cosy_spn = cos_y_sp - cos_y_sn
 
                 # print y_s[-1][len(data[0])-1], y_p[-1][len(data[1])-1], y_n[-1][len(data[2+j])-1], cos_y_sp, cos_y_sn
@@ -287,7 +287,7 @@ def text2vec(worddict, te):
     return np.array(tevec)
 
 def cossim(ls1, ls2):
-    print ls1.shape, ls2.shape
+    print "*****", ls1, ls2, ls1.shape, ls2.shape
     if ls1.shape != ls2.shape:
         print "error ,list not equal"
         return
