@@ -265,7 +265,7 @@ def rdmnegative(alldoc, s):
     negative = []
 
     for i in range(len(alldoc)):
-        if positive != "" and len(set(negative)) == NW: break
+        if positive != "" and len(set(negative)) >= NW: break
         cur = random.choice(alldoc)
         c = getacti(cur)
         cur = cur.replace("c", "")
