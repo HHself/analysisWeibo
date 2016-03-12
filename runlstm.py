@@ -198,9 +198,10 @@ def BPTTtrain(parameters):
             data = gettraindata(r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
             for k in range(PN):
                 param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
+            print data
             y_s = getlastoutput(param, data[0])
             y_p = getlastoutput(param, data[1])
-            print y_s
+
             cos_y_sp = cossim(y_s[-1][-1], y_p[-1][-1])
 
             esum = 0
