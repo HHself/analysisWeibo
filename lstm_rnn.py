@@ -58,8 +58,9 @@ class LSTM_RNN():
 
     	for num in range(self.textlen):
             curvec = self.textvec[num].T
-            ygt = tanh(np.dot(self.W4, curvec) + np.dot(self.Wr4, y_before) + self.b4)
             print np.dot(self.W4, curvec).shape + np.dot(self.Wr4, y_before).shape + self.b4.shape
+            ygt = tanh(np.dot(self.W4, curvec) + np.dot(self.Wr4, y_before) + self.b4)
+
             it  = sigmoid(np.dot(self.W3, curvec) + np.dot(self.Wr3, y_before) + np.dot(self.Wp3, c_before) + self.b3)
             ft  = sigmoid(np.dot(self.W2, curvec) + np.dot(self.Wr2, y_before) + np.dot(self.Wp2, c_before) + self.b2) 
             ct  = ft * c_before + it * ygt
