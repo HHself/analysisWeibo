@@ -515,7 +515,7 @@ def gettraindata():
         print d_source
         
         findactivity = lambda row : str(row).startswith("#")
-        d_source = d_source[d_source.apply(findactivity, axis = 1)]
+        d_source = d_source[d_source.msginfo.apply(findactivity, axis = 1)]
         # print d_source
         newFrame = pd.concat([newFrame, d_source])
         print num, newFrame
