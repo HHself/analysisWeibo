@@ -37,7 +37,7 @@ def calgradient(param, y_s, y_p, y_n, data):
 
     # y_s, y_p, y_n, maxlen = fmtoutput(y_s, y_p, y_n)
     for t in range(1, C):
-        if len(set(y_s[-1])) + len(set(y_s[-1])) + len(set(y_s[-1])) == 3 and sum(y_s[-1]) + sum(y_s[-1])+ sum(y_s[-1]) == 0:
+        if len(set(y_s[-1][t])) + len(set(y_s[-1][t])) + len(set(y_s[-1][t])) == 3 and sum(y_s[-1][t]) + sum(y_s[-1][t])+ sum(y_s[-1][t]) == 0:
             break
         gra_p, lasts_p = calgraR(param, y_s, y_p, lasts_p, data[0:2], t)
         gra_q, lasts_q = calgraR(param, y_s, y_n, lasts_q, data[0:3:2], t)
@@ -199,7 +199,7 @@ def BPTTtrain(parameters):
             data = gettraindata(r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
             for k in range(PN):
                 param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
-            # print len(data)
+            print len(data)
             y_s = getlastoutput(param, data[0])
             y_p = getlastoutput(param, data[1])
             cos_y_sp = cossim(y_s[-1][len(data[0])-1], y_p[-1][len(data[1])-1])
