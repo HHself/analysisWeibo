@@ -21,6 +21,7 @@ cos = lambda x,y : np.cos(x, y)
 class LSTM_RNN():
     def __init__(self, param, textvec, text="", k=3):
         if len(textvec) > C:
+            print len(textvec)
 	    	print "text length >= max len"
 	    	return
         self.W1 = param[0] # param: W1, W2, W3, W4, Wr1, Wr2, Wr3, Wr4, Wp1, Wp2, Wp3, b1, b2, b3, b4
