@@ -209,10 +209,10 @@ def BPTTtrain(parameters):
             for j in range(NW):
                 y_n = getlastoutput(param, data[2+j])
                 cos_y_sn = cossim(y_s[-1][len(data[2+j])-1], y_n[-1][len(data[2+j])-1])
-                print y_s[-1][len(data[0])-1], y_p[-1][len(data[1])-1], y_n[-1][len(data[2+j])-1], cos_y_sp, cos_y_sn, type(cos_y_sp), type(cos_y_sn)
+                print y_s[-1][len(data[0])-1], '\n' ,y_p[-1][len(data[1])-1], '\n' ,y_n[-1][len(data[2+j])-1], '\n' ,cos_y_sp, '\n' ,cos_y_sn, '\n' ,type(cos_y_sp), '\n' ,type(cos_y_sn)
                 cosy_spn = cos_y_sp - cos_y_sn
 
-                print y_s[-1][len(data[0])-1], y_p[-1][len(data[1])-1], y_n[-1][len(data[2+j])-1], cos_y_sp, cos_y_sn
+                # print y_s[-1][len(data[0])-1], y_p[-1][len(data[1])-1], y_n[-1][len(data[2+j])-1], cos_y_sp, cos_y_sn
 
                 esum += np.exp(-1 * gama * cosy_spn)
                 cosy_spns.append(cosy_spn)
@@ -285,24 +285,24 @@ def text2vec(worddict, te):
             tevec.append(worddict[w])
     return np.array(tevec)
 
-# def cossim(ls1, ls2):
-#     if ls1.shape != ls2.shape:
-#         print "error ,list not equal"
-#         return
-#     return np.dot(ls1, ls2)/(np.linalg.norm(ls1) * np.linalg.norm(ls2))
-
 def cossim(ls1, ls2):
-        if len(ls1) != len(ls2):
-            print "error ,list not equal"
-            return
-        m1 = 0
-        m2 = 0
-        sum = 0
-        for i in xrange(len(ls1)):
-            m1 += math.pow(ls1[i], 2)
-            m2 += math.pow(ls2[i], 2)
-            sum +=ls1[i] * ls2[i]
-        return sum/(math.sqrt(m1) *math.sqrt(m2))
+    if ls1.shape != ls2.shape:
+        print "error ,list not equal"
+        return
+    return np.dot(ls1, ls2)/(np.linalg.norm(ls1) * np.linalg.norm(ls2))
+
+# def cossim(ls1, ls2):
+#         if len(ls1) != len(ls2):
+#             print "error ,list not equal"
+#             return
+#         m1 = 0
+#         m2 = 0
+#         sum = 0
+#         for i in xrange(len(ls1)):
+#             m1 += math.pow(ls1[i], 2)
+#             m2 += math.pow(ls2[i], 2)
+#             sum +=ls1[i] * ls2[i]
+#         return sum/(math.sqrt(m1) *math.sqrt(m2))
 
 if __name__ == '__main__':
     parameters = [np.array(q) for q in [[[random.random() for j in range(M)] for i in range(N)] for k in range(4)] + [[[random.random() for j in range(N)] for i in range(N)] for k in range(7)] + [[random.random() for p in range(N)] for q in range(4)]]
