@@ -56,9 +56,9 @@ def calgraR(param, yq, yd, lasts, data, tt):
     vd = b * c * s - a * b * c**3 * t
 
     # ---------------------------for output gate------------------------
-    sigmarqt1 = yq[4][tt] * (1 - yq[4][tt]) * tanh(yq[3][tt]) * vq
+    sigmarqt1 = yq[4][tt] * (1 - yq[4][tt]) * tanh(yq[3][tt]) * vq  #n*1
     sigmardt1 = yd[4][tt] * (1 - yd[4][tt]) * tanh(yd[3][tt]) * vd    
-    gra_wr1 = np.dot(sigmarqt1, s[tt-1]) + np.dot(sigmardt1, t[tt-1])
+    gra_wr1 = np.dot(sigmarqt1, s[tt-1].T) + np.dot(sigmardt1, t[tt-1].T)
     gra_w1 =  np.dot(sigmarqt1, data[0][tt]) + np.dot(sigmardt1, data[1][tt])
     gra_wp1 =  np.dot(sigmarqt1, yq[3][tt]) + np.dot(sigmardt1, yq[3][tt])
     gra_b1 = sigmarqt1 + sigmardt1
