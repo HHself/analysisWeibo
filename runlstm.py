@@ -208,7 +208,8 @@ def BPTTtrain(worddict, parameters):
 
             for k in range(PN):
                 param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
-            print len(data)
+                
+            print "HHHHHHHHH", len(data), len(data[0]), len(data[1]),
             y_s = getlastoutput(param, data[0])
             y_p = getlastoutput(param, data[1])
             cos_y_sp = cossim(y_s[-1][len(data[0])-1], y_p[-1][len(data[1])-1])
