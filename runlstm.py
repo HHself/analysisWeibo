@@ -199,6 +199,7 @@ def BPTTtrain(parameters):
         for r in range(len(weibo)):
             if getacti(weibo[r]) == "None" : continue
             data = gettraindata(r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
+
             for k in range(PN):
                 param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
             print len(data)
@@ -239,13 +240,16 @@ def BPTTtrain(parameters):
 def gettraindata(i, weibo):
     worddict = genworddict("wordhashdict.txt")
     tdata = []
-    s = weibo[i]
-    posi, neg = rdmnegative(weibo, s)
-    # print s, posi, len(neg)
+    s = weibo[i] 
+    posi, neg = rdmnegative(weibo, s) 
     tdata.append(text2vec(worddict, s))
     tdata.append(text2vec(worddict, posi))
     for i in neg:
         tdata.append(text2vec(worddict, i))
+    for t in tdata:
+        if len(t) == 0:
+            gettraindata(i, weibo)
+            break
     return tdata
 
 def genworddict(worddict):
