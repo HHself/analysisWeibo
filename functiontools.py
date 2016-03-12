@@ -518,7 +518,7 @@ def gettraindata():
         # d = pd.read_csv("1299.txt")
         d_source = pd.DataFrame(d['msginfo'])
         
-        findactivity = lambda row : str(row["msginfo"]).startswith("#") and r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【')  and "此微博已被删除" not in row['msginfo'] and "分享图片" not in row['msginfo'] and "@" not in row['msginfo']
+        findactivity = lambda row : str(row["msginfo"]).startswith("#") and r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【')  and "此微博已被删除" not in row['msginfo'] and "分享图片" not in row['msginfo'] and "@" not in row['msginfo'] and "http" not in row['msginfo']
         d_source = d_source[d_source.apply(findactivity, axis = 1)]
 
         d_source["msglen"] = d_source.msginfo.apply(filter64)
