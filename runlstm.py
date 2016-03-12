@@ -265,12 +265,16 @@ def rdmnegative(alldoc, s):
     negative = []
 
     for i in range(len(alldoc)):
-        if positive != "" and len(negative) == NW : break
+        if positive != "" and len(negative) == NW : 
+            print "not"
+            break
         cur = random.choice(alldoc)
         c = getacti(cur)
         cur = cur.replace("c", "")
         if c == acti: positive = cur
-        else: negative.append(cur)
+        else: 
+            print 
+            negative.append(cur)
     return positive, negative
 
 def text2vec(worddict, te):
