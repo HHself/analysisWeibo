@@ -188,13 +188,15 @@ def getlastoutput(param, textvec, t, f = "last"):
 def BPTTtrain(parameters):
     weibo = [line for line in file("weibo_train.txt")]
     param_last = [np.array(q) for q in [[[random.random() for j in range(M)] for i in range(N)] for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
-   
+    param = []
+
     while 1:
         gradient = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)] for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
         for r in range(len(weibo)):
             if getacti(weibo[r]) == "None" : continue
             data = gettraindata(r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
-            param = parameters + miu * (parameters - param_last)
+            for k in range(11):
+                param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
             y_s = getlastoutput(param, data[0], len(data[0]), f = "all")
             y_p = getlastoutput(param, data[1], len(data[1]), f = "all")
             cos_y_sp = cossim(y_s[-1][-1], y_p[-1][-1])
