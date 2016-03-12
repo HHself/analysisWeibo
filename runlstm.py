@@ -12,6 +12,7 @@ NW = 10 #the number of negitive sample
 miu = 0.99  #momentum parameter
 gama = 10 #scaling
 era = 1.0 #learning rate
+PN = 15 # the number of parameters
 
 sigmoid = lambda x : 1.0/(1 + np.exp(-x))
 tanh = lambda x : np.tanh(x)
@@ -195,7 +196,7 @@ def BPTTtrain(parameters):
         for r in range(len(weibo)):
             if getacti(weibo[r]) == "None" : continue
             data = gettraindata(r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
-            for k in range(11):
+            for k in range(PN):
                 param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
             y_s = getlastoutput(param, data[0], len(data[0]), f = "all")
             y_p = getlastoutput(param, data[1], len(data[1]), f = "all")
@@ -211,7 +212,7 @@ def BPTTtrain(parameters):
             for j in range(NW):
                 alpharj = (-1 * gama * np.exp(-1 * gama * cosy_spns[j])) / (1 + esum)
                 g = calgradient(param, y_s, y_p, y_n, [data[0], data[1], data[2+j]])
-                for k in range(11):
+                for k in range(PN):
                     gradient[k] += g[k]
             
         delta_k = miu * (parameters- param_last) - era * gradient
@@ -229,9 +230,6 @@ def gettraindata(i, weibo):
     tdata = []
     s = weibo[i]
     posi, neg = rdmnegative(weibo, s)
-    print s, posi
-    for k in neg:
-        print k
     tdata.append(text2vec(worddict, s))
     tdata.append(text2vec(worddict, posi))
     for i in neg:
