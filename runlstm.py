@@ -278,7 +278,7 @@ def text2vec(worddict, te):
     tevec=[]
     allwords =worddict.keys()
     aw = re.findall(u"[\u4E00-\u9FA5]{1}", te)
-    print worddict[:2], aw
+    print  aw
     for w in aw:
         if w not in allwords: continue
         tevec.append(worddict[w])
