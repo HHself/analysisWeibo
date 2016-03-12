@@ -294,7 +294,8 @@ def rdmnegative(alldoc, s):
 
 def text2vec(worddict, te):
     tevec=[] 
-    aw = re.findall(ur"[\u4E00-\u9FA5]{1}", te.decode("utf-8")) 
+    aw = re.sub(ur"#.*#", "", te.decode("utf-8"))
+    aw = re.findall(ur"[\u4E00-\u9FA5]{1}", aw) 
     for w in aw:
         if worddict.has_key(w):
             tevec.append(worddict[w])
