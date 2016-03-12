@@ -247,8 +247,7 @@ def genworddict(worddict):
         word = da[0].decode("utf-8")
         print [word, word]
         # dictword2vec.setdefault(word, 0)
-        s = "dictword2vec['" + word + "']=" + da[1] 
-        exec(s)
+        dictword2vec[word] = exec(da[1])
     print dictword2vec.keys()
 
     return dictword2vec
