@@ -51,8 +51,8 @@ class LSTM_RNN():
     	if self.textlen != self.textvec.shape[0]:
     		print "data error, length not equal!"
     		return
-    	y_before = 0
-    	c_before = 0
+    	y_before = np.array([0 for i in range(N)]).T
+    	c_before = y_before.copy()
     	output = [[[0]*N for j in range(C)] for i in range(6)]
 
 
@@ -67,14 +67,14 @@ class LSTM_RNN():
             ot  = sigmoid(np.dot(self.W1, curvec) + np.dot(self.Wr1, y_before) +np.dot(self.Wp1, ct) + self.b1)
             yt  = ot * tanh(ct)
     		
-            y_before = yt
-            c_before = ct
-            output[0][num] = ygt
-            output[1][num] = it
-            output[2][num] = ft
-            output[3][num] = ct
-            output[4][num] = ot
-            output[5][num] = yt
+            y_before = yt.copy()
+            c_before = ct.copy()
+            output[0][num] = ygt.copy()
+            output[1][num] = it.copy()
+            output[2][num] = ft.copy()
+            output[3][num] = ct.copy()
+            output[4][num] = ot.copy()
+            output[5][num] = yt.copy()
     	# output = np.array(output)
     	return output
 
