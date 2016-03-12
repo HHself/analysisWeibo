@@ -244,10 +244,11 @@ def genworddict(worddict):
     dictdata = [line for line in file(worddict)]
     for line in dictdata:
         da = line.split("\t")
-        word = da[0].decode("utf-8")
+        word = da[0]
         # dictword2vec.setdefault(word, 0)
-        s = "dictword2vec['" + word + "']=" + da[1] 
+        s = "dictword2vec['" + word.decode("utf-8") + "']=" + da[1] 
         exec(s)
+
     return dictword2vec
 def getacti(s):
     # get #...#
@@ -278,7 +279,7 @@ def text2vec(worddict, te):
     tevec=[]
     allwords =worddict.keys()
     aw = re.findall(ur"[\u4E00-\u9FA5]{1}", te.decode("utf-8"))
-    print  aw
+    print allwords, aw
     for w in aw:
         if w not in allwords: continue
         tevec.append(worddict[w])
