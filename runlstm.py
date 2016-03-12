@@ -183,7 +183,7 @@ def calgraR(param, yq, yd, data, tt):
 
 def getlastoutput(param, textvec, t, f = "last"):
     lr_s = lr.LSTM_RNN(param, textvec)
-    y_output = lr_s.lstmrun(ti = t, flag = f)
+    y_output = lr_s.lstmrun()
     return y_output
 
 def BPTTtrain(parameters):
