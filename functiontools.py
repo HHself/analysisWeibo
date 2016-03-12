@@ -509,17 +509,16 @@ def gettraindata():
         # try:
         num += 1
         if num % 50 ==0: print num, line
-        # d = pd.read_csv(filepath2 + line.replace("\n",""))
-        d = pd.read_csv("1299.txt")
+        d = pd.read_csv(filepath2 + line.replace("\n",""))
+        # d = pd.read_csv("1299.txt")
         d_source = pd.DataFrame(d['msginfo'])
-        print d_source
         
         findactivity = lambda row : str(row["msginfo"]).startswith("#")
         d_source = d_source[d_source.apply(findactivity, axis = 1)]
         # print d_source
         newFrame = pd.concat([newFrame, d_source])
-        print num, newFrame
-        break
+        # print num, newFrame
+        
 
         # except:
             # print line
