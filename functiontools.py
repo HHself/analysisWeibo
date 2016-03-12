@@ -513,7 +513,7 @@ def gettraindata():
         # d = pd.read_csv("1299.txt")
         d_source = pd.DataFrame(d['msginfo'])
         
-        findactivity = lambda row : str(row["msginfo"]).startswith("#")
+        findactivity = lambda row : str(row["msginfo"]).startswith("#") and r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【')  and "此微博已被删除" not in row['msginfo'] and "分享图片" not in row['msginfo']
         d_source = d_source[d_source.apply(findactivity, axis = 1)]
         # print d_source
         newFrame = pd.concat([newFrame, d_source])
@@ -524,7 +524,7 @@ def gettraindata():
         # except:
             # print line
 
-    newFrame.to_csv("weibo_train.csv", encoding="utf-8", index = False)
+    newFrame.to_csv("weibo_train2.csv", encoding="utf-8", index = False)
 
 if __name__ =="__main__":
     #find2012msg()

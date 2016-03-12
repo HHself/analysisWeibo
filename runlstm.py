@@ -198,7 +198,7 @@ def BPTTtrain(parameters):
             data = gettraindata(r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
             for k in range(PN):
                 param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
-            print len(data)
+            # print len(data)
             y_s = getlastoutput(param, data[0])
             y_p = getlastoutput(param, data[1])
 
@@ -233,7 +233,7 @@ def gettraindata(i, weibo):
     tdata = []
     s = weibo[i]
     posi, neg = rdmnegative(weibo, s)
-    print s, posi, len(neg)
+    # print s, posi, len(neg)
     tdata.append(text2vec(worddict, s))
     tdata.append(text2vec(worddict, posi))
     for i in neg:
