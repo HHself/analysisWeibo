@@ -265,14 +265,12 @@ def rdmnegative(alldoc, s):
     negative = []
 
     for i in range(len(alldoc)):
-        if positive != "" and len(negative) == NW : 
-            print "not"
-            break
+        if positive != "" and len(set(negative)) == NW: break
         cur = random.choice(alldoc)
         c = getacti(cur)
         cur = cur.replace("c", "")
         if c == acti: positive = cur
-        else: 
+        elif c != acti and cur not in negative:
             print c, cur, len(negative)
             negative.append(cur)
     return positive, negative
