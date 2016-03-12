@@ -189,7 +189,7 @@ def getlastoutput(param, textvec):
     y_output = lr_s.lstmrun()
     return y_output
 
-def BPTTtrain(parameters):
+def BPTTtrain(worddict, parameters):
     weibo = [line for line in file("weibo_train.txt")]
     param_last = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
     param = []
@@ -198,7 +198,7 @@ def BPTTtrain(parameters):
         gradient = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
         for r in range(len(weibo)):
             if getacti(weibo[r]) == "None" : continue
-            data = gettraindata(r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
+            data = gettraindata(worddict, r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
 
             for k in range(PN):
                 param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
@@ -236,8 +236,7 @@ def BPTTtrain(parameters):
         parameters[i].tofile("./param/" + pa[i] + ".txt")
 
 
-def gettraindata(i, weibo):
-    worddict = genworddict("wordhashdict.txt")
+def gettraindata(worddict, i, weibo):
     tdata = []
     s = weibo[i] 
     f = 0
@@ -250,7 +249,7 @@ def gettraindata(i, weibo):
         if len(t) == 0:
             f = 1
             break
-    if f == 1: gettraindata(i,data)
+    if f == 1: gettraindata(i, weibo)
     return tdata
 
 def genworddict(worddict):
@@ -316,6 +315,7 @@ def cossim(ls1, ls2):
 #         return sum/(math.sqrt(m1) *math.sqrt(m2))
 
 if __name__ == '__main__':
+    worddict = genworddict("wordhashdict.txt")
     parameters = [np.array(q) for q in [[[random.random() for j in range(M)] for i in range(N)] for k in range(4)] + [[[random.random() for j in range(N)] for i in range(N)] for k in range(7)] + [[random.random() for p in range(N)] for q in range(4)]]
-    BPTTtrain(parameters)
+    BPTTtrain(worddict, parameters)
     
