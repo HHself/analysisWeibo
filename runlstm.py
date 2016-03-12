@@ -218,7 +218,7 @@ def BPTTtrain(parameters):
                 for k in range(PN):
                     gradient[k] += g[k]
         for k in range(PN):
-            parameters[k] = parameters[k] + miu * (parameters[k]- param_last[k]) - era * gradient[k])
+            parameters[k] = parameters[k] + miu * (parameters[k]- param_last[k]) - era * gradient[k]
         param_last = copy.deepcopy(parameters) #parameters.copy()
     
 
