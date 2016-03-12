@@ -277,7 +277,7 @@ def rdmnegative(alldoc, s):
 def text2vec(worddict, te):
     tevec=[]
     allwords =worddict.keys()
-    aw = re.findall(u"[\u4E00-\u9FA5]{1}", te)
+    aw = re.findall(ur"[\u4E00-\u9FA5]{1}", te.decode("utf-8"))
     print  aw
     for w in aw:
         if w not in allwords: continue
