@@ -181,7 +181,7 @@ def calgraR(param, yq, yd, data, tt):
     lasts = [gracw2_last, gracw3_last, gracw4_last, gracwr2_last, gracwr3_last, gracwr4_last, gracb2_last, gracb3_last, gracb4_last]
     return  gra, lasts
 
-def getlastoutput(param, textvec, t, f = "last"):
+def getlastoutput(param, textvec):
     lr_s = lr.LSTM_RNN(param, textvec)
     y_output = lr_s.lstmrun()
     return y_output
@@ -198,13 +198,15 @@ def BPTTtrain(parameters):
             data = gettraindata(r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
             for k in range(PN):
                 param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
-            y_s = getlastoutput(param, data[0], len(data[0]), f = "all")
-            y_p = getlastoutput(param, data[1], len(data[1]), f = "all")
+            y_s = getlastoutput(param, data[0])
+            y_p = getlastoutput(param, data[1])
+            print y_s
             cos_y_sp = cossim(y_s[-1][-1], y_p[-1][-1])
+
             esum = 0
             cosy_spns = []
             for j in range(NW):
-                y_n = getlastoutput(param, data[2+j], len(data[2+j]), f = "all")
+                y_n = getlastoutput(param, data[2+j])
                 cos_y_sn = cossim(y_s[-1][-1], y_n[-1][-1])
                 cosy_spn = cos_y_sp - cos_y_sn
                 esum += np.exp(-1 * gama * cosy_spn)
