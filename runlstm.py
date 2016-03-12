@@ -47,8 +47,8 @@ def calgradient(param, y_s, y_p, y_n, data):
     return gra
 def calgraR(param, yq, yd, lasts, data, tt):
     gra = [[] for i in range(15)]
-    s = yq[-1] 
-    t = yd[-1]
+    s = yq[-1][len(data[0])-1]
+    t = yd[-1][len(data[1])-1]
     a = np.dot(s, t)
     b = 1.0 / np.linalg.norm(s)
     c = 1.0 / np.linalg.norm(t)
@@ -249,9 +249,9 @@ def gettraindata(worddict, i, weibo):
     s = weibo[i] 
     f = 0
     posi, neg = rdmnegative(weibo, s) 
-    print s, posi
-    for ii in neg:
-        print ii
+    # print s, posi
+    # for ii in neg:
+    #     print ii
     tdata.append(text2vec(worddict, s))
     tdata.append(text2vec(worddict, posi))
     for j in neg:
