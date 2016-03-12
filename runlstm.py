@@ -250,8 +250,6 @@ def genworddict(worddict):
         exec("v = " + da[1])
         dictword2vec[word] = v
 
-    print dictword2vec.keys()
-
     return dictword2vec
 def getacti(s):
     # get #...#
@@ -268,7 +266,7 @@ def rdmnegative(alldoc, s):
     negative = []
 
     for i in range(len(alldoc)):
-        if positive != "" and len(negative) == NW : break
+        if positive != "" and len(negative) > NW : break
         cur = random.choice(alldoc)
         c = getacti(cur)
         cur = cur.replace("c", "")
