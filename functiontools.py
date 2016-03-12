@@ -518,10 +518,12 @@ def gettraindata():
         # print d_source
         newFrame = pd.concat([newFrame, d_source])
         # print num, newFrame
+        newFrame = newFrame.drop_duplicates()
         
 
         # except:
             # print line
+
     newFrame.to_csv("weibo_train.csv", encoding="utf-8", index = False)
 
 if __name__ =="__main__":
