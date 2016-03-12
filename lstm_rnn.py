@@ -21,10 +21,10 @@ cos = lambda x,y : np.cos(x, y)
 class LSTM_RNN():
     def __init__(self, param, textvec, text="", k=3):
         if len(textvec) > C:
-            print len(textvec)
+            # print len(textvec)
             print "text length >= max len"
             return
-            
+
         self.W1 = param[0] # param: W1, W2, W3, W4, Wr1, Wr2, Wr3, Wr4, Wp1, Wp2, Wp3, b1, b2, b3, b4
         self.W2 = param[1]
         self.W3 = param[2]
@@ -55,7 +55,7 @@ class LSTM_RNN():
 
 
     	for num in range(self.textlen):
-            curvec = self.textvec[num].T
+            curvec = self.textvec[num]
             # print np.dot(self.W4, curvec).shape, np.dot(self.Wr4, y_before).shape, self.b4.shape
             ygt = tanh(np.dot(self.W4, curvec) + np.dot(self.Wr4, y_before) + self.b4)
             it  = sigmoid(np.dot(self.W3, curvec) + np.dot(self.Wr3, y_before) + np.dot(self.Wp3, c_before) + self.b3)
@@ -64,6 +64,7 @@ class LSTM_RNN():
             ot  = sigmoid(np.dot(self.W1, curvec) + np.dot(self.Wr1, y_before) +np.dot(self.Wp1, ct) + self.b1)
             yt  = ot * tanh(ct)
     		
+            # print ygt, it, ft, ct, ot, yt
             y_before = yt.copy()
             c_before = ct.copy()
             output[0][num] = ygt.copy()
