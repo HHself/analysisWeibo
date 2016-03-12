@@ -499,6 +499,10 @@ def getwordnumdistri():
 #     else:
 #         return False
 
+def filter64(sen):
+    aw = re.findall(ur"[\u4E00-\u9FA5]{1}", sen.decode("utf-8"))
+    return len(aw)
+
 def gettraindata():
     precol = ["userID", "username", "screenname", "msginfo", "source", "forwardNum", "commentNum", "releasetime", "etuser"]
     data_source = {} 
@@ -515,6 +519,11 @@ def gettraindata():
         
         findactivity = lambda row : str(row["msginfo"]).startswith("#") and r'//@' not in row['msginfo'] and not row['msginfo'].startswith('【')  and "此微博已被删除" not in row['msginfo'] and "分享图片" not in row['msginfo']
         d_source = d_source[d_source.apply(findactivity, axis = 1)]
+
+        d_source["msglen"] = d_source.msginfo.apply(filter64)
+        d_source = d_source[d_source.msglen >= 64]
+        d_source = d_source.drop("msglen", axis = 1)
+
         # print d_source
         newFrame = pd.concat([newFrame, d_source])
         # print num, newFrame
@@ -524,7 +533,7 @@ def gettraindata():
         # except:
             # print line
 
-    newFrame.to_csv("weibo_train2.csv", encoding="utf-8", index = False)
+    newFrame.to_csv("weibo_train3.csv", encoding="utf-8", index = False)
 
 if __name__ =="__main__":
     #find2012msg()

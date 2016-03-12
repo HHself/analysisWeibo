@@ -44,9 +44,6 @@ class LSTM_RNN():
         self.textlen = len(textvec)
         self.k = k # the number of keyword
     
-    '''
-        flag means output all vectors or last vector
-    '''
     def lstmrun(self):
     	if len(self.textvec) != self.textvec.shape[0]:
     		print "data error, length not equal!"
