@@ -244,9 +244,9 @@ def genworddict(worddict):
     dictdata = [line for line in file(worddict)]
     for line in dictdata:
         da = line.split("\t")
-        word = da[0].decode("utf-8")
+        word = da[0]
         # dictword2vec.setdefault(word, 0)
-        s = "dictword2vec['" + word + "']=" + da[1] 
+        s = "dictword2vec['" + str(word).decode("utf-8")+ "']=" + da[1] 
         exec(s)
     print dictword2vec.keys()
 
