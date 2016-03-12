@@ -198,7 +198,13 @@ def BPTTtrain(worddict, parameters):
         gradient = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
         for r in range(len(weibo)):
             if getacti(weibo[r]) == "None" : continue
-            data = gettraindata(worddict, r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
+            f = 0
+            while True:
+                data = gettraindata(worddict, r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
+                for t in data:
+                    if len(t) != 0: f += 1
+                if f == len(data): break 
+                f = 0
 
             for k in range(PN):
                 param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
@@ -246,12 +252,6 @@ def gettraindata(worddict, i, weibo):
     tdata.append(text2vec(worddict, posi))
     for j in neg:
         tdata.append(text2vec(worddict, j))
-    for t in tdata:
-        if len(t) == 0:
-            print s, '\n', posi, '\n', neg[0]
-            f = 1
-            break
-    if f == 1: gettraindata(worddict, i, weibo)
     return tdata
 
 def genworddict(worddict):
