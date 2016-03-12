@@ -287,6 +287,7 @@ def text2vec(worddict, te):
     return np.array(tevec)
 
 def cossim(ls1, ls2):
+    print ls1.shape, ls2.shape
     if ls1.shape != ls2.shape:
         print "error ,list not equal"
         return
