@@ -270,8 +270,7 @@ def rdmnegative(alldoc, s):
         c = getacti(cur)
         cur = cur.replace("c", "")
         if c == acti: positive = cur
-        elif c != acti and cur not in negative:
-            print c, cur, len(negative)
+        elif c != acti and cur not in negative: 
             negative.append(cur)
     return positive, negative
 
