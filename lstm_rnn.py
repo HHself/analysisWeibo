@@ -45,10 +45,10 @@ class LSTM_RNN():
         self.k = k # the number of keyword
     
     '''
-            flag means output all vectors or last vector
+        flag means output all vectors or last vector
     '''
     def lstmrun(self):
-    	if self.textlen != self.textvec.shape[0]:
+    	if len(self.textvec) != self.textvec.shape[0]:
     		print "data error, length not equal!"
     		return
     	y_before = np.array([0 for i in range(N)]).T
