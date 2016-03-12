@@ -23,7 +23,7 @@ tanh = lambda x : np.tanh(x)
 #zhuanzhi 1*m ===>m*1
 def transps(vec):
     vec.shape = (vec.shape[0], 1)
-    return vec.transpose()
+    return vec
 
 def fmtoutput(y_ss, y_pp, y_nn):
     #make len(y_s) = len(y_p) = len(y_n) = maxlen
@@ -64,9 +64,9 @@ def calgraR(param, yq, yd, lasts, data, tt):
     sigmarqt1 = yq[4][tt] * (1 - yq[4][tt]) * tanh(yq[3][tt]) * vq  #n*1
     sigmardt1 = yd[4][tt] * (1 - yd[4][tt]) * tanh(yd[3][tt]) * vd    
 
-    gra_wr1 = np.dot(sigmarqt1, transps(yq[-1][tt-1])) + np.dot(sigmardt1, transps(yd[-1][tt-1]))
-    gra_w1 =  np.dot(sigmarqt1, transps(data[0][tt])) + np.dot(sigmardt1, transps(data[1][tt]))
-    gra_wp1 =  np.dot(sigmarqt1, transps(yq[3][tt])) + np.dot(sigmardt1, transps(yq[3][tt]))
+    gra_wr1 = np.dot(transps(sigmarqt1), yq[-1][tt-1]) + np.dot(transps(sigmardt1), yd[-1][tt-1])
+    gra_w1 =  np.dot(transps(sigmarqt1), data[0][tt]) + np.dot(transps(sigmardt1), data[1][tt])
+    gra_wp1 =  np.dot(transps(sigmarqt1), yq[3][tt]) + np.dot(transps(sigmardt1), yq[3][tt])
     gra_b1 = sigmarqt1 + sigmardt1
     gra[4].append(gra_wr1)
     gra[0].append(gra_w1)
