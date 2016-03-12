@@ -249,7 +249,7 @@ def gettraindata(worddict, i, weibo):
         if len(t) == 0:
             f = 1
             break
-    if f == 1: gettraindata(i, weibo)
+    if f == 1: gettraindata(worddict, i, weibo)
     return tdata
 
 def genworddict(worddict):
