@@ -206,8 +206,7 @@ def BPTTtrain(parameters):
             y_s = getlastoutput(param, data[0])
             y_p = getlastoutput(param, data[1])
             cos_y_sp = cossim(y_s[-1][len(data[0])-1], y_p[-1][len(data[1])-1])
-            print "#####", y_s[-1][len(data[0])-1], '\n' ,y_p[-1][len(data[1])-1], '\n' ,cos_y_sp,'\n' ,type(cos_y_sp)
-            print "##", len(data[0]), len(data[1])#, y_s[-1], y_p[-1]
+            print "#####", len(data[0]), len(data[1]), y_s[-1][len(data[0])-1], '\n' ,y_p[-1][len(data[1])-1], '\n' ,cos_y_sp,'\n' ,type(cos_y_sp)
 
             esum = 0
             cosy_spns = []
@@ -241,6 +240,7 @@ def gettraindata(i, weibo):
     worddict = genworddict("wordhashdict.txt")
     tdata = []
     s = weibo[i] 
+    f = 0
     posi, neg = rdmnegative(weibo, s) 
     tdata.append(text2vec(worddict, s))
     tdata.append(text2vec(worddict, posi))
@@ -248,8 +248,9 @@ def gettraindata(i, weibo):
         tdata.append(text2vec(worddict, j))
     for t in tdata:
         if len(t) == 0:
-            gettraindata(i, weibo)
+            f = 1
             break
+    if f == 1: gettraindata(i,data)
     return tdata
 
 def genworddict(worddict):
