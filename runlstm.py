@@ -188,11 +188,11 @@ def getlastoutput(param, textvec):
 
 def BPTTtrain(parameters):
     weibo = [line for line in file("weibo_train.txt")]
-    param_last = [np.array(q) for q in [[[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[random.random() for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]]
+    param_last = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
     param = []
 
     while 1:
-        gradient = [np.array(q) for q in [[[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[random.random() for p in range(N)] for q in range(4)]]]
+        gradient = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
         for r in range(len(weibo)):
             if getacti(weibo[r]) == "None" : continue
             data = gettraindata(r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
@@ -288,6 +288,6 @@ def cossim(ls1, ls2):
     return np.dot(ls1, ls2)/(np.linalg.norm(ls1) * np.linalg.norm(ls2))
 
 if __name__ == '__main__':
-    parameters = [np.array(q) for q in [[[[random.random() for j in range(M)] for i in range(N)] for k in range(4)] + [[[random.random() for j in range(N)] for i in range(N)] for k in range(7)] + [[random.random() for p in range(N)] for q in range(4)]]]
+    parameters = [np.array(q) for q in [[[random.random() for j in range(M)] for i in range(N)] for k in range(4)] + [[[random.random() for j in range(N)] for i in range(N)] for k in range(7)] + [[random.random() for p in range(N)] for q in range(4)]]
     BPTTtrain(parameters)
     
