@@ -233,6 +233,7 @@ def gettraindata(i, weibo):
     tdata = []
     s = weibo[i]
     posi, neg = rdmnegative(weibo, s)
+    print s, posi, neg
     tdata.append(text2vec(worddict, s))
     tdata.append(text2vec(worddict, posi))
     for i in neg:
@@ -244,9 +245,7 @@ def genworddict(worddict):
     dictdata = [line for line in file(worddict)]
     for line in dictdata:
         da = line.split("\t")
-        word = da[0].decode("utf-8")
-        print [word, word]
-        # dictword2vec.setdefault(word, 0)
+        word = da[0].decode("utf-8")  
         exec("v = " + da[1])
         dictword2vec[word] = v
 
