@@ -69,8 +69,8 @@ def calgraR(param, yq, yd, lasts, data, tt):
     sigmardt1 = yd[4][tt] * (1 - yd[4][tt]) * tanh(yd[3][tt]) * vd    
 
     gra_wr1 = np.dot(transps1(sigmarqt1), transps2(yq[-1][tt-1])) + np.dot(transps1(sigmardt1), transps2(yd[-1][tt-1]))
-    gra_w1 =  np.dot(transps1(sigmarqt1), data[0][tt]) + np.dot(transps1(sigmardt1), data[1][tt])
-    gra_wp1 =  np.dot(transps1(sigmarqt1), yq[3][tt]) + np.dot(transps1(sigmardt1), yq[3][tt])
+    gra_w1 =  np.dot(transps1(sigmarqt1), transps2(data[0][tt])) + np.dot(transps1(sigmardt1), transps2(data[1][tt]))
+    gra_wp1 =  np.dot(transps1(sigmarqt1), transps2(yq[3][tt])) + np.dot(transps1(sigmardt1), transps2(yq[3][tt]))
     gra_b1 = sigmarqt1 + sigmardt1
     gra[4].append(gra_wr1)
     gra[0].append(gra_w1)
