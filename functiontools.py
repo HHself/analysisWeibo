@@ -512,6 +512,7 @@ def gettraindata():
         # d = pd.read_csv(filepath2 + line.replace("\n",""))
         d = pd.read_csv(filepath2 + "2012weibodata_num_129.csv")
         d_source = pd.DataFrame(d['msginfo'])
+        print d_source
         
         findactivity = lambda row : str(row).startswith("#")
         d_source = d_source[d_source.apply(findactivity, axis = 1)]
