@@ -269,8 +269,8 @@ def rdmnegative(alldoc, s):
         cur = random.choice(alldoc)
         c = getacti(cur)
         cur = cur.replace("c", "")
-        if c == acti and positive == "": positive = cur
-        if c != acti: negative.append(cur)
+        if c == acti: positive = cur
+        else: negative.append(cur)
     return positive, negative
 
 def text2vec(worddict, te):
