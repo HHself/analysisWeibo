@@ -244,10 +244,11 @@ def genworddict(worddict):
     dictdata = [line for line in file(worddict)]
     for line in dictdata:
         da = line.split("\t")
-        word = da[0]
+        word = da[0].decode("utf-8")
         # dictword2vec.setdefault(word, 0)
-        s = "dictword2vec['" + word.decode("utf-8") + "']=" + da[1] 
+        s = "dictword2vec['" + word + "']=" + da[1] 
         exec(s)
+    print dictword2vec.keys()
 
     return dictword2vec
 def getacti(s):
@@ -276,13 +277,11 @@ def rdmnegative(alldoc, s):
     return positive, negative
 
 def text2vec(worddict, te):
-    tevec=[]
-    allwords =worddict.keys()
-    aw = re.findall(ur"[\u4E00-\u9FA5]{1}", te.decode("utf-8"))
-    print allwords, aw
+    tevec=[] 
+    aw = re.findall(ur"[\u4E00-\u9FA5]{1}", te.decode("utf-8")) 
     for w in aw:
-        if w not in allwords: continue
-        tevec.append(worddict[w])
+        if worddict.has_key(w):
+            tevec.append(worddict[w])
     return np.array(tevec)
 
 def cossim(ls1, ls2):
