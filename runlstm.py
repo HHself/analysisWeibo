@@ -41,7 +41,7 @@ def fmtoutput(y_ss, y_pp, y_nn):
 def calgradient(param, y_s, y_p, y_n, data):
     #data[0]:source, data[1]:positive, data[2]:negative
     gra = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)]  for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
-    lasts_p = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)]  for k in range(8)] + [[random.random() for p in range(N)] for q in range(3)]]
+    lasts_p = [np.array(p) for p in [[0 for i in range(N)]  for k in range(22)]
     lasts_q = copy.deepcopy(lasts_p)
 
     # y_s, y_p, y_n, maxlen = fmtoutput(y_s, y_p, y_n)
@@ -70,7 +70,7 @@ def calgraR(param, yq, yd, lasts, data, tt):
 
     gra_wr1 = np.dot(transps1(sigmarqt1), transps2(yq[-1][tt-1])) + np.dot(transps1(sigmardt1), transps2(yd[-1][tt-1]))
     gra_w1 =  np.dot(transps1(sigmarqt1), transps2(data[0][tt])) + np.dot(transps1(sigmardt1), transps2(data[1][tt]))
-    gra_wp1 =  np.dot(transps1(sigmarqt1), transps2(yq[3][tt])) + np.dot(transps1(sigmardt1), transps2(yq[3][tt]))
+    gra_wp1 =  np.dot(transps1(sigmarqt1), transps1(yq[3][tt]).T) + np.dot(transps1(sigmardt1), transps1(yq[3][tt]).T)
     gra_b1 = sigmarqt1 + sigmardt1
     gra[4].append(gra_wr1)
     gra[0].append(gra_w1)
