@@ -522,7 +522,8 @@ def gettraindata():
         d_source = d_source[d_source.apply(findactivity, axis = 1)]
 
         d_source["msglen"] = d_source.msginfo.apply(filter64)
-        d_source = d_source[d_source.msglen <= 64 and d_source.msglen >= 10]
+        d_source = d_source[d_source.msglen <= 64]
+        d_source = d_source[d_source.msglen >= 10]
         d_source = d_source.drop("msglen", axis = 1)
 
         # print d_source
