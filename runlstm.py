@@ -248,6 +248,7 @@ def gettraindata(worddict, i, weibo):
         tdata.append(text2vec(worddict, j))
     for t in tdata:
         if len(t) == 0:
+            print posi, neg
             f = 1
             break
     if f == 1: gettraindata(worddict, i, weibo)
