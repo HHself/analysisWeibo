@@ -500,7 +500,8 @@ def getwordnumdistri():
 #         return False
 
 def filter64(sen):
-    aw = re.findall(ur"[\u4E00-\u9FA5]{1}", sen.decode("utf-8"))
+    s = re.sub(ur"#.*#", "", sen.decode("utf-8"))
+    aw = re.findall(ur"[\u4E00-\u9FA5]{1}", s)
     return len(aw)
 
 def gettraindata():
@@ -521,7 +522,7 @@ def gettraindata():
         d_source = d_source[d_source.apply(findactivity, axis = 1)]
 
         d_source["msglen"] = d_source.msginfo.apply(filter64)
-        d_source = d_source[d_source.msglen >= 64]
+        d_source = d_source[d_source.msglen <= 64]
         d_source = d_source.drop("msglen", axis = 1)
 
         # print d_source
