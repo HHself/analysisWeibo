@@ -58,9 +58,10 @@ def calgraR(param, yq, yd, lasts, data, tt):
     # ---------------------------for output gate------------------------
     sigmarqt1 = yq[4][tt] * (1 - yq[4][tt]) * tanh(yq[3][tt]) * vq  #n*1
     sigmardt1 = yd[4][tt] * (1 - yd[4][tt]) * tanh(yd[3][tt]) * vd    
+
     gra_wr1 = np.dot(sigmarqt1, s[tt-1].T) + np.dot(sigmardt1, t[tt-1].T)
-    gra_w1 =  np.dot(sigmarqt1, data[0][tt]) + np.dot(sigmardt1, data[1][tt])
-    gra_wp1 =  np.dot(sigmarqt1, yq[3][tt]) + np.dot(sigmardt1, yq[3][tt])
+    gra_w1 =  np.dot(sigmarqt1, data[0][tt].T) + np.dot(sigmardt1, data[1][tt].T)
+    gra_wp1 =  np.dot(sigmarqt1, yq[3][tt].T) + np.dot(sigmardt1, yq[3][tt].T)
     gra_b1 = sigmarqt1 + sigmardt1
     gra[4].append(gra_wr1)
     gra[0].append(gra_w1)
@@ -302,7 +303,7 @@ def text2vec(worddict, te):
     return np.array(tevec)
 
 def cossim(ls1, ls2):
-    print "*****", ls1, ls2, ls1.shape, ls2.shape
+    #print "*****", ls1, ls2, ls1.shape, ls2.shape
     if ls1.shape != ls2.shape:
         print "error ,list not equal"
         return
