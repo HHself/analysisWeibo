@@ -76,7 +76,6 @@ class LSTM_RNN():
             output[4][num] = ot.copy()
             output[5][num] = yt.copy()
     	# output = np.array(output)
-        print output[-1]
     	return output
 
 
@@ -85,7 +84,6 @@ class LSTM_RNN():
     	dis = [cossim(y_output[num], y_output[num+1]) for num in range(textlen-1)]
     	dis_ind_val = dict([(ind, val) for ind, val in enumerate(dis, start = 1)])
     	dis_ind = sorted(dis_ind_val)
-
     	f = 0
     	# while f < textlen:
     	# 	for j in range(f, textlen):
