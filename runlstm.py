@@ -207,7 +207,7 @@ def BPTTtrain(parameters):
             y_p = getlastoutput(param, data[1])
             cos_y_sp = cossim(y_s[-1][len(data[0])-1], y_p[-1][len(data[1])-1])
             print "#####", y_s[-1][len(data[0])-1], '\n' ,y_p[-1][len(data[1])-1], '\n' ,cos_y_sp,'\n' ,type(cos_y_sp)
-            print "##", len(data[0]), len(data[1]), y_s[-1], y_p[-1]
+            print "##", len(data[0]), len(data[1])#, y_s[-1], y_p[-1]
 
             esum = 0
             cosy_spns = []
@@ -215,7 +215,7 @@ def BPTTtrain(parameters):
                 y_n = getlastoutput(param, data[2+j])
                 cos_y_sn = cossim(y_s[-1][len(data[0])-1], y_n[-1][len(data[2+j])-1])
                 print "%%%%%%%%%%%", y_n[-1][len(data[2+j])-1], '\n' ,cos_y_sn, '\n' ,type(cos_y_sn)
-                print "##", len(data[2+j]), y_n[-1]
+                print "##", len(data[2+j])#, y_n[-1]
                 cosy_spn = cos_y_sp - cos_y_sn
 
                 # print y_s[-1][len(data[0])-1], y_p[-1][len(data[1])-1], y_n[-1][len(data[2+j])-1], cos_y_sp, cos_y_sn
