@@ -181,7 +181,7 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gra[14].append(gra_b4)
     
     # lasts = [gracw2_last, gracw3_last, gracw4_last, gracwr2_last, gracwr3_last, gracwr4_last, gracb2_last, gracb3_last, gracb4_last]
-    lasts = [grw2_last_d, grw2_last_q, grw3_last_d, grw3_last_q, grw4_last_d, grw4_last_q, grwr2_last_d, grwr2_last_q, grwr3_last_d, grwr3_last_q, grwr4_last_d, grwr4_last_q, grwp2_last_d, grwp2_last_q, grwp3_last_d, grwp3_last_q, grb2_last_d, grb2_last_q, , grb3_last_d, grb3_last_q, grb4_last_d, grb4_last_q]
+    lasts = [grw2_last_d, grw2_last_q, grw3_last_d, grw3_last_q, grw4_last_d, grw4_last_q, grwr2_last_d, grwr2_last_q, grwr3_last_d, grwr3_last_q, grwr4_last_d, grwr4_last_q, grwp2_last_d, grwp2_last_q, grwp3_last_d, grwp3_last_q, grb2_last_d, grb2_last_q, grb3_last_d, grb3_last_q, grb4_last_d, grb4_last_q]
     return  gra, lasts
 
 def getlastoutput(param, textvec):
