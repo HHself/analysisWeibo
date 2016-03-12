@@ -4,6 +4,7 @@ import random
 import numpy as np
 import copy
 import re
+import math
 
 N = 128
 M = 32 # the dim of wordvec
