@@ -207,6 +207,7 @@ def BPTTtrain(worddict, parameters):
             y_p = getlastoutput(param, data[1])
             cos_y_sp = cossim(y_s[-1][len(data[0])-1], y_p[-1][len(data[1])-1])
             print "#####", len(data[0]), len(data[1]), y_s[-1][len(data[0])-1], '\n' ,y_p[-1][len(data[1])-1], '\n' ,cos_y_sp,'\n' ,type(cos_y_sp)
+            if len(data[1]) == 0: print data[:5]
 
             esum = 0
             cosy_spns = []
