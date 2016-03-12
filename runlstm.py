@@ -208,7 +208,7 @@ def BPTTtrain(worddict, parameters):
 
             for k in range(PN):
                 param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
-                
+
             # print "HHHHHHHHH", len(data), len(data[0]), len(data[1]),
             y_s = getlastoutput(param, data[0])
             y_p = getlastoutput(param, data[1])
@@ -249,6 +249,9 @@ def gettraindata(worddict, i, weibo):
     s = weibo[i] 
     f = 0
     posi, neg = rdmnegative(weibo, s) 
+    print s, posi
+    for ii in neg:
+        print ii
     tdata.append(text2vec(worddict, s))
     tdata.append(text2vec(worddict, posi))
     for j in neg:
