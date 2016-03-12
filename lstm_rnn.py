@@ -27,14 +27,14 @@ class LSTM_RNN():
         self.W1 = param[0] # param: W1, W2, W3, W4, Wr1, Wr2, Wr3, Wr4, Wp1, Wp2, Wp3, b1, b2, b3, b4
         self.W2 = param[1]
         self.W3 = param[2]
-        self.W4 = param[3]
+        self.W4 = param[3] # dim: n*32
         self.Wr1 = param[4]
         self.Wr2 = param[5]
         self.Wr3 = param[6]
         self.Wr4 = param[7]
         self.Wp1 = param[8]
         self.Wp2 = param[9]
-        self.Wp3 = param[10] # dim: n*32
+        self.Wp3 = param[10] # dim: n*n
         self.b1 = param[11]
         self.b2 = param[12]
         self.b3 = param[13]
