@@ -9,7 +9,6 @@ N = 128
 M = 32 # the dim of wordvec
 C = 64 # the number of cell
 NW = 10 #the number of negitive sample
-parameters = [np.array(q) for q in [[[random.random() for j in range(M)] for i in range(N)] for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
 miu = 0.99  #momentum parameter
 gama = 10 #scaling
 era = 1.0 #learning rate
@@ -186,7 +185,7 @@ def getlastoutput(param, textvec, t, f = "last"):
     y_output = lr_s.lstmrun(ti = t, flag = f)
     return y_output
 
-def BPTTtrain():
+def BPTTtrain(parameters):
     weibo = [line for line in file("weibo_train.txt")]
     param_last = [np.array(q) for q in [[[random.random() for j in range(M)] for i in range(N)] for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
    
@@ -285,5 +284,6 @@ def cossim(ls1, ls2):
     return np.dot(ls1, ls2)/(np.linalg.norm(ls1) * np.linalg.norm(ls2))
 
 if __name__ == '__main__':
-    BPTTtrain()
+    parameters = [np.array(q) for q in [[[random.random() for j in range(M)] for i in range(N)] for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
+    BPTTtrain(parameters)
     
