@@ -48,7 +48,7 @@ class LSTM_RNN():
             flag means output all vectors or last vector
     '''
     def lstmrun(self):
-    	if textlen != self.textvec.shape[0]:
+    	if self.textlen != self.textvec.shape[0]:
     		print "data error, length not equal!"
     		return
     	y_before = 0
