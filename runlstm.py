@@ -41,7 +41,7 @@ def fmtoutput(y_ss, y_pp, y_nn):
 def calgradient(param, y_s, y_p, y_n, data):
     #data[0]:source, data[1]:positive, data[2]:negative
     gra = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)]  for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
-    lasts_p = [np.array(p) for p in [[0 for i in range(N)]  for k in range(22)]]
+    lasts_p = [np.array(p) for p in [[0 for i in range(N)]  for k in range(16)] + [[0 for j in range(N)] for i in range(N)]  for k in range(6)]]
     lasts_q = copy.deepcopy(lasts_p)
 
     # y_s, y_p, y_n, maxlen = fmtoutput(y_s, y_p, y_n)
@@ -91,21 +91,21 @@ def calgraR(param, yq, yd, lasts, data, tt):
     grwr3_last_d = copy.deepcopy(gracwr3_d)
     gra_wr3 = grarall(gracwr3_q, gracwr3_d)
 
-    gracw3 = lambda ft, gracw3_last, ygt, it, i: np.dot(ft[tt], gracw3_last[tt]) + np.dot(bit(ygt, it), data[i][tt-1]) 
+    gracw3 = lambda ft, gracw3_last, ygt, it, i: np.dot(transps1(ft[tt]), transps2(gracw3_last[tt])) + np.dot(transps1(bit(ygt, it)), data[i][tt-1]) 
     gracw3_q = gracw3(yq[2], lasts[3], yq[0], yq[1], 0)
     gracw3_d = gracw3(yd[2], lasts[2], yd[0], yd[1], 1)
     grw3_last_q = copy.deepcopy(gracw3_q)
     grw3_last_d = copy.deepcopy(gracw3_d)
     gra_w3 = grarall(gracw3_q, gracw3_d)
 
-    gracwp3 = lambda ft, gracwp3_last, ygt, it, ct: np.dot(ft[tt], gracwp3_last[tt]) + np.dot(bit(ygt, it), ct[tt-1]) 
+    gracwp3 = lambda ft, gracwp3_last, ygt, it, ct: np.dot(transps1(ft[tt]), transps2(gracwp3_last[tt])) + np.dot(transps1(bit(ygt, it)), ct[tt-1]) 
     gracwp3_q = gracwp3(yq[2], lasts[15], yq[0], yq[1], yq[3])
     gracwp3_d = gracwp3(yd[2], lasts[14], yd[0], yd[1], yd[3])
     grwp3_last_q = copy.deepcopy(gracwp3_q)
     grwp3_last_d = copy.deepcopy(gracwp3_d)
     gra_wp3 = grarall(gracwp3_q, gracwp3_d)
 
-    gracb3 = lambda ft, gracb3_last, ygt, it: np.dot(ft[tt], gracb3_last[tt]) + bit(ygt, it)
+    gracb3 = lambda ft, gracb3_last, ygt, it: np.dot(transps1(ft[tt]), gracb3_last[tt]) + bit(ygt, it)
     gracb3_q = gracb3(yq[2], lasts[19], yq[0], yq[1], yq[3])
     gracb3_d = gracb3(yd[2], lasts[18], yd[0], yd[1], yd[3])
     grb3_last_q = copy.deepcopy(gracb3_q)
