@@ -78,10 +78,10 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gra[11].append(gra_b1)
 
     #  ---------------------------for input gate------------------------
-    sigmart3 = lambda y_c, y_o, v : (1 - tanh(y_c[tt])) * (1 + tanh(y_c[tt])) * y_o[tt] * v
+    sigmart3 = lambda y_c, y_o, v : (1 - tanh(y_c)) * (1 + tanh(y_c)) * y_o * v
     bit = lambda ygt, it : ygt[tt] * it[tt] * (1-it[tt])
-    syvq_ig = sigmart3(yq[3].T, yq[4], vq)
-    syvd_ig = sigmart3(yd[3], yd[4], vd)
+    syvq_ig = sigmart3(yq[3][tt].T, yq[4][tt], vq)
+    syvd_ig = sigmart3(yd[3][tt], yd[4][tt], vd)
     grarall = lambda g_q, g_d : np.dot(syvq_ig, g_q) + np.dot(syvd_ig, g_d)
 
     gracwr3 = lambda ft, gracwr3_last, ygt, it, yt: np.dot(transps1(ft[tt]), transps2(gracwr3_last)) + np.dot(transps1(bit(ygt, it)), yt[tt-1]) 
