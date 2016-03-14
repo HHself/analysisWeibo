@@ -88,8 +88,8 @@ def calgraR(param, yq, yd, lasts, data, tt):
 
 
     # ---------------------------for output gate------------------------
-    sigmarqt1 = yq[4][tt] * (1 - yq[4][tt]) * tanh(yq[3][tt]) * vq  #n*1
-    sigmardt1 = yd[4][tt] * (1 - yd[4][tt]) * tanh(yd[3][tt]) * vd    
+    sigmarqt1 = transps1(yq[4][tt] * (1 - yq[4][tt]) * tanh(yq[3][tt].T) * vq)  #n*1
+    sigmardt1 = yd[4][tt] * (1 - yd[4][tt]) * tanh(yd[3][tt]) * vd
 
 
     gra_wr1 = np.dot(transps1(sigmarqt1), transps2(yq[-1][tt-1])) + np.dot(transps1(sigmardt1), transps2(yd[-1][tt-1]))
