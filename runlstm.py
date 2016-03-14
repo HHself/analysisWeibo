@@ -81,7 +81,7 @@ def calgraR(param, yq, yd, lasts, data, tt):
     sigmart3 = lambda y_c, y_o, v : (1 - tanh(y_c)) * (1 + tanh(y_c)) * y_o * v
     bit = lambda ygt, it : ygt[tt] * it[tt] * (1-it[tt])
     syvq_ig = sigmart3(yq[3][tt].T, yq[4][tt], vq)
-    syvd_ig = sigmart3(yd[3][tt], yd[4][tt], vd)
+    syvd_ig = transps2(sigmart3(yd[3][tt], yd[4][tt], vd))
     grarall = lambda g_q, g_d : np.dot(syvq_ig, g_q) + np.dot(syvd_ig, g_d)
 
     gracwr3 = lambda ft, gracwr3_last, ygt, it, yt: np.dot(transps1(ft[tt]), transps2(gracwr3_last)) + np.dot(transps1(bit(ygt, it)), yt[tt-1]) 
@@ -118,10 +118,10 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gra[13].append(gra_b3)
     #  ---------------------------for forget gate------------------------
 
-    sigmart2 = lambda ct, ot, v : (1 - tanh(ct[tt])) * (1 + tanh(ct[tt])) * ot[tt] * v
+    sigmart2 = lambda ct, ot, v : (1 - tanh(ct)) * (1 + tanh(ct) * ot * v
     bft = lambda ct, ft : ct[tt-1] * ft[tt] * (1-ft[tt])
-    syvq_fg = sigmart2(yq[3], yq[4], vq)
-    syvd_fg = sigmart2(yd[3], yd[4], vd)
+    syvq_fg = sigmart2(yq[3][tt].T, yq[4][tt], vq)
+    syvd_fg = sigmart2(yd[3][tt], yd[4][tt], vd)
     grarall_fg = lambda g_q, g_d : np.dot(syvq_fg, g_q) + np.dot(syvd_fg, g_d)
 
 
