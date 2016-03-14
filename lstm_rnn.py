@@ -51,7 +51,7 @@ class LSTM_RNN():
     		return
     	y_before = np.array([0 for i in range(N)]).T
     	c_before = y_before.copy()
-    	output = [[np.array([0 for k in range(N)]) for j in range(C)] for i in range(6)]
+    	output = [[np.array([1 for k in range(N)]) for j in range(C)] for i in range(6)]
 
 
     	for num in range(self.textlen):
@@ -64,7 +64,7 @@ class LSTM_RNN():
             ot  = sigmoid(np.dot(self.W1, curvec) + np.dot(self.Wr1, y_before) +np.dot(self.Wp1, ct) + self.b1)
             yt  = ot * tanh(ct)
     		
-            print textvec[num] , yt
+            print "self.textvec[num] ---  yt"
             
             y_before = yt.copy()
             c_before = ct.copy()
