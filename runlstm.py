@@ -161,8 +161,8 @@ def calgraR(param, yq, yd, lasts, data, tt):
     #  ---------------------------for input without gate------------------------
     sigmart4 = lambda ct, ot, v : (1 - tanh(ct)) * (1 + tanh(ct)) * ot * v
     bgt = lambda it, ygt : it[tt] * (1 - ygt[tt]) * (1 + ygt[tt])
-    syvq_iwg = sigmart4(yq[3][tt], yq[4][tt], vq)
-    syvd_iwg = sigmart4(yd[3][tt], yd[4][tt], vd)
+    syvq_iwg = sigmart4(yq[3][tt].T, yq[4][tt], vq)
+    syvd_iwg = transps2(sigmart4(yd[3][tt], yd[4][tt], vd))
     grarall_iwg = lambda g_q, g_d : np.dot(syvq_iwg, g_q) + np.dot(syvd_iwg, g_d)
 
     gracwr4 = lambda ft, gracwr4_last, it, ygt, yt: np.dot(ft[tt], gracwr4_last) + np.dot(bgt(it, ygt), yt[tt-1]) 
