@@ -64,7 +64,8 @@ class LSTM_RNN():
             ot  = sigmoid(np.dot(self.W1, curvec) + np.dot(self.Wr1, y_before) +np.dot(self.Wp1, ct) + self.b1)
             yt  = ot * tanh(ct)
     		
-            # print ygt, it, ft, ct, ot, yt
+            print ygt, it, ft, ct, ot, yt
+            break
             y_before = yt.copy()
             c_before = ct.copy()
             output[0][num] = ygt.copy()
