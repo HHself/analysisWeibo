@@ -110,7 +110,7 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gracb3_d = gracb3(yd[2], lasts[18], yd[0], yd[1])
     grb3_last_q = copy.deepcopy(gracb3_q)
     grb3_last_d = copy.deepcopy(gracb3_d)
-    gra_b3 = grarall(gracb3_q, gracb3_d)
+    gra_b3 = grarall(gracb3_q.T, gracb3_d.T)
 
     gra[6].append(gra_wr3)
     gra[2].append(gra_w3)
