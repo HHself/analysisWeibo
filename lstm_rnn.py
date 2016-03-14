@@ -51,7 +51,7 @@ class LSTM_RNN():
     		return
     	y_before = np.array([0 for i in range(N)]).T
     	c_before = y_before.copy()
-    	output = [[np.array([]) for j in range(C)] for i in range(6)]
+    	output = [[np.array([0 for k in range(N)]) for j in range(C)] for i in range(6)]
 
 
     	for num in range(self.textlen):

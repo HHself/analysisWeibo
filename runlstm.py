@@ -60,12 +60,6 @@ def calgradient(param, y_s, y_p, y_n, data):
         gra_p, lasts_p = calgraR(param, y_s, y_p, lasts_p, data[0:2], t)
         jianyan(y_p, y_n)
 
-
-
-
-
-
-
         gra_q, lasts_q = calgraR(param, y_s, y_n, lasts_q, data[0:3:2], t)
         for k in range(PN):
             gra[k] += gra_p[k] - gra_q[k]
