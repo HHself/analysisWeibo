@@ -63,8 +63,6 @@ class LSTM_RNN():
             ct  = ft * c_before + it * ygt
             ot  = sigmoid(np.dot(self.W1, curvec) + np.dot(self.Wr1, y_before) +np.dot(self.Wp1, ct) + self.b1)
             yt  = ot * tanh(ct)
-    		
-            print "self.textvec[num] ---  yt"
             
             y_before = yt.copy()
             c_before = ct.copy()
