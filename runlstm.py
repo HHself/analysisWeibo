@@ -41,7 +41,7 @@ def jianyan(y_p, y_n):
     if len(y_p) != len(y_n):
             print " positive not equal neg..."
             return
-    for t in range(1,C)   
+    for t in range(1,C):
         for i in range(len(y_p)):
         
             print y_p[i][t].shape, y_n[i][t].shape
@@ -192,7 +192,7 @@ def calgraR(param, yq, yd, lasts, data, tt):
     grw4_last_d = copy.deepcopy(gracw4_d)
     gra_w4 = grarall_iwg(gracw4_q, gracw4_d)
 
-    gracb4 = lambda ft, gracb4_last, it, ygt: np.dot(ft[tt], gracb4_last) + bgt(it, ygt) 
+    gracb4 = lambda ft, gracb4_last, it, ygt: np.dot(ft, gracb4_last) + bgt(it, ygt) 
     gracb4_q = gracb4(yq[2][tt].T, lasts[21], yq[1], yq[0])
     gracb4_d = gracb4(yd[2][tt].T, lasts[20], yd[1], yd[0])
     grb4_last_q = copy.deepcopy(gracb4_q)
