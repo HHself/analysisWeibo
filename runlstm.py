@@ -118,7 +118,7 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gra[13].append(gra_b3)
     #  ---------------------------for forget gate------------------------
 
-    sigmart2 = lambda ct, ot, v : (1 - tanh(ct)) * (1 + tanh(ct) * ot * v
+    sigmart2 = lambda ct, ot, v : (1 - tanh(ct)) * (1 + tanh(ct) * ot * v)
     bft = lambda ct, ft : ct[tt-1] * ft[tt] * (1-ft[tt])
     syvq_fg = sigmart2(yq[3][tt].T, yq[4][tt], vq)
     syvd_fg = sigmart2(yd[3][tt], yd[4][tt], vd)
