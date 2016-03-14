@@ -76,6 +76,7 @@ def calgraR(param, yq, yd, lasts, data, tt):
     c = 1.0 / np.linalg.norm(t)
     vq = b * c * t - a * b**3 * c * s
     vd = b * c * s - a * b * c**3 * t
+    
 
     # ---------------------------for output gate------------------------
     sigmarqt1 = yq[4][tt] * (1 - yq[4][tt]) * tanh(yq[3][tt]) * vq  #n*1
