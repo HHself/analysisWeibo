@@ -22,12 +22,21 @@ tanh = lambda x : np.tanh(x)
 
 #zhuanzhi 1*m ===>m*1
 def transps1(vec):
-    vec.shape = (vec.shape[0], 1)
+    sh =  vec.shape
+    if sh[0] == 1:
+        vec.shape = (vec.shape[1], 1)
+    else:
+        vec.shape = (vec.shape[0], 1)
     return vec
 
 def transps2(vec):
-    vec.shape = (1, vec.shape[0])
+    sh =  vec.shape
+    if sh[0] == 1:
+        vec.shape = (1, vec.shape[1])
+    else:
+        vec.shape = (1, vec.shape[0])
     return vec
+
 
 def fmtoutput(y_ss, y_pp, y_nn):
     #make len(y_s) = len(y_p) = len(y_n) = maxlen
@@ -58,9 +67,9 @@ def calgradient(param, y_s, y_p, y_n, data):
         if len(set(y_s[-1][t])) + len(set(y_s[-1][t])) + len(set(y_s[-1][t])) == 3 and sum(y_s[-1][t]) + sum(y_s[-1][t])+ sum(y_s[-1][t]) == 0:
             break
         gra_p, lasts_p = calgraR(param, y_s, y_p, lasts_p, data[0:2], t)
-        jianyan(y_p, y_n)
-
+        # jianyan(y_p, y_n)
         gra_q, lasts_q = calgraR(param, y_s, y_n, lasts_q, data[0:3:2], t)
+
         for k in range(PN):
             gra[k] += gra_p[k] - gra_q[k]
 
@@ -76,7 +85,7 @@ def calgraR(param, yq, yd, lasts, data, tt):
     c = 1.0 / np.linalg.norm(t)
     vq = b * c * t - a * b**3 * c * s
     vd = b * c * s - a * b * c**3 * t
-    
+
 
     # ---------------------------for output gate------------------------
     sigmarqt1 = yq[4][tt] * (1 - yq[4][tt]) * tanh(yq[3][tt]) * vq  #n*1
@@ -136,13 +145,13 @@ def calgraR(param, yq, yd, lasts, data, tt):
     sigmart2 = lambda ct, ot, v : (1 - tanh(ct)) * (1 + tanh(ct) * ot * v)
     bft = lambda ct, ft : ct[tt-1].T * ft[tt] * (1-ft[tt])
     syvq_fg = sigmart2(yq[3][tt].T, yq[4][tt], vq)
-    syvd_fg = transps2(sigmart2(yd[3][tt], yd[4][tt], vd))
+    syvd_fg = transps2(sigmart2(yd[3][tt], yd[4][tt], vd)) #1*128
     grarall_fg = lambda g_q, g_d : np.dot(syvq_fg, g_q) + np.dot(syvd_fg, g_d)
 
 
     gracwr2 = lambda ft, gracwr2_last, ct, yt: np.dot(ft[tt], transps2(gracwr2_last)) + np.dot(bft(ct, ft), yt[tt-1]) 
     gracwr2_q = gracwr2(yq[2], lasts[7], yq[3], yq[5])
-    gracwr2_d = gracwr2(yd[2], lasts[6], yd[3], yd[5])
+    gracwr2_d = gracwr2(yd[2], lasts[6], yd[3], yd[5]) 
     grwr2_last_q = copy.deepcopy(gracwr2_q)
     grwr2_last_d = copy.deepcopy(gracwr2_d)
     gra_wr2 = grarall_fg(gracwr2_q, gracwr2_d) 
