@@ -291,7 +291,7 @@ def BPTTtrain(worddict, parameters):
 
 
 def gettraindata(worddict, i, weibo):
-    tdata = [[0 for q in range(C)] for k in range(NW + 2)]
+    tdata = [[[0 for p in range(M)] for q in range(C)] for k in range(NW + 2)]
     s = weibo[i] 
     # f = 0
     posi, neg = rdmnegative(weibo, s) 
