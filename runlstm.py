@@ -75,6 +75,7 @@ def calgradient(param, y_s, y_p, y_n, data):
         gra_q, lasts_q = calgraR(param, y_s, y_n, lasts_q, data[0:3:2], t)
 
         for k in range(PN):
+            if k>10: gra[k] = transps1(gra[k])
             if k in [4, 0, 8, 11, 12, 13, 14]:
                 gra[k] += gra_p[k][0] - gra_q[k][0]
             else:
