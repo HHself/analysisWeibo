@@ -144,8 +144,8 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gracb3 = lambda ft, gracb3_last, ygt, it: np.dot(transps1(ft[tt]).T, gracb3_last) + bit(ygt, it)
     gracb3_q = gracb3(yq[2], lasts[19], yq[0], yq[1])
     gracb3_d = gracb3(yd[2], lasts[18], yd[0], yd[1])
-    grb3_last_q = copy.deepcopy(gracb3_q)
-    grb3_last_d = copy.deepcopy(gracb3_d)
+    grb3_last_q = copy.deepcopy(gracb3_q[0])
+    grb3_last_d = copy.deepcopy(gracb3_d[0])
     gra_b3 = transps1(grarall(gracb3_q.T, gracb3_d.T))
 
     gra[6].append(gra_wr3)
@@ -186,8 +186,8 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gracb2 = lambda ft, gracb2_last, ct: np.dot(ft[tt].T, gracb2_last) + bft(ct, ft) 
     gracb2_q = gracb2(yq[2], lasts[17], yq[3])
     gracb2_d = gracb2(yd[2], lasts[16], yd[3])
-    grb2_last_q = copy.deepcopy(gracb2_q)
-    grb2_last_d = copy.deepcopy(gracb2_d)
+    grb2_last_q = copy.deepcopy(gracb2_q[0])
+    grb2_last_d = copy.deepcopy(gracb2_d[0])
     gra_b2 = transps1(grarall_fg(gracb2_q, gracb2_d))
 
     gra[5].append(gra_wr2)
@@ -218,8 +218,8 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gracb4 = lambda ft, gracb4_last, it, ygt: np.dot(ft, gracb4_last) + bgt(it, ygt) 
     gracb4_q = gracb4(yq[2][tt].T, lasts[21], yq[1], yq[0])
     gracb4_d = gracb4(yd[2][tt].T, lasts[20], yd[1], yd[0])
-    grb4_last_q = copy.deepcopy(gracb4_q)
-    grb4_last_d = copy.deepcopy(gracb4_d)
+    grb4_last_q = copy.deepcopy(gracb4_q[0])
+    grb4_last_d = copy.deepcopy(gracb4_d[0])
     gra_b4 = transps1(grarall_iwg(gracb4_q.T, gracb4_d.T))#128*1
 
     gra[7].append(gra_wr4)
