@@ -29,8 +29,6 @@ def transps1(vec):
         vec.shape = (vec.shape[0], 1)
     elif sh[1] == 1:
         vec.shape = (vec.shape[0], 1)
-    else:
-        vec = transps1(vec[:, 0])
     return vec
 
 def transps2(vec):
@@ -41,8 +39,6 @@ def transps2(vec):
         vec.shape = (1, vec.shape[0])
     elif sh[1] == 1:
         vec.shape = (1, vec.shape[0])
-    else:
-        vec = transps2(vec[:, 0])
     return vec
 
 
