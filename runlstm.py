@@ -186,8 +186,8 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gracb2 = lambda ft, gracb2_last, ct: np.dot(ft[tt].T, gracb2_last) + bft(ct, ft) 
     gracb2_q = gracb2(yq[2], lasts[17], yq[3])
     gracb2_d = gracb2(yd[2], lasts[16], yd[3])
-    grb2_last_q = copy.deepcopy(incrs_scale(gracb2_q))
-    grb2_last_d = copy.deepcopy(incrs_scale(gracb2_d))
+    grb2_last_q = copy.deepcopy(gracb2_q)
+    grb2_last_d = copy.deepcopy(gracb2_d)
     gra_b2 = transps1(grarall_fg(gracb2_q, gracb2_d))
 
     gra[5].append(gra_wr2)
@@ -291,17 +291,17 @@ def BPTTtrain(worddict, parameters):
 
 
 def gettraindata(worddict, i, weibo):
-    tdata = []
+    tdata = [[0 for q in range(C)] for k in range(NW + 2)]
     s = weibo[i] 
-    f = 0
+    # f = 0
     posi, neg = rdmnegative(weibo, s) 
     # print s, posi
     # for ii in neg:
     #     print ii
-    tdata.append(text2vec(worddict, s))
-    tdata.append(text2vec(worddict, posi))
-    for j in neg:
-        tdata.append(text2vec(worddict, j))
+    tdata[0] = text2vec(worddict, s)
+    tdata[1] = text2vec(worddict, posi)
+    for j in range(NW):
+        tdata[2 + j] = text2vec(worddict, neg[j])
     return tdata
 
 def genworddict(worddict):
