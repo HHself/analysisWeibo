@@ -252,6 +252,7 @@ def BPTTtrain(worddict, parameters):
                     if len(t) != 0: f += 1
                 if f == len(data): break 
                 f = 0
+            print "train data success..."
 
             for k in range(PN):
                 param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
