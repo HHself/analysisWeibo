@@ -248,9 +248,9 @@ def BPTTtrain(worddict, parameters):
             f = 0
             while True:
                 data = gettraindata(worddict, r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
-                print data[0], data[1]
-                for gg in range(NW):
-                    print data[2+gg]
+                # print data[0], data[1]
+                # for gg in range(NW):
+                #     print data[2+gg]
 
                 for t in data:
                     if len(t) != 0: f += 1
@@ -349,9 +349,9 @@ def text2vec(worddict, te):
     tevec=[[0 for j in range(M)] for i in range(C)] 
     aw = re.sub(ur"#.*#", "", te.decode("utf-8"))
     aw = re.findall(ur"[\u4E00-\u9FA5]{1}", aw) 
-    for w in aw:
-        if worddict.has_key(w):
-            tevec.append(worddict[w])
+    for w in range(len(aw)):
+        if worddict.has_key(aw[w]):
+            tevec[w] = worddict[aw[w]]
     return np.array(tevec)
 
 def cossim(ls1, ls2):
