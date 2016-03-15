@@ -61,7 +61,8 @@ def incrs_scale(vec):
 
 def calgradient(param, y_s, y_p, y_n, data):
     #data[0]:source, data[1]:positive, data[2]:negative
-    gra = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)]  for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
+    # gra = [np.array(p) for p in [[[0 for j in range(M)] for i in range(N)]  for k in range(11)] + [[random.random() for p in range(N)] for q in range(4)]]
+    gra = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
     lasts_p = [np.array(p) for p in [[0 for i in range(M)]  for k in range(6)] + [[0 for i in range(N)]  for k in range(10)] + [[[0 for j in range(N)] for i in range(N)]  for k in range(6)]]
     lasts_q = copy.deepcopy(lasts_p)
 
@@ -74,7 +75,7 @@ def calgradient(param, y_s, y_p, y_n, data):
         gra_q, lasts_q = calgraR(param, y_s, y_n, lasts_q, data[0:3:2], t)
 
         for k in range(PN):
-            if k in [4, 0, 8, 11]:
+            if k in [4, 0, 8, 11, 12, 13, 14]:
                 gra[k] += gra_p[k][0] - gra_q[k][0]
             else:
                 gra[k] += incrs_scale(gra_p[k][0]) - incrs_scale(gra_q[k][0])
@@ -140,7 +141,7 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gracb3_d = gracb3(yd[2], lasts[18], yd[0], yd[1])
     grb3_last_q = copy.deepcopy(gracb3_q)
     grb3_last_d = copy.deepcopy(gracb3_d)
-    gra_b3 = grarall(gracb3_q.T, gracb3_d.T)
+    gra_b3 = transps1(grarall(gracb3_q.T, gracb3_d.T))
 
     gra[6].append(gra_wr3)
     gra[2].append(gra_w3)
@@ -182,7 +183,7 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gracb2_d = gracb2(yd[2], lasts[16], yd[3])
     grb2_last_q = copy.deepcopy(gracb2_q)
     grb2_last_d = copy.deepcopy(gracb2_d)
-    gra_b2 = grarall_fg(gracb2_q, gracb2_d)
+    gra_b2 = transps1(grarall_fg(gracb2_q, gracb2_d))
 
     gra[5].append(gra_wr2)
     gra[1].append(gra_w2)
@@ -214,7 +215,7 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gracb4_d = gracb4(yd[2][tt].T, lasts[20], yd[1], yd[0])
     grb4_last_q = copy.deepcopy(gracb4_q)
     grb4_last_d = copy.deepcopy(gracb4_d)
-    gra_b4 = grarall_iwg(gracb4_q.T, gracb4_d.T)
+    gra_b4 = transps1(grarall_iwg(gracb4_q.T, gracb4_d.T))#128*1
 
     gra[7].append(gra_wr4)
     gra[3].append(gra_w4)
