@@ -123,8 +123,8 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gracwr3 = lambda ft, gracwr3_last, ygt, it, yt: np.dot(transps1(ft[tt]), transps2(gracwr3_last)) + np.dot(transps1(bit(ygt, it)), yt[tt-1]) 
     gracwr3_q = gracwr3(yq[2], lasts[9], yq[0], yq[1], yq[5])
     gracwr3_d = gracwr3(yd[2], lasts[8], yd[0], yd[1], yd[5])#128*128
-    grwr3_last_q = copy.deepcopy(gracwr3_q) 
-    grwr3_last_d = copy.deepcopy(gracwr3_d)
+    grwr3_last_q = copy.deepcopy(gracwr3_q[:, 0]) 
+    grwr3_last_d = copy.deepcopy(gracwr3_d[:, 0])
     gra_wr3 = grarall(gracwr3_q, gracwr3_d)
 
     gracw3 = lambda ft, gracw3_last, ygt, it, i: np.dot(transps1(ft[tt]), transps2(gracw3_last)) + np.dot(transps1(bit(ygt, it)), transps2(data[i][tt-1])) 
@@ -164,8 +164,8 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gracwr2 = lambda ft, gracwr2_last, ct, yt: np.dot(ft[tt], transps2(gracwr2_last)) + np.dot(bft(ct, ft), yt[tt-1]) 
     gracwr2_q = gracwr2(yq[2], lasts[7], yq[3], yq[5])
     gracwr2_d = gracwr2(yd[2], lasts[6], yd[3], yd[5]) 
-    grwr2_last_q = copy.deepcopy(gracwr2_q)
-    grwr2_last_d = copy.deepcopy(gracwr2_d)
+    grwr2_last_q = copy.deepcopy(gracwr2_q[:, 0])
+    grwr2_last_d = copy.deepcopy(gracwr2_d[:, 0])
     gra_wr2 = grarall_fg(gracwr2_q, gracwr2_d) 
 
     
@@ -204,8 +204,8 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gracwr4 = lambda ft, gracwr4_last, it, ygt, yt: np.dot(ft[tt], transps2(gracwr4_last)) + np.dot(transps1(bgt(it, ygt)), yt[tt-1]) 
     gracwr4_q = gracwr4(yq[2], lasts[11], yq[1], yq[0], yq[5])
     gracwr4_d = gracwr4(yd[2], lasts[10], yd[1], yd[0], yd[5])
-    grwr4_last_q = copy.deepcopy(gracwr4_q)
-    grwr4_last_d = copy.deepcopy(gracwr4_d)
+    grwr4_last_q = copy.deepcopy(gracwr4_q[:, 0])
+    grwr4_last_d = copy.deepcopy(gracwr4_d[:, 0])
     gra_wr4 = grarall_iwg(gracwr4_q, gracwr4_d) 
 
     gracw4 = lambda ft, gracw4_last, it, ygt, i: np.dot(transps1(ft[tt]), transps2(gracw4_last)) + np.dot(transps1(bgt(it, ygt)), transps2(data[i][tt-1]))
