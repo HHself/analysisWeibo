@@ -243,6 +243,7 @@ def BPTTtrain(worddict, parameters):
     while 1:
         gradient = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
         for r in range(len(weibo)):
+            print r
             if getacti(weibo[r]) == "None" : continue
             f = 0
             while True:
@@ -265,6 +266,7 @@ def BPTTtrain(worddict, parameters):
             esum = 0
             cosy_spns = []
             for j in range(NW):
+                print j
                 y_n = getlastoutput(param, data[2+j])
                 cos_y_sn = cossim(y_s[-1][len(data[0])-1], y_n[-1][len(data[2+j])-1])
                 # print "%%%%%%%%%%%", y_n[-1][len(data[2+j])-1], '\n' ,cos_y_sn, '\n' ,type(cos_y_sn)
