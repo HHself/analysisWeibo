@@ -236,7 +236,7 @@ def getlastoutput(param, textvec):
     return y_output
 
 def BPTTtrain(worddict, parameters):
-    weibo = [line for line in file("weibo_train.txt")]
+    weibo = [line for line in file("weibo_train3.csv")]
     param_last = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
     param = []
 
