@@ -25,16 +25,20 @@ def transps1(vec):
     sh =  vec.shape
     if sh[0] == 1:
         vec.shape = (vec.shape[1], 1)
-    else:
+    elif sh[1] == 1:
         vec.shape = (vec.shape[0], 1)
+    else:
+        vec = transps1(vec[:, 0])
     return vec
 
 def transps2(vec):
     sh =  vec.shape
     if sh[0] == 1:
         vec.shape = (1, vec.shape[1])
-    else:
+    elif sh[1] == 1:
         vec.shape = (1, vec.shape[0])
+    else:
+        vec = vec[:, 0]
     return vec
 
 
