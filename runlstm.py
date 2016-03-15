@@ -291,17 +291,17 @@ def BPTTtrain(worddict, parameters):
 
 
 def gettraindata(worddict, i, weibo):
-    tdata = [[[0 for p in range(M)] for q in range(C)] for k in range(NW + 2)]
+    tdata = [[] for k in range(NW + 2)]
     s = weibo[i] 
     # f = 0
     posi, neg = rdmnegative(weibo, s) 
     # print s, posi
     # for ii in neg:
     #     print ii
-    tdata[0] = text2vec(worddict, s)
-    tdata[1] = text2vec(worddict, posi)
-    for j in range(NW):
-        tdata[2 + j] = text2vec(worddict, neg[j])
+    tdata.append(text2vec(worddict, s))
+    tdata.append(text2vec(worddict, posi))
+    for j in neg:
+        tdata.append(text2vec(worddict, j))
     return tdata
 
 def genworddict(worddict):
@@ -339,7 +339,7 @@ def rdmnegative(alldoc, s):
     return positive, negative
 
 def text2vec(worddict, te):
-    tevec=[] 
+    tevec=[[0 for j in range(M)] for i in range(C)] 
     aw = re.sub(ur"#.*#", "", te.decode("utf-8"))
     aw = re.findall(ur"[\u4E00-\u9FA5]{1}", aw) 
     for w in aw:
