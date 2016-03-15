@@ -54,7 +54,10 @@ def jianyan(y_p, y_n):
         for i in range(len(y_p)):
         
             print y_p[i][t].shape, y_n[i][t].shape
-
+def incrs_scale(vec):
+    for i in range(7):
+        vec = np.vstack((vec, vec))
+    return vec
 
 def calgradient(param, y_s, y_p, y_n, data):
     #data[0]:source, data[1]:positive, data[2]:negative
@@ -71,7 +74,7 @@ def calgradient(param, y_s, y_p, y_n, data):
         gra_q, lasts_q = calgraR(param, y_s, y_n, lasts_q, data[0:3:2], t)
 
         for k in range(PN):
-            gra[k] += gra_p[k] - gra_q[k]
+            gra[k] += incrs_scale(gra_p[k]) - incrs_scale(gra_q[k])
 
     return gra
 
@@ -105,19 +108,19 @@ def calgraR(param, yq, yd, lasts, data, tt):
     sigmart3 = lambda y_c, y_o, v : (1 - tanh(y_c)) * (1 + tanh(y_c)) * y_o * v
     bit = lambda ygt, it : ygt[tt] * it[tt] * (1-it[tt])
     syvq_ig = sigmart3(yq[3][tt].T, yq[4][tt], vq)
-    syvd_ig = transps2(sigmart3(yd[3][tt], yd[4][tt], vd))
+    syvd_ig = transps2(sigmart3(yd[3][tt], yd[4][tt], vd)) #1*128
     grarall = lambda g_q, g_d : np.dot(syvq_ig, g_q) + np.dot(syvd_ig, g_d)
 
     gracwr3 = lambda ft, gracwr3_last, ygt, it, yt: np.dot(transps1(ft[tt]), transps2(gracwr3_last)) + np.dot(transps1(bit(ygt, it)), yt[tt-1]) 
     gracwr3_q = gracwr3(yq[2], lasts[9], yq[0], yq[1], yq[5])
-    gracwr3_d = gracwr3(yd[2], lasts[8], yd[0], yd[1], yd[5])
-    grwr3_last_q = copy.deepcopy(gracwr3_q)
+    gracwr3_d = gracwr3(yd[2], lasts[8], yd[0], yd[1], yd[5])#128*128
+    grwr3_last_q = copy.deepcopy(gracwr3_q) 
     grwr3_last_d = copy.deepcopy(gracwr3_d)
     gra_wr3 = grarall(gracwr3_q, gracwr3_d)
 
     gracw3 = lambda ft, gracw3_last, ygt, it, i: np.dot(transps1(ft[tt]), transps2(gracw3_last)) + np.dot(transps1(bit(ygt, it)), transps2(data[i][tt-1])) 
     gracw3_q = gracw3(yq[2], lasts[3], yq[0], yq[1], 0)
-    gracw3_d = gracw3(yd[2], lasts[2], yd[0], yd[1], 1)
+    gracw3_d = gracw3(yd[2], lasts[2], yd[0], yd[1], 1)#128*32
     grw3_last_q = copy.deepcopy(gracw3_q)
     grw3_last_d = copy.deepcopy(gracw3_d)
     gra_w3 = grarall(gracw3_q, gracw3_d)
