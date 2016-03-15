@@ -211,8 +211,8 @@ def calgraR(param, yq, yd, lasts, data, tt):
     gracw4 = lambda ft, gracw4_last, it, ygt, i: np.dot(transps1(ft[tt]), transps2(gracw4_last)) + np.dot(transps1(bgt(it, ygt)), transps2(data[i][tt-1]))
     gracw4_q = gracw4(yq[2], lasts[5], yq[1], yq[0], 0)
     gracw4_d = gracw4(yd[2], lasts[4], yd[1], yd[0], 1)
-    grw4_last_q = copy.deepcopy(gracw4_q)
-    grw4_last_d = copy.deepcopy(gracw4_d)
+    grw4_last_q = copy.deepcopy(gracw4_q[0])
+    grw4_last_d = copy.deepcopy(gracw4_d[0])
     gra_w4 = grarall_iwg(gracw4_q, gracw4_d)
 
     gracb4 = lambda ft, gracb4_last, it, ygt: np.dot(ft, gracb4_last) + bgt(it, ygt) 
