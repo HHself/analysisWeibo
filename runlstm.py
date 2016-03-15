@@ -242,6 +242,7 @@ def BPTTtrain(worddict, parameters):
 
     while 1:
         gradient = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
+        # gra = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
         for r in range(len(weibo)):
             print r
             if getacti(weibo[r]) == "None" : continue
@@ -286,7 +287,10 @@ def BPTTtrain(worddict, parameters):
                 alpharj = (-1 * gama * np.exp(-1 * gama * cosy_spns[j])) / (1 + esum)
                 g = calgradient(param, y_s, y_p, y_n, [data[0], data[1], data[2+j]])
                 for k in range(PN):
+                    if k > 10: gradient[k] = transps1(gradient[k])
                     gradient[k] += g[k]
+
+
         for k in range(PN):
             parameters[k] = parameters[k] + miu * (parameters[k]- param_last[k]) - era * gradient[k]
         param_last = copy.deepcopy(parameters) #parameters.copy()
