@@ -75,32 +75,47 @@ class LSTM_RNN():
     	# output = np.array(output)
     	return output
 
-
     def getkeywordind(self):
     	y_output = self.lstmrun(flag = "all")
     	dis = [cossim(y_output[num], y_output[num+1]) for num in range(textlen-1)]
     	dis_ind_val = dict([(ind, val) for ind, val in enumerate(dis, start = 1)])
     	dis_ind = sorted(dis_ind_val)
-    	f = 0
-    	# while f < textlen:
-    	# 	for j in range(f, textlen):
-
+    	f = 1
+        b = 0
+        keywords = []
+    	while f < textlen:
+            temp = [] 
+            if dis_ind[b] - b == dis_ind[f] -f:
+                temp.append(b)
+                temp.append(f)
+            else:
+                b += 1
+            f += 1
+            keywords.append(temp)
+        return keywords
             
-        return  #---*--*---*---*----*----*--*--choose continue ....
-
+        #---*--*---*---*----*----*--*--choose continue ....
 
     def cossim(self, ls1, ls2):
+        #print "*****", ls1, ls2, ls1.shape, ls2.shape
         if ls1.shape != ls2.shape:
             print "error ,list not equal"
             return
-        m1 = 0
-        m2 = 0
-        sum = 0
-        for i in xrange(len(ls1)):
-            m1 += math.pow(ls1[i], 2)
-            m2 += math.pow(ls2[i], 2)
-            sum +=ls1[i] * ls2[i]
-        return sum/(math.sqrt(m1) *math.sqrt(m2))
+        return np.dot(ls1, ls2)/(np.linalg.norm(ls1) * np.linalg.norm(ls2))
+
+
+    # def cossim(self, ls1, ls2):
+    #     if ls1.shape != ls2.shape:
+    #         print "error ,list not equal"
+    #         return
+    #     m1 = 0
+    #     m2 = 0
+    #     sum = 0
+    #     for i in xrange(len(ls1)):
+    #         m1 += math.pow(ls1[i], 2)
+    #         m2 += math.pow(ls2[i], 2)
+    #         sum +=ls1[i] * ls2[i]
+    #     return sum/(math.sqrt(m1) *math.sqrt(m2))
 
 
 

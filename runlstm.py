@@ -248,6 +248,10 @@ def BPTTtrain(worddict, parameters):
             f = 0
             while True:
                 data = gettraindata(worddict, r, weibo) #data[0]: source, data[1]:posotive, data[2:]:negatives
+                print data[0], data[1]
+                for gg in range(NW):
+                    print data[2+gg]
+
                 for t in data:
                     if len(t) != 0: f += 1
                 if f == len(data): break 
