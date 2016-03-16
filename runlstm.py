@@ -72,8 +72,8 @@ def calgradient(param, y_s, y_p, y_n, data):
 
     # y_s, y_p, y_n, maxlen = fmtoutput(y_s, y_p, y_n)
     for t in range(1, C):
-        if len(set(y_s[-1][t])) + len(set(y_s[-1][t])) + len(set(y_s[-1][t])) == 3 and sum(y_s[-1][t]) + sum(y_s[-1][t])+ sum(y_s[-1][t]) == 0:
-            break
+        # if len(set(y_s[-1][t])) + len(set(y_s[-1][t])) + len(set(y_s[-1][t])) == 3 and sum(y_s[-1][t]) + sum(y_s[-1][t])+ sum(y_s[-1][t]) == 0:
+        #     break
         gra_p, lasts_p = calgraR(param, y_s, y_p, lasts_p, data[0:2], t)
         # jianyan(y_p, y_n)
         gra_q, lasts_q = calgraR(param, y_s, y_n, lasts_q, data[0:3:2], t)
