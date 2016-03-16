@@ -30,7 +30,7 @@ def transps1(vec):
     elif sh[1] == 1:
         vec.shape = (vec.shape[0], 1)
     else:
-        vec.shape = (vec.shape[0], 1)
+        vec = vec[0]
     return vec
 
 def transps2(vec):
@@ -239,9 +239,12 @@ def getlastoutput(param, textvec):
 def BPTTtrain(worddict, parameters):
     weibo = [line for line in file("weibo_train3.csv")]
     param_last = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
-    param = []
-
-    while 1:
+    
+    num = 0
+    error = 10000000000
+    while error < 0.0001:
+        num += 1
+        print "step", num
         gradient = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
         # gra = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
         for r in range(len(weibo)):
@@ -253,13 +256,13 @@ def BPTTtrain(worddict, parameters):
                 # print data[0], data[1]
                 # for gg in range(NW):
                 #     print data[2+gg]
-
                 for t in data:
                     if len(t) != 0: f += 1
                 if f == len(data): break 
                 f = 0
             print "train data success..."
 
+            param = []
             for k in range(PN):
                 param.append(parameters[k] + miu * (parameters[k] - param_last[k]))
 
@@ -286,17 +289,18 @@ def BPTTtrain(worddict, parameters):
                 esum += np.exp(-1 * gama * cosy_spn)
                 cosy_spns.append(cosy_spn)
             for k in range(NW):
-                print "step", k
                 alpharj = (-1 * gama * np.exp(-1 * gama * cosy_spns[k])) / (1 + esum)
                 g = calgradient(param, y_s, y_p, y_ns[k], [data[0], data[1], data[2+k]])
                 for p in range(PN):
                     if p > 10: gradient[p] = transps1(gradient[p])
                     gradient[p] += g[p]
 
-
-        for k in range(PN):
-            parameters[k] = parameters[k] + miu * (parameters[k]- param_last[k]) - era * gradient[k]
-        param_last = copy.deepcopy(parameters) #parameters.copy()
+            if num % 256 == 0:
+                for k in range(PN):
+                    parameters[k] = parameters[k] + miu * (parameters[k]- param_last[k]) - era * gradient[k]
+                    if k>10:
+                        error += np.linalg.norm(parameters[k], param_last[k])
+                param_last = copy.deepcopy(parameters) #parameters.copy()
     
 
     pa = ["w1", "w2", "w3", "w4", "wr1", "wr2", "wr3", "wr4", "wp1", "wp2", "wp3", "b1", "b2", "b3", "b4"]
@@ -367,6 +371,7 @@ def cossim(ls1, ls2):
         print "error ,list not equal"
         return
     return np.dot(ls1, ls2)/(np.linalg.norm(ls1) * np.linalg.norm(ls2))
+
 
 # def cossim(ls1, ls2):
 #         if len(ls1) != len(ls2):
