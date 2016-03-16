@@ -29,6 +29,8 @@ def transps1(vec):
         vec.shape = (vec.shape[0], 1)
     elif sh[1] == 1:
         vec.shape = (vec.shape[0], 1)
+    else:
+        vec.shape = (vec.shape[0], 1)
     return vec
 
 def transps2(vec):
@@ -84,7 +86,6 @@ def calgradient(param, y_s, y_p, y_n, data):
                 gra[k] += gra_p[k][0] - gra_q[k][0]
             else:
                 gra[k] += incrs_scale(gra_p[k][0]) - incrs_scale(gra_q[k][0])
-
     return gra
 
 
