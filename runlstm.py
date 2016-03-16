@@ -241,8 +241,7 @@ def BPTTtrain(worddict, parameters):
     param_last = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
     
     num = 0
-    error = 10000000000
-    while error < 0.0001:
+    while True:
         num += 1
         print "step", num
         gradient = [np.array(q) for q in [[[0 for j in range(M)] for i in range(N)] for k in range(4)] + [[[0 for j in range(N)] for i in range(N)] for k in range(7)] + [[0 for p in range(N)] for q in range(4)]]
@@ -294,13 +293,14 @@ def BPTTtrain(worddict, parameters):
                 for p in range(PN):
                     if p > 10: gradient[p] = transps1(gradient[p])
                     gradient[p] += g[p]
-
+            error = 0
             if num % 256 == 0:
                 for k in range(PN):
                     parameters[k] = parameters[k] + miu * (parameters[k]- param_last[k]) - era * gradient[k]
                     if k>10:
                         error += np.linalg.norm(parameters[k], param_last[k])
                 param_last = copy.deepcopy(parameters) #parameters.copy()
+        if error < 0.0001: break
     
 
     pa = ["w1", "w2", "w3", "w4", "wr1", "wr2", "wr3", "wr4", "wp1", "wp2", "wp3", "b1", "b2", "b3", "b4"]
