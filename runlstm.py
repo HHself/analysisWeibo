@@ -273,7 +273,6 @@ def BPTTtrain(worddict, parameters):
             cosy_spns = []
             y_ns = []
             for j in range(NW):
-                print j
                 y_n = getlastoutput(param, data[2+j])
                 y_ns.append(y_n)
                 cos_y_sn = cossim(y_s[-1][len(data[0])-1], y_n[-1][len(data[2+j])-1])
@@ -285,12 +284,13 @@ def BPTTtrain(worddict, parameters):
 
                 esum += np.exp(-1 * gama * cosy_spn)
                 cosy_spns.append(cosy_spn)
-            for j in range(NW):
-                alpharj = (-1 * gama * np.exp(-1 * gama * cosy_spns[j])) / (1 + esum)
-                g = calgradient(param, y_s, y_p, y_ns[j], [data[0], data[1], data[2+j]])
-                for k in range(PN):
-                    if k > 10: gradient[k] = transps1(gradient[k])
-                    gradient[k] += g[k]
+            for k in range(NW):
+                print "step", k
+                alpharj = (-1 * gama * np.exp(-1 * gama * cosy_spns[k])) / (1 + esum)
+                g = calgradient(param, y_s, y_p, y_ns[k], [data[0], data[1], data[2+k]])
+                for p in range(PN):
+                    if p > 10: gradient[p] = transps1(gradient[p])
+                    gradient[p] += g[p]
 
 
         for k in range(PN):
